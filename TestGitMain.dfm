@@ -41,6 +41,20 @@ object TestGitMainFrm: TTestGitMainFrm
     TabOrder = 2
     OnClick = CmdDevClick
   end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Top = 222
+    Width = 366
+    Height = 19
+    Panels = <
+      item
+        Text = 'Coded By Nhakin'
+        Width = 50
+      end>
+    ExplicitLeft = 237
+    ExplicitTop = 225
+    ExplicitWidth = 0
+  end
   object MainMenu1: TMainMenu
     Left = 105
     Top = 7

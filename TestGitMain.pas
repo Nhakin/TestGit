@@ -4,13 +4,14 @@ Interface
 
 Uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls;
+  Dialogs, StdCtrls, ComCtrls;
 
 Type
   TTestGitMainFrm = Class(TForm)
     CmdLive : TButton;
     CmdBeta : TButton;
     CmdDev  : TButton;
+    StatusBar1: TStatusBar;
 
     Procedure CmdLiveClick(Sender : TObject);
     Procedure CmdBetaClick(Sender : TObject);

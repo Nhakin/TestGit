@@ -9,6 +9,7 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  Application.Title := 'Test Git';
   Application.CreateForm(TForm7, Form7);
   Application.Run;
 end.

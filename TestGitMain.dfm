@@ -1,4 +1,4 @@
-object Form7: TForm7
+object TestGitMainFrm: TTestGitMainFrm
   Left = 0
   Top = 0
   Caption = 'Test Git 1.0.0.5'
@@ -13,31 +13,31 @@ object Form7: TForm7
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
-  object Button1: TButton
+  object CmdLive: TButton
     Left = 8
     Top = 8
     Width = 75
     Height = 25
     Caption = 'Live'
     TabOrder = 0
-    OnClick = Button1Click
+    OnClick = CmdLiveClick
   end
-  object Button2: TButton
+  object CmdBeta: TButton
     Left = 8
     Top = 39
     Width = 75
     Height = 25
     Caption = 'Beta'
     TabOrder = 1
-    OnClick = Button2Click
+    OnClick = CmdBetaClick
   end
-  object Button3: TButton
+  object CmdDev: TButton
     Left = 8
     Top = 70
     Width = 75
     Height = 25
     Caption = 'Dev'
     TabOrder = 2
-    OnClick = Button3Click
+    OnClick = CmdDevClick
   end
 end

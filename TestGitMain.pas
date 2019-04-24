@@ -1,45 +1,48 @@
-unit TestGitMain;
+Unit TestGitMain;
 
-interface
+Interface
 
-uses
+Uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls;
 
-type
-  TForm7 = class(TForm)
-    Button1: TButton;
-    Button2: TButton;
-    Button3: TButton;
-    procedure Button1Click(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
-    procedure Button3Click(Sender: TObject);
-  private
-    { Private declarations }
-  public
-    { Public declarations }
-  end;
+Type
+  TTestGitMainFrm = Class(TForm)
+    CmdLive : TButton;
+    CmdBeta : TButton;
+    CmdDev  : TButton;
 
-var
-  Form7: TForm7;
+    Procedure CmdLiveClick(Sender : TObject);
+    Procedure CmdBetaClick(Sender : TObject);
+    Procedure CmdDevClick(Sender : TObject);
 
-implementation
+  Private
+
+  Public
+
+  End;
+
+Var
+  TestGitMainFrm : TTestGitMainFrm;
+
+Implementation
 
 {$R *.dfm}
 
-procedure TForm7.Button1Click(Sender: TObject);
-begin
+Procedure TTestGitMainFrm.CmdLiveClick(Sender : TObject);
+Begin
   ShowMessage('Live');
-end;
+End;
 
-procedure TForm7.Button2Click(Sender: TObject);
-begin
+Procedure TTestGitMainFrm.CmdBetaClick(Sender : TObject);
+Begin
   ShowMessage('Beta');
-end;
+End;
 
-procedure TForm7.Button3Click(Sender: TObject);
-begin
+Procedure TTestGitMainFrm.CmdDevClick(Sender : TObject);
+Begin
   ShowMessage('Dev');
-end;
+End;
 
-end.
+End.
+

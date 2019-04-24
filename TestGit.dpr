@@ -2,13 +2,13 @@ program TestGit;
 
 uses
   Forms,
-  TestGitMain in 'TestGitMain.pas' {Form7};
+  TestGitMain in 'TestGitMain.pas' {TestGitMainFrm};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TForm7, Form7);
+  Application.CreateForm(TTestGitMainFrm, TestGitMainFrm);
   Application.Run;
 end.

@@ -73,6 +73,42 @@
       
       
       
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       <Excluded_Packages Name="C:\Users\Public\Documents\RAD Studio\5.0\Bpl\pngdelphi.bpl">File C:\Users\Public\Documents\RAD Studio\5.0\Bpl\pngdelphi.bpl not found</Excluded_Packages>
       <Excluded_Packages Name="C:\Users\Public\Documents\RAD Studio\5.0\Bpl\dclDosCommand.bpl">File C:\Users\Public\Documents\RAD Studio\5.0\Bpl\dclDosCommand.bpl not found</Excluded_Packages>
       <Excluded_Packages Name="C:\Users\Public\Documents\RAD Studio\5.0\Bpl\dclHsGridsEx.bpl">File C:\Users\Public\Documents\RAD Studio\5.0\Bpl\dclHsGridsEx.bpl not found</Excluded_Packages>
@@ -88,14 +124,13 @@
     </Source>
   </Delphi.Personality> </BorlandProject></BorlandProject>
   </ProjectExtensions>
-  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
   <ItemGroup>
     <DelphiCompile Include="TestGit.dpr">
       <MainSource>MainSource</MainSource>
     </DelphiCompile>
     <DCCReference Include="TestGitMain.pas">
-      <Form>Form7</Form>
+      <Form>TestGitMainFrm</Form>
     </DCCReference>
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
 </Project>

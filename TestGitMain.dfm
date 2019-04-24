@@ -1,7 +1,7 @@
 object Form7: TForm7
   Left = 0
   Top = 0
-  Caption = 'Test Git 1.0.0.0'
+  Caption = 'Test Git 1.0.0.2'
   ClientHeight = 241
   ClientWidth = 366
   Color = clBtnFace
@@ -18,8 +18,17 @@ object Form7: TForm7
     Top = 8
     Width = 75
     Height = 25
-    Caption = 'Button1'
+    Caption = 'Live'
     TabOrder = 0
     OnClick = Button1Click
+  end
+  object Button2: TButton
+    Left = 8
+    Top = 39
+    Width = 75
+    Height = 25
+    Caption = 'Beta'
+    TabOrder = 1
+    OnClick = Button2Click
   end
 end

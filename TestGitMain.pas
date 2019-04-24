@@ -34,7 +34,7 @@ end;
 
 procedure TForm7.Button2Click(Sender: TObject);
 begin
-  ShowMessage('Dev');
+  ShowMessage('Beta');
 end;
 
 procedure TForm7.Button3Click(Sender: TObject);

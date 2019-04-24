@@ -10,7 +10,7 @@ object TestGitMainFrm: TTestGitMainFrm
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
-  Menu = MainMenu1
+  Menu = MainMenu
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
@@ -41,7 +41,7 @@ object TestGitMainFrm: TTestGitMainFrm
     TabOrder = 2
     OnClick = CmdDevClick
   end
-  object StatusBar1: TStatusBar
+  object SBar: TStatusBar
     Left = 0
     Top = 222
     Width = 366
@@ -51,25 +51,22 @@ object TestGitMainFrm: TTestGitMainFrm
         Text = 'Coded By Nhakin'
         Width = 50
       end>
-    ExplicitLeft = 237
-    ExplicitTop = 225
-    ExplicitWidth = 0
   end
-  object MainMenu1: TMainMenu
+  object MainMenu: TMainMenu
     Left = 105
     Top = 7
-    object File1: TMenuItem
+    object mnuFile: TMenuItem
       Caption = 'File'
-      object About1: TMenuItem
+      object mnuAbout: TMenuItem
         Caption = 'About'
-        OnClick = About1Click
+        OnClick = mnuAboutClick
       end
       object N1: TMenuItem
         Caption = '-'
       end
-      object Exit1: TMenuItem
+      object mnuExit: TMenuItem
         Caption = 'Exit'
-        OnClick = Exit1Click
+        OnClick = mnuExitClick
       end
     end
   end

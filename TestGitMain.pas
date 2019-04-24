@@ -11,18 +11,18 @@ Type
     CmdLive : TButton;
     CmdBeta : TButton;
     CmdDev  : TButton;
-    StatusBar1: TStatusBar;
-    MainMenu1: TMainMenu;
-    File1: TMenuItem;
-    About1: TMenuItem;
+    SBar: TStatusBar;
+    MainMenu: TMainMenu;
+    mnuFile: TMenuItem;
+    mnuAbout: TMenuItem;
     N1: TMenuItem;
-    Exit1: TMenuItem;
+    mnuExit: TMenuItem;
 
     Procedure CmdLiveClick(Sender : TObject);
     Procedure CmdBetaClick(Sender : TObject);
     Procedure CmdDevClick(Sender : TObject);
-    procedure Exit1Click(Sender: TObject);
-    procedure About1Click(Sender: TObject);
+    procedure mnuExitClick(Sender: TObject);
+    procedure mnuAboutClick(Sender: TObject);
 
   Private
 
@@ -42,12 +42,12 @@ Begin
   ShowMessage('Live');
 End;
 
-procedure TTestGitMainFrm.Exit1Click(Sender: TObject);
+procedure TTestGitMainFrm.mnuExitClick(Sender: TObject);
 begin
   Close();
 end;
 
-procedure TTestGitMainFrm.About1Click(Sender: TObject);
+procedure TTestGitMainFrm.mnuAboutClick(Sender: TObject);
 begin
   ShowMessage('TestGit');
 end;

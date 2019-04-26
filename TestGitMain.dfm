@@ -2,8 +2,8 @@ object TestGitMainFrm: TTestGitMainFrm
   Left = 0
   Top = 0
   Caption = 'Test Git 1.0.0.7'
-  ClientHeight = 170
-  ClientWidth = 328
+  ClientHeight = 206
+  ClientWidth = 393
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -43,16 +43,16 @@ object TestGitMainFrm: TTestGitMainFrm
   end
   object SBar: TStatusBar
     Left = 0
-    Top = 151
-    Width = 328
+    Top = 187
+    Width = 393
     Height = 19
     Panels = <
       item
         Text = 'Coded By Nhakin'
         Width = 50
       end>
-    ExplicitTop = 222
-    ExplicitWidth = 366
+    ExplicitTop = 151
+    ExplicitWidth = 328
   end
   object RgOptions: TRadioGroup
     Left = 111
@@ -65,7 +65,7 @@ object TestGitMainFrm: TTestGitMainFrm
       'Option #2'
       'Option #3'
       'Option #4')
-    TabOrder = 4
+    TabOrder = 6
   end
   object CmdOk: TButton
     Left = 220
@@ -75,6 +75,30 @@ object TestGitMainFrm: TTestGitMainFrm
     Caption = 'Ok'
     TabOrder = 5
     OnClick = CmdOkClick
+  end
+  object GbSaySomething: TGroupBox
+    Left = 8
+    Top = 127
+    Width = 350
+    Height = 47
+    Caption = ' Say something'
+    TabOrder = 4
+    object EditSaySomething: TEdit
+      Left = 9
+      Top = 17
+      Width = 266
+      Height = 21
+      TabOrder = 0
+    end
+    object CmdSaySomething: TButton
+      Left = 281
+      Top = 15
+      Width = 62
+      Height = 25
+      Caption = 'Ok'
+      TabOrder = 1
+      OnClick = CmdSaySomethingClick
+    end
   end
   object MainMenu: TMainMenu
     Left = 9

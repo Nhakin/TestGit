@@ -3,7 +3,7 @@ object TestGitMainFrm: TTestGitMainFrm
   Top = 0
   Caption = 'Test Git 1.0.0.8'
   ClientHeight = 375
-  ClientWidth = 556
+  ClientWidth = 558
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,33 +12,37 @@ object TestGitMainFrm: TTestGitMainFrm
   Font.Style = []
   Menu = MainMenu
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object SBar: TStatusBar
     Left = 0
     Top = 356
-    Width = 556
+    Width = 558
     Height = 19
     Panels = <
       item
         Text = 'Coded By Nhakin'
         Width = 50
       end>
-    ExplicitWidth = 558
+    ExplicitTop = 257
+    ExplicitWidth = 722
   end
   object pcMain: TPageControl
     AlignWithMargins = True
     Left = 3
     Top = 3
-    Width = 550
+    Width = 552
     Height = 350
-    ActivePage = tsDemo
+    ActivePage = tsTreeView
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 552
+    ExplicitWidth = 716
+    ExplicitHeight = 251
     object tsDemo: TTabSheet
       Caption = 'Demo'
-      ExplicitWidth = 544
+      ExplicitWidth = 708
+      ExplicitHeight = 223
       object Label1: TLabel
         Left = 33
         Top = 161
@@ -160,16 +164,54 @@ object TestGitMainFrm: TTestGitMainFrm
     object tsTreeView: TTabSheet
       Caption = 'TreeView Demo'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
       ExplicitWidth = 708
       ExplicitHeight = 223
+      object Splitter: TSplitter
+        Left = 195
+        Top = 0
+        Height = 322
+        ExplicitLeft = 220
+        ExplicitTop = 128
+        ExplicitHeight = 100
+      end
+      object vstDemo: TVirtualStringTree
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 189
+        Height = 316
+        Align = alLeft
+        Header.AutoSizeIndex = 0
+        Header.DefaultHeight = 17
+        Header.Font.Charset = DEFAULT_CHARSET
+        Header.Font.Color = clWindowText
+        Header.Font.Height = -11
+        Header.Font.Name = 'Tahoma'
+        Header.Font.Style = []
+        Header.MainColumn = -1
+        TabOrder = 0
+        OnGetText = vstDemoGetText
+        OnInitChildren = vstDemoInitChildren
+        OnInitNode = vstDemoInitNode
+        Columns = <>
+      end
+      object PanTvDemo: TPanel
+        AlignWithMargins = True
+        Left = 201
+        Top = 3
+        Width = 340
+        Height = 316
+        Align = alClient
+        TabOrder = 1
+        ExplicitLeft = 302
+        ExplicitTop = 131
+        ExplicitWidth = 185
+        ExplicitHeight = 41
+      end
     end
     object tsSynEditDemo: TTabSheet
       Caption = 'Syn Edit Demo'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
       ExplicitWidth = 708
       ExplicitHeight = 223
       object MemoSrc: TSynMemo

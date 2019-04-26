@@ -2,8 +2,8 @@ object TestGitMainFrm: TTestGitMainFrm
   Left = 0
   Top = 0
   Caption = 'Test Git 1.0.0.8'
-  ClientHeight = 312
-  ClientWidth = 351
+  ClientHeight = 375
+  ClientWidth = 558
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,29 +16,32 @@ object TestGitMainFrm: TTestGitMainFrm
   TextHeight = 13
   object SBar: TStatusBar
     Left = 0
-    Top = 293
-    Width = 351
+    Top = 356
+    Width = 558
     Height = 19
     Panels = <
       item
         Text = 'Coded By Nhakin'
         Width = 50
       end>
-    ExplicitWidth = 314
+    ExplicitTop = 257
+    ExplicitWidth = 722
   end
-  object PageControl1: TPageControl
+  object pcMain: TPageControl
     AlignWithMargins = True
     Left = 3
     Top = 3
-    Width = 345
-    Height = 287
+    Width = 552
+    Height = 350
     ActivePage = tsDemo
     Align = alClient
-    TabOrder = 1
+    TabOrder = 0
+    ExplicitWidth = 716
+    ExplicitHeight = 251
     object tsDemo: TTabSheet
       Caption = 'Demo'
-      ExplicitWidth = 281
-      ExplicitHeight = 165
+      ExplicitWidth = 708
+      ExplicitHeight = 223
       object Label1: TLabel
         Left = 33
         Top = 161
@@ -61,7 +64,7 @@ object TestGitMainFrm: TTestGitMainFrm
         Width = 75
         Height = 25
         Caption = 'Beta'
-        TabOrder = 1
+        TabOrder = 2
         OnClick = CmdBetaClick
       end
       object CmdDev: TButton
@@ -70,7 +73,7 @@ object TestGitMainFrm: TTestGitMainFrm
         Width = 75
         Height = 25
         Caption = 'Dev'
-        TabOrder = 2
+        TabOrder = 3
         OnClick = CmdDevClick
       end
       object RgOptions: TRadioGroup
@@ -84,7 +87,7 @@ object TestGitMainFrm: TTestGitMainFrm
           'Option #2'
           'Option #3'
           'Option #4')
-        TabOrder = 3
+        TabOrder = 1
       end
       object CmdOk: TButton
         Left = 225
@@ -101,7 +104,7 @@ object TestGitMainFrm: TTestGitMainFrm
         Width = 300
         Height = 47
         Caption = ' Say something'
-        TabOrder = 5
+        TabOrder = 8
         object EditSaySomething: TEdit
           Left = 9
           Top = 17
@@ -133,7 +136,7 @@ object TestGitMainFrm: TTestGitMainFrm
         Width = 75
         Height = 25
         Caption = 'Go'
-        TabOrder = 7
+        TabOrder = 5
         OnClick = CmdPBarGoClick
       end
       object chkIsChecked: TCheckBox
@@ -142,7 +145,7 @@ object TestGitMainFrm: TTestGitMainFrm
         Width = 97
         Height = 17
         Caption = 'Is Checked?'
-        TabOrder = 8
+        TabOrder = 9
         OnClick = chkIsCheckedClick
       end
       object TbPBarSpeed: TTrackBar
@@ -153,20 +156,59 @@ object TestGitMainFrm: TTestGitMainFrm
         Max = 1000
         Min = 250
         Position = 250
-        TabOrder = 9
+        TabOrder = 7
         OnChange = TbPBarSpeedChange
       end
     end
-    object TabTV: TTabSheet
+    object tsTreeView: TTabSheet
       Caption = 'TreeView Demo'
       ImageIndex = 1
-      ExplicitWidth = 281
-      ExplicitHeight = 165
+      ExplicitWidth = 708
+      ExplicitHeight = 223
+    end
+    object tsSynEditDemo: TTabSheet
+      Caption = 'Syn Edit Demo'
+      ImageIndex = 2
+      ExplicitWidth = 708
+      ExplicitHeight = 223
+      object MemoSrc: TSynMemo
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 538
+        Height = 316
+        Align = alClient
+        Color = clBlack
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Courier New'
+        Font.Style = []
+        TabOrder = 0
+        Gutter.Font.Charset = DEFAULT_CHARSET
+        Gutter.Font.Color = clWindowText
+        Gutter.Font.Height = -11
+        Gutter.Font.Name = 'Courier New'
+        Gutter.Font.Style = []
+        Gutter.ShowLineNumbers = True
+        Gutter.ShowModification = True
+        Highlighter = SynPasSyn1
+        Lines.UnicodeStrings = 
+          '{This is a Comment}'#13#10#13#10'procedure TTestGitMainFrm.CmdOkClick(Send' +
+          'er: TObject);'#13#10'begin'#13#10'  lChar := #$29A;'#13#10#13#10'  If RgOptions.ItemIn' +
+          'dex > -1 Then'#13#10'    ShowMessage(RgOptions.Items[RgOptions.ItemInd' +
+          'ex])'#13#10'  Else'#13#10'    ShowMessage('#39'Please select an option.'#39');'#13#10'end;'
+        FontSmoothing = fsmNone
+        ExplicitLeft = 313
+        ExplicitTop = -7
+        ExplicitWidth = 395
+        ExplicitHeight = 230
+      end
     end
   end
   object MainMenu: TMainMenu
     Left = 11
-    Top = 6
+    Top = 37
     object mnuFile: TMenuItem
       Caption = 'File'
       object mnuAbout: TMenuItem
@@ -187,6 +229,29 @@ object TestGitMainFrm: TTestGitMainFrm
     Interval = 500
     OnTimer = TimerTimer
     Left = 45
-    Top = 6
+    Top = 37
+  end
+  object SynPasSyn1: TSynPasSyn
+    Options.AutoDetectEnabled = False
+    Options.AutoDetectLineLimit = 0
+    Options.Visible = False
+    AsmAttri.Background = clBlack
+    AsmAttri.Foreground = clLime
+    CommentAttri.Background = clBlack
+    CommentAttri.Foreground = clYellow
+    IdentifierAttri.Background = clBlack
+    IdentifierAttri.Foreground = clWhite
+    KeyAttri.Background = clBlack
+    KeyAttri.Foreground = clAqua
+    NumberAttri.Background = clBlack
+    NumberAttri.Foreground = clFuchsia
+    StringAttri.Background = clBlack
+    StringAttri.Foreground = clRed
+    CharAttri.Background = clBlack
+    CharAttri.Foreground = clRed
+    SymbolAttri.Background = clBlack
+    SymbolAttri.Foreground = clWhite
+    Left = 370
+    Top = 65
   end
 end

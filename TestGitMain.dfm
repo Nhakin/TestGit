@@ -12,6 +12,7 @@ object TestGitMainFrm: TTestGitMainFrm
   Font.Style = []
   Menu = MainMenu
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object SBar: TStatusBar
@@ -33,7 +34,7 @@ object TestGitMainFrm: TTestGitMainFrm
     Top = 3
     Width = 552
     Height = 350
-    ActivePage = tsDemo
+    ActivePage = tsTreeView
     Align = alClient
     TabOrder = 0
     ExplicitWidth = 716
@@ -165,6 +166,48 @@ object TestGitMainFrm: TTestGitMainFrm
       ImageIndex = 1
       ExplicitWidth = 708
       ExplicitHeight = 223
+      object Splitter: TSplitter
+        Left = 195
+        Top = 0
+        Height = 322
+        ExplicitLeft = 220
+        ExplicitTop = 128
+        ExplicitHeight = 100
+      end
+      object vstDemo: TVirtualStringTree
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 189
+        Height = 316
+        Align = alLeft
+        Header.AutoSizeIndex = 0
+        Header.DefaultHeight = 17
+        Header.Font.Charset = DEFAULT_CHARSET
+        Header.Font.Color = clWindowText
+        Header.Font.Height = -11
+        Header.Font.Name = 'Tahoma'
+        Header.Font.Style = []
+        Header.MainColumn = -1
+        TabOrder = 0
+        OnGetText = vstDemoGetText
+        OnInitChildren = vstDemoInitChildren
+        OnInitNode = vstDemoInitNode
+        Columns = <>
+      end
+      object PanTvDemo: TPanel
+        AlignWithMargins = True
+        Left = 201
+        Top = 3
+        Width = 340
+        Height = 316
+        Align = alClient
+        TabOrder = 1
+        ExplicitLeft = 302
+        ExplicitTop = 131
+        ExplicitWidth = 185
+        ExplicitHeight = 41
+      end
     end
     object tsSynEditDemo: TTabSheet
       Caption = 'Syn Edit Demo'

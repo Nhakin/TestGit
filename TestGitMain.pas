@@ -25,6 +25,7 @@ Type
     PBar: TProgressBar;
     CmdPBarGo: TButton;
     Timer: TTimer;
+    chkIsChecked: TCheckBox;
 
     Procedure CmdLiveClick(Sender : TObject);
     Procedure CmdBetaClick(Sender : TObject);
@@ -35,6 +36,7 @@ Type
     procedure CmdSaySomethingClick(Sender: TObject);
     procedure TimerTimer(Sender: TObject);
     procedure CmdPBarGoClick(Sender: TObject);
+    procedure chkIsCheckedClick(Sender: TObject);
 
   Private
 
@@ -96,6 +98,14 @@ begin
     CmdPBarGo.Caption := 'Stop'
   Else
     CmdPBarGo.Caption := 'Go';
+end;
+
+procedure TTestGitMainFrm.chkIsCheckedClick(Sender: TObject);
+begin
+  If chkIsChecked.Checked Then
+    chkIsChecked.Caption := 'Is Checked? Yes'
+  Else
+    chkIsChecked.Caption := 'Is Checked? No';
 end;
 
 Procedure TTestGitMainFrm.CmdBetaClick(Sender : TObject);

@@ -2,7 +2,7 @@ object TestGitMainFrm: TTestGitMainFrm
   Left = 0
   Top = 0
   Caption = 'Test Git 1.0.0.7'
-  ClientHeight = 223
+  ClientHeight = 251
   ClientWidth = 314
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -43,7 +43,7 @@ object TestGitMainFrm: TTestGitMainFrm
   end
   object SBar: TStatusBar
     Left = 0
-    Top = 204
+    Top = 232
     Width = 314
     Height = 19
     Panels = <
@@ -51,8 +51,7 @@ object TestGitMainFrm: TTestGitMainFrm
         Text = 'Coded By Nhakin'
         Width = 50
       end>
-    ExplicitTop = 187
-    ExplicitWidth = 393
+    ExplicitTop = 204
   end
   object RgOptions: TRadioGroup
     Left = 111
@@ -116,6 +115,15 @@ object TestGitMainFrm: TTestGitMainFrm
     Caption = 'Go'
     TabOrder = 7
     OnClick = CmdPBarGoClick
+  end
+  object chkIsChecked: TCheckBox
+    Left = 9
+    Top = 204
+    Width = 97
+    Height = 17
+    Caption = 'Is Checked?'
+    TabOrder = 9
+    OnClick = chkIsCheckedClick
   end
   object MainMenu: TMainMenu
     Left = 11

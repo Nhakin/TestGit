@@ -51,8 +51,6 @@ object TestGitMainFrm: TTestGitMainFrm
         Text = 'Coded By Nhakin'
         Width = 50
       end>
-    ExplicitTop = 222
-    ExplicitWidth = 366
   end
   object RgOptions: TRadioGroup
     Left = 111
@@ -76,6 +74,23 @@ object TestGitMainFrm: TTestGitMainFrm
     TabOrder = 5
     OnClick = CmdOkClick
   end
+  object PBar: TProgressBar
+    Left = 64
+    Top = 128
+    Width = 150
+    Height = 17
+    Smooth = True
+    TabOrder = 6
+  end
+  object CmdPBarGo: TButton
+    Left = 220
+    Top = 122
+    Width = 75
+    Height = 25
+    Caption = 'Go'
+    TabOrder = 7
+    OnClick = CmdPBarGoClick
+  end
   object MainMenu: TMainMenu
     Left = 9
     Top = 103
@@ -93,5 +108,12 @@ object TestGitMainFrm: TTestGitMainFrm
         OnClick = mnuExitClick
       end
     end
+  end
+  object Timer: TTimer
+    Enabled = False
+    Interval = 500
+    OnTimer = TimerTimer
+    Left = 65
+    Top = 115
   end
 end

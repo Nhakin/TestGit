@@ -1,7 +1,7 @@
 object TestGitMainFrm: TTestGitMainFrm
   Left = 0
   Top = 0
-  Caption = 'Test Git 1.0.0.7'
+  Caption = 'Test Git 1.0.0.8'
   ClientHeight = 270
   ClientWidth = 314
   Color = clBtnFace
@@ -58,7 +58,6 @@ object TestGitMainFrm: TTestGitMainFrm
         Text = 'Coded By Nhakin'
         Width = 50
       end>
-    ExplicitTop = 232
   end
   object RgOptions: TRadioGroup
     Left = 111

@@ -8,15 +8,14 @@ Uses
 
 Type
   TTestGitMainFrm = Class(TForm)
-    CmdLive : TButton;
-    CmdBeta : TButton;
-    CmdDev  : TButton;
     SBar: TStatusBar;
-    MainMenu: TMainMenu;
-    mnuFile: TMenuItem;
-    mnuAbout: TMenuItem;
-    N1: TMenuItem;
-    mnuExit: TMenuItem;
+    PageControl1: TPageControl;
+    tsDemo: TTabSheet;
+    TabTV: TTabSheet;
+    Label1: TLabel;
+    CmdLive: TButton;
+    CmdBeta: TButton;
+    CmdDev: TButton;
     RgOptions: TRadioGroup;
     CmdOk: TButton;
     GbSaySomething: TGroupBox;
@@ -24,10 +23,14 @@ Type
     CmdSaySomething: TButton;
     PBar: TProgressBar;
     CmdPBarGo: TButton;
-    Timer: TTimer;
     chkIsChecked: TCheckBox;
-    Label1: TLabel;
     TbPBarSpeed: TTrackBar;
+    MainMenu: TMainMenu;
+    mnuFile: TMenuItem;
+    mnuAbout: TMenuItem;
+    N1: TMenuItem;
+    mnuExit: TMenuItem;
+    Timer: TTimer;
 
     Procedure CmdLiveClick(Sender : TObject);
     Procedure CmdBetaClick(Sender : TObject);

@@ -4,7 +4,8 @@ Interface
 
 Uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ComCtrls, Menus, ExtCtrls;
+  Dialogs, StdCtrls, ComCtrls, Menus, ExtCtrls, SynEditHighlighter,
+  SynHighlighterPas, SynEdit, SynMemo;
 
 Type
   TTestGitMainFrm = Class(TForm)
@@ -28,6 +29,8 @@ Type
     chkIsChecked: TCheckBox;
     Label1: TLabel;
     TbPBarSpeed: TTrackBar;
+    MemoSrc: TSynMemo;
+    SynPasSyn1: TSynPasSyn;
 
     Procedure CmdLiveClick(Sender : TObject);
     Procedure CmdBetaClick(Sender : TObject);

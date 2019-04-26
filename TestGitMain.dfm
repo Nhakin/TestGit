@@ -2,8 +2,8 @@ object TestGitMainFrm: TTestGitMainFrm
   Left = 0
   Top = 0
   Caption = 'Test Git 1.0.0.8'
-  ClientHeight = 270
-  ClientWidth = 314
+  ClientHeight = 276
+  ClientWidth = 722
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -50,14 +50,16 @@ object TestGitMainFrm: TTestGitMainFrm
   end
   object SBar: TStatusBar
     Left = 0
-    Top = 251
-    Width = 314
+    Top = 257
+    Width = 722
     Height = 19
     Panels = <
       item
         Text = 'Coded By Nhakin'
         Width = 50
       end>
+    ExplicitTop = 251
+    ExplicitWidth = 314
   end
   object RgOptions: TRadioGroup
     Left = 111
@@ -142,6 +144,33 @@ object TestGitMainFrm: TTestGitMainFrm
     TabOrder = 10
     OnChange = TbPBarSpeedChange
   end
+  object MemoSrc: TSynMemo
+    Left = 319
+    Top = 16
+    Width = 395
+    Height = 230
+    Color = clBlack
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Courier New'
+    Font.Style = []
+    TabOrder = 11
+    Gutter.Font.Charset = DEFAULT_CHARSET
+    Gutter.Font.Color = clWindowText
+    Gutter.Font.Height = -11
+    Gutter.Font.Name = 'Courier New'
+    Gutter.Font.Style = []
+    Gutter.ShowLineNumbers = True
+    Gutter.ShowModification = True
+    Highlighter = SynPasSyn1
+    Lines.UnicodeStrings = 
+      '{This is a Comment}'#13#10#13#10'procedure TTestGitMainFrm.CmdOkClick(Send' +
+      'er: TObject);'#13#10'begin'#13#10'  lChar := #$29A;'#13#10#13#10'  If RgOptions.ItemIn' +
+      'dex > -1 Then'#13#10'    ShowMessage(RgOptions.Items[RgOptions.ItemInd' +
+      'ex])'#13#10'  Else'#13#10'    ShowMessage('#39'Please select an option.'#39');'#13#10'end;'
+    FontSmoothing = fsmNone
+  end
   object MainMenu: TMainMenu
     Left = 11
     Top = 6
@@ -166,5 +195,28 @@ object TestGitMainFrm: TTestGitMainFrm
     OnTimer = TimerTimer
     Left = 45
     Top = 6
+  end
+  object SynPasSyn1: TSynPasSyn
+    Options.AutoDetectEnabled = False
+    Options.AutoDetectLineLimit = 0
+    Options.Visible = False
+    AsmAttri.Background = clBlack
+    AsmAttri.Foreground = clLime
+    CommentAttri.Background = clBlack
+    CommentAttri.Foreground = clYellow
+    IdentifierAttri.Background = clBlack
+    IdentifierAttri.Foreground = clWhite
+    KeyAttri.Background = clBlack
+    KeyAttri.Foreground = clAqua
+    NumberAttri.Background = clBlack
+    NumberAttri.Foreground = clFuchsia
+    StringAttri.Background = clBlack
+    StringAttri.Foreground = clRed
+    CharAttri.Background = clBlack
+    CharAttri.Foreground = clRed
+    SymbolAttri.Background = clBlack
+    SymbolAttri.Foreground = clWhite
+    Left = 370
+    Top = 65
   end
 end

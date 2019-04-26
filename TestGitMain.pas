@@ -26,6 +26,8 @@ Type
     CmdPBarGo: TButton;
     Timer: TTimer;
     chkIsChecked: TCheckBox;
+    Label1: TLabel;
+    TbPBarSpeed: TTrackBar;
 
     Procedure CmdLiveClick(Sender : TObject);
     Procedure CmdBetaClick(Sender : TObject);
@@ -37,6 +39,7 @@ Type
     procedure TimerTimer(Sender: TObject);
     procedure CmdPBarGoClick(Sender: TObject);
     procedure chkIsCheckedClick(Sender: TObject);
+    procedure TbPBarSpeedChange(Sender: TObject);
 
   Private
 
@@ -67,6 +70,11 @@ end;
 procedure TTestGitMainFrm.mnuExitClick(Sender: TObject);
 begin
   Close();
+end;
+
+procedure TTestGitMainFrm.TbPBarSpeedChange(Sender: TObject);
+begin
+  Timer.Interval := 1250 - TbPBarSpeed.Position;
 end;
 
 procedure TTestGitMainFrm.TimerTimer(Sender: TObject);

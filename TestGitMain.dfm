@@ -1,7 +1,7 @@
 object TestGitMainFrm: TTestGitMainFrm
   Left = 0
   Top = 0
-  Caption = 'Test Git 1.0.0.5'
+  Caption = 'Test Git 1.0.0.6'
   ClientHeight = 241
   ClientWidth = 366
   Color = clBtnFace
@@ -51,6 +51,30 @@ object TestGitMainFrm: TTestGitMainFrm
         Text = 'Coded By Nhakin'
         Width = 50
       end>
+  end
+  object GbSaySomething: TGroupBox
+    Left = 8
+    Top = 169
+    Width = 350
+    Height = 47
+    Caption = ' Say something'
+    TabOrder = 4
+    object EditSaySomething: TEdit
+      Left = 9
+      Top = 17
+      Width = 266
+      Height = 21
+      TabOrder = 0
+    end
+    object CmdSaySomething: TButton
+      Left = 281
+      Top = 15
+      Width = 62
+      Height = 25
+      Caption = 'Ok'
+      TabOrder = 1
+      OnClick = CmdSaySomethingClick
+    end
   end
   object MainMenu: TMainMenu
     Left = 105

@@ -17,12 +17,16 @@ Type
     mnuAbout: TMenuItem;
     N1: TMenuItem;
     mnuExit: TMenuItem;
+    GbSaySomething: TGroupBox;
+    EditSaySomething: TEdit;
+    CmdSaySomething: TButton;
 
     Procedure CmdLiveClick(Sender : TObject);
     Procedure CmdBetaClick(Sender : TObject);
     Procedure CmdDevClick(Sender : TObject);
     procedure mnuExitClick(Sender: TObject);
     procedure mnuAboutClick(Sender: TObject);
+    procedure CmdSaySomethingClick(Sender: TObject);
 
   Private
 
@@ -41,6 +45,14 @@ Procedure TTestGitMainFrm.CmdLiveClick(Sender : TObject);
 Begin
   ShowMessage('Live');
 End;
+
+procedure TTestGitMainFrm.CmdSaySomethingClick(Sender: TObject);
+begin
+  If EditSaySomething.Text = '' Then
+    ShowMessage('Nothing to say.')
+  Else
+    ShowMessage(EditSaySomething.Text);
+end;
 
 procedure TTestGitMainFrm.mnuExitClick(Sender: TObject);
 begin

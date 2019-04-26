@@ -22,6 +22,9 @@ Type
     GbSaySomething: TGroupBox;
     EditSaySomething: TEdit;
     CmdSaySomething: TButton;
+    PBar: TProgressBar;
+    CmdPBarGo: TButton;
+    Timer: TTimer;
 
     Procedure CmdLiveClick(Sender : TObject);
     Procedure CmdBetaClick(Sender : TObject);
@@ -30,6 +33,8 @@ Type
     procedure mnuAboutClick(Sender: TObject);
     procedure CmdOkClick(Sender: TObject);
     procedure CmdSaySomethingClick(Sender: TObject);
+    procedure TimerTimer(Sender: TObject);
+    procedure CmdPBarGoClick(Sender: TObject);
 
   Private
 
@@ -62,6 +67,14 @@ begin
   Close();
 end;
 
+procedure TTestGitMainFrm.TimerTimer(Sender: TObject);
+begin
+  If PBar.Position = PBar.Max Then
+    PBar.Position := 0
+  Else
+    PBar.Position := PBar.Position + 1;
+end;
+
 procedure TTestGitMainFrm.mnuAboutClick(Sender: TObject);
 begin
   ShowMessage('TestGit');
@@ -73,6 +86,16 @@ begin
     ShowMessage(RgOptions.Items[RgOptions.ItemIndex])
   Else
     ShowMessage('Please select an option.');
+end;
+
+procedure TTestGitMainFrm.CmdPBarGoClick(Sender: TObject);
+begin
+  Timer.Enabled := Not Timer.Enabled;
+
+  If Timer.Enabled Then
+    CmdPBarGo.Caption := 'Stop'
+  Else
+    CmdPBarGo.Caption := 'Go';
 end;
 
 Procedure TTestGitMainFrm.CmdBetaClick(Sender : TObject);

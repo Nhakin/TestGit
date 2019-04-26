@@ -2,8 +2,8 @@ object TestGitMainFrm: TTestGitMainFrm
   Left = 0
   Top = 0
   Caption = 'Test Git 1.0.0.7'
-  ClientHeight = 206
-  ClientWidth = 393
+  ClientHeight = 223
+  ClientWidth = 314
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -43,16 +43,16 @@ object TestGitMainFrm: TTestGitMainFrm
   end
   object SBar: TStatusBar
     Left = 0
-    Top = 187
-    Width = 393
+    Top = 204
+    Width = 314
     Height = 19
     Panels = <
       item
         Text = 'Coded By Nhakin'
         Width = 50
       end>
-    ExplicitTop = 151
-    ExplicitWidth = 328
+    ExplicitTop = 187
+    ExplicitWidth = 393
   end
   object RgOptions: TRadioGroup
     Left = 111
@@ -65,7 +65,7 @@ object TestGitMainFrm: TTestGitMainFrm
       'Option #2'
       'Option #3'
       'Option #4')
-    TabOrder = 6
+    TabOrder = 8
   end
   object CmdOk: TButton
     Left = 220
@@ -77,21 +77,21 @@ object TestGitMainFrm: TTestGitMainFrm
     OnClick = CmdOkClick
   end
   object GbSaySomething: TGroupBox
-    Left = 8
-    Top = 127
-    Width = 350
+    Left = 0
+    Top = 151
+    Width = 300
     Height = 47
     Caption = ' Say something'
     TabOrder = 4
     object EditSaySomething: TEdit
       Left = 9
       Top = 17
-      Width = 266
+      Width = 205
       Height = 21
       TabOrder = 0
     end
     object CmdSaySomething: TButton
-      Left = 281
+      Left = 220
       Top = 15
       Width = 62
       Height = 25
@@ -100,9 +100,26 @@ object TestGitMainFrm: TTestGitMainFrm
       OnClick = CmdSaySomethingClick
     end
   end
+  object PBar: TProgressBar
+    Left = 64
+    Top = 128
+    Width = 150
+    Height = 17
+    Smooth = True
+    TabOrder = 6
+  end
+  object CmdPBarGo: TButton
+    Left = 220
+    Top = 122
+    Width = 75
+    Height = 25
+    Caption = 'Go'
+    TabOrder = 7
+    OnClick = CmdPBarGoClick
+  end
   object MainMenu: TMainMenu
-    Left = 9
-    Top = 103
+    Left = 11
+    Top = 6
     object mnuFile: TMenuItem
       Caption = 'File'
       object mnuAbout: TMenuItem
@@ -117,5 +134,12 @@ object TestGitMainFrm: TTestGitMainFrm
         OnClick = mnuExitClick
       end
     end
+  end
+  object Timer: TTimer
+    Enabled = False
+    Interval = 500
+    OnTimer = TimerTimer
+    Left = 45
+    Top = 6
   end
 end

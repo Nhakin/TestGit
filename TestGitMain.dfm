@@ -1,9 +1,9 @@
 object TestGitMainFrm: TTestGitMainFrm
   Left = 0
   Top = 0
-  Caption = 'Test Git 1.0.0.5'
-  ClientHeight = 241
-  ClientWidth = 366
+  Caption = 'Test Git 1.0.0.7'
+  ClientHeight = 170
+  ClientWidth = 328
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -43,18 +43,42 @@ object TestGitMainFrm: TTestGitMainFrm
   end
   object SBar: TStatusBar
     Left = 0
-    Top = 222
-    Width = 366
+    Top = 151
+    Width = 328
     Height = 19
     Panels = <
       item
         Text = 'Coded By Nhakin'
         Width = 50
       end>
+    ExplicitTop = 222
+    ExplicitWidth = 366
+  end
+  object RgOptions: TRadioGroup
+    Left = 111
+    Top = 12
+    Width = 189
+    Height = 109
+    Caption = ' Options '
+    Items.Strings = (
+      'Option #1'
+      'Option #2'
+      'Option #3'
+      'Option #4')
+    TabOrder = 4
+  end
+  object CmdOk: TButton
+    Left = 220
+    Top = 91
+    Width = 75
+    Height = 25
+    Caption = 'Ok'
+    TabOrder = 5
+    OnClick = CmdOkClick
   end
   object MainMenu: TMainMenu
-    Left = 105
-    Top = 7
+    Left = 9
+    Top = 103
     object mnuFile: TMenuItem
       Caption = 'File'
       object mnuAbout: TMenuItem

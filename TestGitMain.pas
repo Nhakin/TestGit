@@ -4,7 +4,7 @@ Interface
 
 Uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ComCtrls, Menus;
+  Dialogs, StdCtrls, ComCtrls, Menus, ExtCtrls;
 
 Type
   TTestGitMainFrm = Class(TForm)
@@ -17,12 +17,15 @@ Type
     mnuAbout: TMenuItem;
     N1: TMenuItem;
     mnuExit: TMenuItem;
+    RgOptions: TRadioGroup;
+    CmdOk: TButton;
 
     Procedure CmdLiveClick(Sender : TObject);
     Procedure CmdBetaClick(Sender : TObject);
     Procedure CmdDevClick(Sender : TObject);
     procedure mnuExitClick(Sender: TObject);
     procedure mnuAboutClick(Sender: TObject);
+    procedure CmdOkClick(Sender: TObject);
 
   Private
 
@@ -50,6 +53,14 @@ end;
 procedure TTestGitMainFrm.mnuAboutClick(Sender: TObject);
 begin
   ShowMessage('TestGit');
+end;
+
+procedure TTestGitMainFrm.CmdOkClick(Sender: TObject);
+begin
+  If RgOptions.ItemIndex > -1 Then
+    ShowMessage(RgOptions.Items[RgOptions.ItemIndex])
+  Else
+    ShowMessage('Please select an option.');
 end;
 
 Procedure TTestGitMainFrm.CmdBetaClick(Sender : TObject);

@@ -4,14 +4,15 @@ Interface
 
 Uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ComCtrls, Menus, ExtCtrls;
+  Dialogs, StdCtrls, ComCtrls, Menus, ExtCtrls, SynEditHighlighter,
+  SynHighlighterPas, SynEdit, SynMemo;
 
 Type
   TTestGitMainFrm = Class(TForm)
     SBar: TStatusBar;
-    PageControl1: TPageControl;
+    pcMain: TPageControl;
     tsDemo: TTabSheet;
-    TabTV: TTabSheet;
+    tsTreeView: TTabSheet;
     Label1: TLabel;
     CmdLive: TButton;
     CmdBeta: TButton;
@@ -27,10 +28,13 @@ Type
     TbPBarSpeed: TTrackBar;
     MainMenu: TMainMenu;
     mnuFile: TMenuItem;
+    SynPasSyn1: TSynPasSyn;
     mnuAbout: TMenuItem;
     N1: TMenuItem;
     mnuExit: TMenuItem;
     Timer: TTimer;
+    tsSynEditDemo: TTabSheet;
+    MemoSrc: TSynMemo;
 
     Procedure CmdLiveClick(Sender : TObject);
     Procedure CmdBetaClick(Sender : TObject);

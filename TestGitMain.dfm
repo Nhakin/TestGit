@@ -132,10 +132,6 @@ object TestGitMainFrm: TTestGitMainFrm
     object tsTreeView: TTabSheet
       Caption = 'TreeView Demo'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Splitter: TSplitter
         Left = 195
         Top = 0
@@ -151,21 +147,36 @@ object TestGitMainFrm: TTestGitMainFrm
         Width = 189
         Height = 316
         Align = alLeft
-        Header.AutoSizeIndex = 0
+        Header.AutoSizeIndex = 1
         Header.DefaultHeight = 17
         Header.Font.Charset = DEFAULT_CHARSET
         Header.Font.Color = clWindowText
         Header.Font.Height = -11
         Header.Font.Name = 'Tahoma'
         Header.Font.Style = []
-        Header.MainColumn = -1
+        Header.Options = [hoAutoResize, hoColumnResize, hoDrag, hoShowSortGlyphs, hoVisible]
         Images = ilTreeView
         TabOrder = 0
+        TreeOptions.MiscOptions = [toAcceptOLEDrop, toCheckSupport, toEditable, toFullRepaintOnResize, toGridExtensions, toInitOnSave, toToggleOnDblClick, toWheelPanning]
+        TreeOptions.PaintOptions = [toHotTrack, toPopupMode, toShowButtons, toShowDropmark, toShowRoot, toShowTreeLines, toThemeAware, toUseBlendedImages]
+        TreeOptions.SelectionOptions = [toExtendedFocus]
+        OnFocusChanged = vstDemoFocusChanged
         OnGetText = vstDemoGetText
         OnGetImageIndex = vstDemoGetImageIndex
         OnInitChildren = vstDemoInitChildren
         OnInitNode = vstDemoInitNode
-        Columns = <>
+        OnNewText = vstDemoNewText
+        Columns = <
+          item
+            Position = 0
+            Width = 95
+            WideText = 'Name'
+          end
+          item
+            Position = 1
+            Width = 90
+            WideText = 'Value'
+          end>
       end
       object PanTvDemo: TPanel
         AlignWithMargins = True
@@ -180,10 +191,6 @@ object TestGitMainFrm: TTestGitMainFrm
     object tsSynEditDemo: TTabSheet
       Caption = 'Syn Edit Demo'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object MemoSrc: TSynMemo
         AlignWithMargins = True
         Left = 3
@@ -282,7 +289,7 @@ object TestGitMainFrm: TTestGitMainFrm
     Left = 44
     Top = 69
     Bitmap = {
-      494C010104007800200010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104007800240010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

@@ -91,6 +91,10 @@ Type
     procedure vstDemoGetImageIndex(Sender: TBaseVirtualTree; Node: PVirtualNode;
       Kind: TVTImageKind; Column: TColumnIndex; var Ghosted: Boolean;
       var ImageIndex: Integer);
+    procedure vstDemoFocusChanged(Sender: TBaseVirtualTree; Node: PVirtualNode;
+      Column: TColumnIndex);
+    procedure vstDemoNewText(Sender: TBaseVirtualTree; Node: PVirtualNode;
+      Column: TColumnIndex; NewText: WideString);
 
   Private
     FTreeViewData : ITreeViewDatas;
@@ -322,6 +326,13 @@ Begin
   Result := GetNodeData(ANode, AId, lDummy);
 End;
 
+procedure TTestGitMainFrm.vstDemoFocusChanged(Sender: TBaseVirtualTree;
+  Node: PVirtualNode; Column: TColumnIndex);
+begin
+  If Column = 1 Then
+    vstDemo.EditNode(Node, Column);
+end;
+
 procedure TTestGitMainFrm.vstDemoGetImageIndex(Sender: TBaseVirtualTree;
   Node: PVirtualNode; Kind: TVTImageKind; Column: TColumnIndex;
   var Ghosted: Boolean; var ImageIndex: Integer);
@@ -335,8 +346,13 @@ procedure TTestGitMainFrm.vstDemoGetText(Sender: TBaseVirtualTree;
 
 Var lData : ITreeViewData;
 begin
+  CellText := '';
+
   If GetNodeData(Node, ITreeViewData, lData) Then
-    CellText := lData.DataName;
+    Case Column Of
+      0 : CellText := lData.DataName;
+      1 : CellText := lData.DataValue;
+    End;
 end;
 
 procedure TTestGitMainFrm.vstDemoInitNode(Sender: TBaseVirtualTree; ParentNode,
@@ -358,6 +374,17 @@ begin
     If FTreeViewData[Node.Index].Items.Count > 0 Then
       Node.States := Node.States + [vsHasChildren];
   End;
+end;
+
+procedure TTestGitMainFrm.vstDemoNewText(Sender: TBaseVirtualTree;
+  Node: PVirtualNode; Column: TColumnIndex; NewText: WideString);
+Var lData : ITreeViewData;
+begin
+  If GetNodeData(Node, ITreeViewData, lData) Then
+    Case Column Of
+      0 : lData.DataName  := NewText;
+      1 : lData.DataValue := NewText;
+    End;
 end;
 
 procedure TTestGitMainFrm.vstDemoInitChildren(Sender: TBaseVirtualTree;

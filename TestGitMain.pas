@@ -5,7 +5,9 @@ Interface
 Uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ComCtrls, Menus, ExtCtrls, SynEditHighlighter,
-  SynHighlighterPas, SynEdit, SynMemo, VirtualTrees, ImgList;
+  SynHighlighterPas, SynEdit, SynMemo, VirtualTrees, ImgList, TB2Item,
+  SpTBXItem, SpTBXTabs, TB2Dock, TB2Toolbar, SpTBXControls, SpTBXEditors,
+  SpTBXExControls;
 
 Type
   ITreeViewDatas = Interface;
@@ -39,38 +41,51 @@ Type
   End;
 
   TTestGitMainFrm = Class(TForm)
-    SBar: TStatusBar;
-    pcMain: TPageControl;
-    tsDemo: TTabSheet;
-    tsTreeView: TTabSheet;
-    Label1: TLabel;
-    RgOptions: TRadioGroup;
-    CmdOk: TButton;
-    GbSaySomething: TGroupBox;
-    EditSaySomething: TEdit;
-    CmdSaySomething: TButton;
-    PBar: TProgressBar;
-    CmdPBarGo: TButton;
-    chkIsChecked: TCheckBox;
-    TbPBarSpeed: TTrackBar;
-    MainMenu: TMainMenu;
-    mnuFile: TMenuItem;
     SynPasSyn1: TSynPasSyn;
-    mnuAbout: TMenuItem;
-    N1: TMenuItem;
-    mnuExit: TMenuItem;
     Timer: TTimer;
-    tsSynEditDemo: TTabSheet;
-    MemoSrc: TSynMemo;
-    Splitter: TSplitter;
-    PanTvDemo: TPanel;
     ilTreeView: TImageList;
+    tcMain: TSpTBXTabControl;
+    SpTBXTabItem1: TSpTBXTabItem;
+    sptbxSynEditDemo: TSpTBXTabSheet;
+    SpTBXTabItem2: TSpTBXTabItem;
+    sptbxTreeViewDemo: TSpTBXTabSheet;
+    SpTBXTabItem3: TSpTBXTabItem;
+    sptbxDemo: TSpTBXTabSheet;
     PanTv: TPanel;
-    vstDemo: TVirtualStringTree;
-    EditTvValueValue: TEdit;
-    EditTvValueName: TEdit;
-    Label2: TLabel;
-    Label3: TLabel;
+    PanTvDemo: TPanel;
+    Splitter: TSplitter;
+    MemoSrc: TSynMemo;
+    SpTBXBItemContainer1: TSpTBXBItemContainer;
+    mnuFile: TTBSubmenuItem;
+    N1: TTBSeparatorItem;
+    mnuVersion: TTBSubmenuItem;
+    SpTBXDock1: TSpTBXDock;
+    SpTBXToolbar1: TSpTBXToolbar;
+    SpTBXTBGroupItem1: TSpTBXTBGroupItem;
+    SpTBXSubmenuItem1: TSpTBXSubmenuItem;
+    SpTBXSkinGroupItem1: TSpTBXSkinGroupItem;
+    RgOptions: TSpTBXRadioGroup;
+    CmdOk: TSpTBXButton;
+    CmdPBarGo: TSpTBXButton;
+    PBar: TSpTBXProgressBar;
+    chkIsChecked: TSpTBXCheckBox;
+    EditTvValueValue: TSpTBXEdit;
+    EditTvValueName: TSpTBXEdit;
+    TbPBarSpeed: TSpTBXTrackBar;
+    Label2: TSpTBXLabel;
+    Label3: TSpTBXLabel;
+    Label1: TSpTBXLabel;
+    mnuAbout: TSpTBXItem;
+    mnuExit: TSpTBXItem;
+    mnuLive: TSpTBXItem;
+    mnuBeta: TSpTBXItem;
+    mnuDev: TSpTBXItem;
+    GbSaySomething: TSpTBXGroupBox;
+    CmdSaySomething: TSpTBXButton;
+    EditSaySomething: TSpTBXEdit;
+    SpTBXStatusBar1: TSpTBXStatusBar;
+    SpTBXLabelItem1: TSpTBXLabelItem;
+    vstDemo: TSpTBXVirtualStringTree;
 
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -128,6 +143,9 @@ Var
   TestGitMainFrm : TTestGitMainFrm;
 
 Implementation
+
+Uses
+  SpTBXSkins, SpTBXDefaultSkins, SpTBXAdditionalSkins;
 
 {$R *.dfm}
 
@@ -290,7 +308,7 @@ begin
 
   vstDemo.NodeDataSize := SizeOf(IInterface);
   vstDemo.RootNodeCount := FTreeViewData.Count;
-  pcMain.ActivePage := tsDemo;
+  tcMain.ActivePage := sptbxDemo;
   FPrevData := Nil;
 end;
 

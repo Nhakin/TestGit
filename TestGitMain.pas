@@ -8,9 +8,6 @@ Uses
 
 Type
   TTestGitMainFrm = Class(TForm)
-    CmdLive : TButton;
-    CmdBeta : TButton;
-    CmdDev  : TButton;
     SBar: TStatusBar;
     MainMenu: TMainMenu;
     mnuFile: TMenuItem;
@@ -28,6 +25,10 @@ Type
     chkIsChecked: TCheckBox;
     Label1: TLabel;
     TbPBarSpeed: TTrackBar;
+    mnuVersion: TMenuItem;
+    mnuLive: TMenuItem;
+    mnuBeta: TMenuItem;
+    mnuDev: TMenuItem;
 
     Procedure CmdLiveClick(Sender : TObject);
     Procedure CmdBetaClick(Sender : TObject);

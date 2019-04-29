@@ -2,67 +2,98 @@ object TestGitMainFrm: TTestGitMainFrm
   Left = 0
   Top = 0
   Caption = 'Test Git 1.0.0.10'
-  ClientHeight = 375
-  ClientWidth = 558
+  ClientHeight = 400
+  ClientWidth = 556
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
-  Menu = MainMenu
   OldCreateOrder = False
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
-  object SBar: TStatusBar
-    Left = 0
-    Top = 356
-    Width = 558
-    Height = 19
-    Panels = <
-      item
-        Text = 'Coded By Nhakin'
-        Width = 50
-      end>
-  end
-  object pcMain: TPageControl
+  object tcMain: TSpTBXTabControl
     AlignWithMargins = True
     Left = 3
-    Top = 3
-    Width = 552
-    Height = 350
-    ActivePage = tsTreeView
+    Top = 28
+    Width = 550
+    Height = 344
     Align = alClient
-    TabOrder = 0
-    object tsDemo: TTabSheet
+    ActiveTabIndex = 1
+    HiddenItems = <>
+    object SpTBXTabItem3: TSpTBXTabItem
       Caption = 'Demo'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
-      object Label1: TLabel
-        Left = 9
-        Top = 161
-        Width = 30
-        Height = 13
-        Caption = 'Speed'
+    end
+    object SpTBXTabItem2: TSpTBXTabItem
+      Caption = 'TreeView Demo'
+      Checked = True
+    end
+    object SpTBXTabItem1: TSpTBXTabItem
+      Caption = 'SynEdit Demo'
+    end
+    object sptbxSynEditDemo: TSpTBXTabSheet
+      Left = 0
+      Top = 25
+      Width = 550
+      Height = 319
+      Caption = 'SynEdit Demo'
+      ImageIndex = -1
+      TabItem = 'SpTBXTabItem1'
+      object MemoSrc: TSynMemo
+        AlignWithMargins = True
+        Left = 5
+        Top = 3
+        Width = 538
+        Height = 309
+        Align = alClient
+        Color = clBlack
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Courier New'
+        Font.Style = []
+        TabOrder = 0
+        Gutter.Font.Charset = DEFAULT_CHARSET
+        Gutter.Font.Color = clWindowText
+        Gutter.Font.Height = -11
+        Gutter.Font.Name = 'Courier New'
+        Gutter.Font.Style = []
+        Gutter.ShowLineNumbers = True
+        Gutter.ShowModification = True
+        Highlighter = SynPasSyn1
+        Lines.UnicodeStrings = 
+          '{This is a Comment}'#13#10#13#10'procedure TTestGitMainFrm.CmdOkClick(Send' +
+          'er: TObject);'#13#10'begin'#13#10'  lChar := #$29A;'#13#10#13#10'  If RgOptions.ItemIn' +
+          'dex > -1 Then'#13#10'    ShowMessage(RgOptions.Items[RgOptions.ItemInd' +
+          'ex])'#13#10'  Else'#13#10'    ShowMessage('#39'Please select an option.'#39');'#13#10'end;'
+        FontSmoothing = fsmNone
       end
-      object RgOptions: TRadioGroup
+    end
+    object sptbxDemo: TSpTBXTabSheet
+      Left = 0
+      Top = 25
+      Width = 550
+      Height = 319
+      Caption = 'Demo'
+      ImageIndex = -1
+      TabItem = 'SpTBXTabItem3'
+      object RgOptions: TSpTBXRadioGroup
         Left = 10
         Top = 19
         Width = 189
         Height = 109
         Caption = ' Options '
+        TabOrder = 0
         Items.Strings = (
           'Option #1'
           'Option #2'
           'Option #3'
           'Option #4')
-        TabOrder = 0
       end
-      object CmdOk: TButton
+      object CmdOk: TSpTBXButton
         Left = 119
         Top = 98
         Width = 75
@@ -71,21 +102,64 @@ object TestGitMainFrm: TTestGitMainFrm
         TabOrder = 1
         OnClick = CmdOkClick
       end
-      object GbSaySomething: TGroupBox
+      object CmdPBarGo: TSpTBXButton
+        Left = 166
+        Top = 129
+        Width = 75
+        Height = 25
+        Caption = 'Go'
+        TabOrder = 3
+        OnClick = CmdPBarGoClick
+      end
+      object PBar: TSpTBXProgressBar
+        Left = 10
+        Top = 135
+        Width = 150
+        Height = 17
+        Caption = '0%'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Smooth = True
+      end
+      object chkIsChecked: TSpTBXCheckBox
+        Left = 14
+        Top = 236
+        Width = 82
+        Height = 21
+        Caption = 'Is Checked?'
+        TabOrder = 4
+        OnClick = chkIsCheckedClick
+      end
+      object TbPBarSpeed: TSpTBXTrackBar
+        Left = 45
+        Top = 158
+        Width = 150
+        Height = 26
+        Max = 1000
+        Min = 250
+        Position = 250
+        TabOrder = 5
+        OnChange = TbPBarSpeedChange
+      end
+      object Label1: TSpTBXLabel
+        Left = 9
+        Top = 161
+        Width = 36
+        Height = 19
+        Caption = 'Speed'
+      end
+      object GbSaySomething: TSpTBXGroupBox
         Left = 5
         Top = 183
         Width = 300
         Height = 47
         Caption = ' Say something'
-        TabOrder = 5
-        object EditSaySomething: TEdit
-          Left = 9
-          Top = 17
-          Width = 205
-          Height = 21
-          TabOrder = 0
-        end
-        object CmdSaySomething: TButton
+        TabOrder = 2
+        object CmdSaySomething: TSpTBXButton
           Left = 220
           Top = 15
           Width = 62
@@ -94,107 +168,44 @@ object TestGitMainFrm: TTestGitMainFrm
           TabOrder = 1
           OnClick = CmdSaySomethingClick
         end
-      end
-      object PBar: TProgressBar
-        Left = 10
-        Top = 135
-        Width = 150
-        Height = 17
-        Smooth = True
-        TabOrder = 3
-      end
-      object CmdPBarGo: TButton
-        Left = 166
-        Top = 129
-        Width = 75
-        Height = 25
-        Caption = 'Go'
-        TabOrder = 2
-        OnClick = CmdPBarGoClick
-      end
-      object chkIsChecked: TCheckBox
-        Left = 14
-        Top = 236
-        Width = 97
-        Height = 17
-        Caption = 'Is Checked?'
-        TabOrder = 6
-        OnClick = chkIsCheckedClick
-      end
-      object TbPBarSpeed: TTrackBar
-        Left = 45
-        Top = 158
-        Width = 150
-        Height = 19
-        Max = 1000
-        Min = 250
-        Position = 250
-        TabOrder = 4
-        OnChange = TbPBarSpeedChange
-      end
-    end
-    object tsTreeView: TTabSheet
-      Caption = 'TreeView Demo'
-      ImageIndex = 1
-      object Splitter: TSplitter
-        Left = 185
-        Top = 0
-        Height = 322
-        ExplicitLeft = 202
-        ExplicitTop = 1
-      end
-      object PanTvDemo: TPanel
-        AlignWithMargins = True
-        Left = 191
-        Top = 3
-        Width = 350
-        Height = 316
-        Align = alClient
-        TabOrder = 0
-        object Label2: TLabel
-          Left = 11
-          Top = 16
-          Width = 27
-          Height = 13
-          Caption = 'Name'
-        end
-        object Label3: TLabel
-          Left = 11
-          Top = 43
-          Width = 26
-          Height = 13
-          Caption = 'Value'
-        end
-        object EditTvValueValue: TEdit
-          Left = 59
-          Top = 39
-          Width = 149
+        object EditSaySomething: TSpTBXEdit
+          Left = 9
+          Top = 17
+          Width = 205
           Height = 21
           TabOrder = 0
-          OnChange = EditTvValueNameChange
-        end
-        object EditTvValueName: TEdit
-          Left = 59
-          Top = 12
-          Width = 149
-          Height = 21
-          TabOrder = 1
-          OnChange = EditTvValueNameChange
         end
       end
+    end
+    object sptbxTreeViewDemo: TSpTBXTabSheet
+      Left = 0
+      Top = 25
+      Width = 550
+      Height = 319
+      Caption = 'TreeView Demo'
+      ImageIndex = -1
+      TabItem = 'SpTBXTabItem2'
+      object Splitter: TSplitter
+        Left = 187
+        Top = 0
+        Height = 315
+        ExplicitLeft = 236
+        ExplicitTop = 15
+        ExplicitHeight = 321
+      end
       object PanTv: TPanel
-        Left = 0
+        Left = 2
         Top = 0
         Width = 185
-        Height = 322
+        Height = 315
         Align = alLeft
-        TabOrder = 1
-        object vstDemo: TVirtualStringTree
+        TabOrder = 0
+        object vstDemo: TSpTBXVirtualStringTree
           AlignWithMargins = True
           Left = 4
           Top = 4
           Width = 177
-          Height = 314
+          Height = 307
           Align = alClient
           Header.AutoSizeIndex = 1
           Header.DefaultHeight = 17
@@ -203,7 +214,7 @@ object TestGitMainFrm: TTestGitMainFrm
           Header.Font.Height = -11
           Header.Font.Name = 'Tahoma'
           Header.Font.Style = []
-          Header.Options = [hoAutoResize, hoColumnResize, hoDrag, hoShowSortGlyphs, hoVisible]
+          Header.Options = [hoAutoResize, hoColumnResize, hoDrag, hoOwnerDraw, hoShowSortGlyphs, hoVisible]
           Images = ilTreeView
           TabOrder = 0
           TreeOptions.AutoOptions = [toAutoDropExpand, toAutoScrollOnExpand, toAutoSort, toAutoTristateTracking, toAutoDeleteMovedNodes]
@@ -231,76 +242,74 @@ object TestGitMainFrm: TTestGitMainFrm
             end>
         end
       end
-    end
-    object tsSynEditDemo: TTabSheet
-      Caption = 'Syn Edit Demo'
-      ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
-      object MemoSrc: TSynMemo
+      object PanTvDemo: TPanel
         AlignWithMargins = True
-        Left = 3
+        Left = 193
         Top = 3
-        Width = 538
-        Height = 316
+        Width = 350
+        Height = 309
         Align = alClient
-        Color = clBlack
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Courier New'
-        Font.Style = []
-        TabOrder = 0
-        Gutter.Font.Charset = DEFAULT_CHARSET
-        Gutter.Font.Color = clWindowText
-        Gutter.Font.Height = -11
-        Gutter.Font.Name = 'Courier New'
-        Gutter.Font.Style = []
-        Gutter.ShowLineNumbers = True
-        Gutter.ShowModification = True
-        Highlighter = SynPasSyn1
-        Lines.UnicodeStrings = 
-          '{This is a Comment}'#13#10#13#10'procedure TTestGitMainFrm.CmdOkClick(Send' +
-          'er: TObject);'#13#10'begin'#13#10'  lChar := #$29A;'#13#10#13#10'  If RgOptions.ItemIn' +
-          'dex > -1 Then'#13#10'    ShowMessage(RgOptions.Items[RgOptions.ItemInd' +
-          'ex])'#13#10'  Else'#13#10'    ShowMessage('#39'Please select an option.'#39');'#13#10'end;'
-        FontSmoothing = fsmNone
+        TabOrder = 1
+        object EditTvValueValue: TSpTBXEdit
+          Left = 59
+          Top = 39
+          Width = 149
+          Height = 21
+          TabOrder = 0
+          OnChange = EditTvValueNameChange
+        end
+        object EditTvValueName: TSpTBXEdit
+          Left = 59
+          Top = 12
+          Width = 149
+          Height = 21
+          TabOrder = 1
+          OnChange = EditTvValueNameChange
+        end
+        object Label2: TSpTBXLabel
+          Left = 11
+          Top = 16
+          Width = 33
+          Height = 19
+          Caption = 'Name'
+        end
+        object Label3: TSpTBXLabel
+          Left = 11
+          Top = 43
+          Width = 32
+          Height = 19
+          Caption = 'Value'
+        end
       end
     end
   end
-  object MainMenu: TMainMenu
-    Left = 11
-    Top = 37
-    object mnuFile: TMenuItem
-      Caption = 'File'
-      object mnuAbout: TMenuItem
-        Caption = 'About'
-        OnClick = mnuAboutClick
-      end
-      object N1: TMenuItem
-        Caption = '-'
-      end
-      object mnuExit: TMenuItem
-        Caption = 'Exit'
-        OnClick = mnuExitClick
-      end
+  object SpTBXDock1: TSpTBXDock
+    Left = 0
+    Top = 0
+    Width = 556
+    Height = 25
+    AllowDrag = False
+    object SpTBXToolbar1: TSpTBXToolbar
+      Left = 0
+      Top = 0
+      CloseButton = False
+      FullSize = True
+      LinkSubitems = SpTBXTBGroupItem1
+      ProcessShortCuts = True
+      ShrinkMode = tbsmWrap
+      TabOrder = 0
+      Caption = 'sptbxMenu'
+      Customizable = False
+      MenuBar = True
     end
-    object mnuVersion: TMenuItem
-      Caption = 'Version'
-      object mnuLive: TMenuItem
-        Caption = 'Live'
-        OnClick = CmdLiveClick
-      end
-      object mnuBeta: TMenuItem
-        Caption = 'Beta'
-        OnClick = CmdBetaClick
-      end
-      object mnuDev: TMenuItem
-        Caption = 'Dev'
-        OnClick = CmdDevClick
-      end
+  end
+  object SpTBXStatusBar1: TSpTBXStatusBar
+    Left = 0
+    Top = 375
+    Width = 556
+    Height = 25
+    object SpTBXLabelItem1: TSpTBXLabelItem
+      Caption = 'Coded By Nhakin'
     end
   end
   object Timer: TTimer
@@ -337,7 +346,7 @@ object TestGitMainFrm: TTestGitMainFrm
     Left = 44
     Top = 69
     Bitmap = {
-      494C010104007800300010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104007800380010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -607,5 +616,44 @@ object TestGitMainFrm: TTestGitMainFrm
       C00180008003E00FC00180008003F21FC00180008003F39FC00300008007F13F
       C007C001800FF83FC00FF003801FFFFF00000000000000000000000000000000
       000000000000}
+  end
+  object SpTBXBItemContainer1: TSpTBXBItemContainer
+    Left = 12
+    Top = 35
+    object SpTBXTBGroupItem1: TSpTBXTBGroupItem
+      object mnuFile: TTBSubmenuItem
+        Caption = 'File'
+        object N1: TTBSeparatorItem
+        end
+        object mnuAbout: TSpTBXItem
+          Caption = 'About'
+          OnClick = mnuAboutClick
+        end
+        object mnuExit: TSpTBXItem
+          Caption = 'Exit'
+          OnClick = mnuExitClick
+        end
+      end
+      object mnuVersion: TTBSubmenuItem
+        Caption = 'Version'
+        object mnuLive: TSpTBXItem
+          Caption = 'Live'
+          OnClick = CmdLiveClick
+        end
+        object mnuBeta: TSpTBXItem
+          Caption = 'Beta'
+          OnClick = CmdBetaClick
+        end
+        object mnuDev: TSpTBXItem
+          Caption = 'Dev'
+          OnClick = CmdDevClick
+        end
+      end
+      object SpTBXSubmenuItem1: TSpTBXSubmenuItem
+        Caption = 'Skins'
+        object SpTBXSkinGroupItem1: TSpTBXSkinGroupItem
+        end
+      end
+    end
   end
 end

@@ -5,7 +5,9 @@ Interface
 Uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ComCtrls, Menus, ExtCtrls, SynEditHighlighter,
-  SynHighlighterPas, SynEdit, SynMemo, VirtualTrees, ImgList;
+  SynHighlighterPas, SynEdit, SynMemo, VirtualTrees, ImgList, TB2Item,
+  SpTBXItem, SpTBXTabs, TB2Dock, TB2Toolbar, SpTBXControls, SpTBXEditors,
+  SpTBXExControls;
 
 Type
   ITreeViewDatas = Interface;
@@ -31,46 +33,62 @@ Type
     Function  Get(Index : Integer) : ITreeViewData;
     Procedure Put(Index : Integer; Const Item : ITreeViewData);
 
+    Function GetAsXml() : String;
+
     Function Add() : ITreeViewData; OverLoad;
     Function Add(Const AItem : ITreeViewData) : Integer; OverLoad;
 
     Property Items[Index : Integer] : ITreeViewData Read Get Write Put; Default;
+    Property AsXml : String Read GetAsXml;
 
   End;
 
   TTestGitMainFrm = Class(TForm)
-    SBar: TStatusBar;
-    pcMain: TPageControl;
-    tsDemo: TTabSheet;
-    tsTreeView: TTabSheet;
-    Label1: TLabel;
-    RgOptions: TRadioGroup;
-    CmdOk: TButton;
-    GbSaySomething: TGroupBox;
-    EditSaySomething: TEdit;
-    CmdSaySomething: TButton;
-    PBar: TProgressBar;
-    CmdPBarGo: TButton;
-    chkIsChecked: TCheckBox;
-    TbPBarSpeed: TTrackBar;
-    MainMenu: TMainMenu;
-    mnuFile: TMenuItem;
     SynPasSyn1: TSynPasSyn;
-    mnuAbout: TMenuItem;
-    N1: TMenuItem;
-    mnuExit: TMenuItem;
     Timer: TTimer;
-    tsSynEditDemo: TTabSheet;
-    MemoSrc: TSynMemo;
-    Splitter: TSplitter;
-    PanTvDemo: TPanel;
     ilTreeView: TImageList;
+    tcMain: TSpTBXTabControl;
+    SpTBXTabItem1: TSpTBXTabItem;
+    sptbxSynEditDemo: TSpTBXTabSheet;
+    SpTBXTabItem2: TSpTBXTabItem;
+    sptbxTreeViewDemo: TSpTBXTabSheet;
+    SpTBXTabItem3: TSpTBXTabItem;
+    sptbxDemo: TSpTBXTabSheet;
     PanTv: TPanel;
-    vstDemo: TVirtualStringTree;
-    EditTvValueValue: TEdit;
-    EditTvValueName: TEdit;
-    Label2: TLabel;
-    Label3: TLabel;
+    PanTvDemo: TPanel;
+    Splitter: TSplitter;
+    MemoSrc: TSynMemo;
+    SpTBXBItemContainer1: TSpTBXBItemContainer;
+    mnuFile: TTBSubmenuItem;
+    N1: TTBSeparatorItem;
+    mnuVersion: TTBSubmenuItem;
+    SpTBXDock1: TSpTBXDock;
+    SpTBXToolbar1: TSpTBXToolbar;
+    SpTBXTBGroupItem1: TSpTBXTBGroupItem;
+    SpTBXSubmenuItem1: TSpTBXSubmenuItem;
+    SpTBXSkinGroupItem1: TSpTBXSkinGroupItem;
+    RgOptions: TSpTBXRadioGroup;
+    CmdOk: TSpTBXButton;
+    CmdPBarGo: TSpTBXButton;
+    PBar: TSpTBXProgressBar;
+    chkIsChecked: TSpTBXCheckBox;
+    EditTvValueValue: TSpTBXEdit;
+    EditTvValueName: TSpTBXEdit;
+    TbPBarSpeed: TSpTBXTrackBar;
+    Label2: TSpTBXLabel;
+    Label3: TSpTBXLabel;
+    Label1: TSpTBXLabel;
+    mnuAbout: TSpTBXItem;
+    mnuExit: TSpTBXItem;
+    mnuLive: TSpTBXItem;
+    mnuBeta: TSpTBXItem;
+    mnuDev: TSpTBXItem;
+    GbSaySomething: TSpTBXGroupBox;
+    CmdSaySomething: TSpTBXButton;
+    EditSaySomething: TSpTBXEdit;
+    SpTBXStatusBar1: TSpTBXStatusBar;
+    SpTBXLabelItem1: TSpTBXLabelItem;
+    vstDemo: TSpTBXVirtualStringTree;
 
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -85,6 +103,7 @@ Type
     procedure CmdPBarGoClick(Sender: TObject);
     procedure chkIsCheckedClick(Sender: TObject);
     procedure TbPBarSpeedChange(Sender: TObject);
+    procedure EditTvValueNameChange(Sender: TObject);
 
     //VirtualTreeView Event Handler
     procedure vstDemoInitNode(Sender: TBaseVirtualTree; ParentNode,
@@ -104,7 +123,7 @@ Type
       Node2: PVirtualNode; Column: TColumnIndex; var Result: Integer);
     procedure vstDemoHeaderClick(Sender: TVTHeader; Column: TColumnIndex;
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure EditTvValueNameChange(Sender: TObject);
+    procedure SpTBXButton1Click(Sender: TObject);
 
   Private
     FTreeViewData : ITreeViewDatas;
@@ -128,6 +147,12 @@ Var
   TestGitMainFrm : TTestGitMainFrm;
 
 Implementation
+
+Uses
+  SpTBXSkins, SpTBXDefaultSkins, SpTBXAdditionalSkins;
+
+Uses
+  XmlDoc, XmlIntf;
 
 {$R *.dfm}
 
@@ -162,6 +187,10 @@ Type
 
     Function Add() : ITreeViewData; OverLoad;
     Function Add(Const AItem : ITreeViewData) : Integer; OverLoad;
+
+    Function GetAsXml() : String;
+
+    Property Items[Index : Integer] : ITreeViewData Read Get Write Put; Default;
 
   End;
 
@@ -240,6 +269,35 @@ Begin
   Result := InHerited Add(AItem);
 End;
 
+Function TTreeViewDatas.GetAsXml() : String;
+  Procedure InternalTreeViewAsString(AStartPoint : ITreeViewDatas; AParent : IXMLNode);
+  Var X : Integer;
+  Begin
+    For X := 0 To AStartPoint.Count - 1 Do
+    Begin
+      With AParent.AddChild('Item') Do
+      Begin
+        AddChild('Name').NodeValue  := AStartPoint.Items[X].DataName;
+        AddChild('Value').NodeValue := AStartPoint.Items[X].DataValue;
+
+        If AStartPoint[X].Items.Count > 0 Then
+          InternalTreeViewAsString(AStartPoint[X].Items, AddChild('Items'));
+      End;
+    End;
+  End;
+
+Var lXml : IXMLDocument;
+Begin
+  lXml := NewXMLDocument('');
+  Try
+    InternalTreeViewAsString(Self, lXml.AddChild('Items'));
+    Result := FormatXmlData(lXml.Xml.Text);
+
+    Finally
+      lXml := Nil;
+  End;
+End;
+
 (******************************************************************************)
 
 Procedure TTestGitMainFrm.CmdLiveClick(Sender : TObject);
@@ -290,7 +348,7 @@ begin
 
   vstDemo.NodeDataSize := SizeOf(IInterface);
   vstDemo.RootNodeCount := FTreeViewData.Count;
-  pcMain.ActivePage := tsDemo;
+  tcMain.ActivePage := sptbxDemo;
   FPrevData := Nil;
 end;
 
@@ -324,12 +382,17 @@ Begin
   lNodeData^ := Pointer(ANodeData);
 End;
 
+procedure TTestGitMainFrm.SpTBXButton1Click(Sender: TObject);
+begin
+  ShowMessage(FTreeViewData.AsXml);
+end;
+
 Function TTestGitMainFrm.GetNodeData(ANode : PVirtualNode; AId : TGUID; Var ANodeData) : Boolean;
 Var lNodeData : PPointer;
 Begin
   If Assigned(ANode) Then
   Begin
-    lNodeData := vstDemo.GetNodeData(ANode);
+    lNodeData := vstDemo.GetNodeData(ANode); 
     Result := Assigned(lNodeData) And Assigned(lNodeData^) And
               Supports(IInterface(lNodeData^), AId, ANodeData);
   End

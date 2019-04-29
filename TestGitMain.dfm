@@ -36,8 +36,6 @@ object TestGitMainFrm: TTestGitMainFrm
     ActivePage = tsTreeView
     Align = alClient
     TabOrder = 0
-    ExplicitLeft = 199
-    ExplicitTop = 0
     object tsDemo: TTabSheet
       Caption = 'Demo'
       object Label1: TLabel
@@ -149,8 +147,36 @@ object TestGitMainFrm: TTestGitMainFrm
         Height = 316
         Align = alClient
         TabOrder = 0
-        ExplicitLeft = 201
-        ExplicitWidth = 340
+        object Label2: TLabel
+          Left = 11
+          Top = 16
+          Width = 27
+          Height = 13
+          Caption = 'Name'
+        end
+        object Label3: TLabel
+          Left = 11
+          Top = 43
+          Width = 26
+          Height = 13
+          Caption = 'Value'
+        end
+        object EditTvValueValue: TEdit
+          Left = 59
+          Top = 39
+          Width = 149
+          Height = 21
+          TabOrder = 0
+          OnChange = EditTvValueNameChange
+        end
+        object EditTvValueName: TEdit
+          Left = 59
+          Top = 12
+          Width = 149
+          Height = 21
+          TabOrder = 1
+          OnChange = EditTvValueNameChange
+        end
       end
       object PanTv: TPanel
         Left = 0
@@ -159,9 +185,6 @@ object TestGitMainFrm: TTestGitMainFrm
         Height = 322
         Align = alLeft
         TabOrder = 1
-        ExplicitLeft = 223
-        ExplicitTop = 139
-        ExplicitHeight = 41
         object vstDemo: TVirtualStringTree
           AlignWithMargins = True
           Left = 4
@@ -191,8 +214,6 @@ object TestGitMainFrm: TTestGitMainFrm
           OnInitChildren = vstDemoInitChildren
           OnInitNode = vstDemoInitNode
           OnNewText = vstDemoNewText
-          ExplicitWidth = 189
-          ExplicitHeight = 33
           Columns = <
             item
               Position = 0

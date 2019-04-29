@@ -25,8 +25,6 @@ object TestGitMainFrm: TTestGitMainFrm
         Text = 'Coded By Nhakin'
         Width = 50
       end>
-    ExplicitTop = 257
-    ExplicitWidth = 722
   end
   object pcMain: TPageControl
     AlignWithMargins = True
@@ -34,51 +32,22 @@ object TestGitMainFrm: TTestGitMainFrm
     Top = 3
     Width = 552
     Height = 350
-    ActivePage = tsTreeView
+    ActivePage = tsDemo
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 716
-    ExplicitHeight = 251
     object tsDemo: TTabSheet
       Caption = 'Demo'
-      ExplicitWidth = 708
-      ExplicitHeight = 223
+      ExplicitLeft = 0
+      ExplicitTop = 25
       object Label1: TLabel
-        Left = 33
+        Left = 9
         Top = 161
         Width = 30
         Height = 13
         Caption = 'Speed'
       end
-      object CmdLive: TButton
-        Left = 13
-        Top = 19
-        Width = 75
-        Height = 25
-        Caption = 'Live'
-        TabOrder = 0
-        OnClick = CmdLiveClick
-      end
-      object CmdBeta: TButton
-        Left = 13
-        Top = 50
-        Width = 75
-        Height = 25
-        Caption = 'Beta'
-        TabOrder = 2
-        OnClick = CmdBetaClick
-      end
-      object CmdDev: TButton
-        Left = 13
-        Top = 81
-        Width = 75
-        Height = 25
-        Caption = 'Dev'
-        TabOrder = 3
-        OnClick = CmdDevClick
-      end
       object RgOptions: TRadioGroup
-        Left = 116
+        Left = 10
         Top = 19
         Width = 189
         Height = 109
@@ -88,15 +57,15 @@ object TestGitMainFrm: TTestGitMainFrm
           'Option #2'
           'Option #3'
           'Option #4')
-        TabOrder = 1
+        TabOrder = 0
       end
       object CmdOk: TButton
-        Left = 225
+        Left = 119
         Top = 98
         Width = 75
         Height = 25
         Caption = 'Ok'
-        TabOrder = 4
+        TabOrder = 1
         OnClick = CmdOkClick
       end
       object GbSaySomething: TGroupBox
@@ -105,7 +74,7 @@ object TestGitMainFrm: TTestGitMainFrm
         Width = 300
         Height = 47
         Caption = ' Say something'
-        TabOrder = 8
+        TabOrder = 5
         object EditSaySomething: TEdit
           Left = 9
           Top = 17
@@ -124,20 +93,20 @@ object TestGitMainFrm: TTestGitMainFrm
         end
       end
       object PBar: TProgressBar
-        Left = 69
+        Left = 10
         Top = 135
         Width = 150
         Height = 17
         Smooth = True
-        TabOrder = 6
+        TabOrder = 3
       end
       object CmdPBarGo: TButton
-        Left = 225
+        Left = 166
         Top = 129
         Width = 75
         Height = 25
         Caption = 'Go'
-        TabOrder = 5
+        TabOrder = 2
         OnClick = CmdPBarGoClick
       end
       object chkIsChecked: TCheckBox
@@ -146,26 +115,24 @@ object TestGitMainFrm: TTestGitMainFrm
         Width = 97
         Height = 17
         Caption = 'Is Checked?'
-        TabOrder = 9
+        TabOrder = 6
         OnClick = chkIsCheckedClick
       end
       object TbPBarSpeed: TTrackBar
-        Left = 69
+        Left = 45
         Top = 158
         Width = 150
         Height = 19
         Max = 1000
         Min = 250
         Position = 250
-        TabOrder = 7
+        TabOrder = 4
         OnChange = TbPBarSpeedChange
       end
     end
     object tsTreeView: TTabSheet
       Caption = 'TreeView Demo'
       ImageIndex = 1
-      ExplicitWidth = 708
-      ExplicitHeight = 223
       object Splitter: TSplitter
         Left = 195
         Top = 0
@@ -203,17 +170,11 @@ object TestGitMainFrm: TTestGitMainFrm
         Height = 316
         Align = alClient
         TabOrder = 1
-        ExplicitLeft = 302
-        ExplicitTop = 131
-        ExplicitWidth = 185
-        ExplicitHeight = 41
       end
     end
     object tsSynEditDemo: TTabSheet
       Caption = 'Syn Edit Demo'
       ImageIndex = 2
-      ExplicitWidth = 708
-      ExplicitHeight = 223
       object MemoSrc: TSynMemo
         AlignWithMargins = True
         Left = 3
@@ -242,10 +203,6 @@ object TestGitMainFrm: TTestGitMainFrm
           'dex > -1 Then'#13#10'    ShowMessage(RgOptions.Items[RgOptions.ItemInd' +
           'ex])'#13#10'  Else'#13#10'    ShowMessage('#39'Please select an option.'#39');'#13#10'end;'
         FontSmoothing = fsmNone
-        ExplicitLeft = 313
-        ExplicitTop = -7
-        ExplicitWidth = 395
-        ExplicitHeight = 230
       end
     end
   end

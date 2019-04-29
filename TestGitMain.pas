@@ -44,9 +44,6 @@ Type
     tsDemo: TTabSheet;
     tsTreeView: TTabSheet;
     Label1: TLabel;
-    CmdLive: TButton;
-    CmdBeta: TButton;
-    CmdDev: TButton;
     RgOptions: TRadioGroup;
     CmdOk: TButton;
     GbSaySomething: TGroupBox;

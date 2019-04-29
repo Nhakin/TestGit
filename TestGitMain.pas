@@ -5,7 +5,8 @@ Interface
 Uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ComCtrls, Menus, ExtCtrls, SynEditHighlighter,
-  SynHighlighterPas, SynEdit, SynMemo, VirtualTrees, ImgList;
+  SynHighlighterPas, SynEdit, SynMemo, VirtualTrees, ImgList, SpTBXItem,
+  SpTBXControls;
 
 Type
   ITreeViewDatas = Interface;
@@ -31,10 +32,13 @@ Type
     Function  Get(Index : Integer) : ITreeViewData;
     Procedure Put(Index : Integer; Const Item : ITreeViewData);
 
+    Function GetAsXml() : String;
+
     Function Add() : ITreeViewData; OverLoad;
     Function Add(Const AItem : ITreeViewData) : Integer; OverLoad;
 
     Property Items[Index : Integer] : ITreeViewData Read Get Write Put; Default;
+    Property AsXml : String Read GetAsXml;
 
   End;
 
@@ -71,6 +75,7 @@ Type
     EditTvValueName: TEdit;
     Label2: TLabel;
     Label3: TLabel;
+    SpTBXButton1: TSpTBXButton;
 
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -85,6 +90,7 @@ Type
     procedure CmdPBarGoClick(Sender: TObject);
     procedure chkIsCheckedClick(Sender: TObject);
     procedure TbPBarSpeedChange(Sender: TObject);
+    procedure EditTvValueNameChange(Sender: TObject);
 
     //VirtualTreeView Event Handler
     procedure vstDemoInitNode(Sender: TBaseVirtualTree; ParentNode,
@@ -104,7 +110,7 @@ Type
       Node2: PVirtualNode; Column: TColumnIndex; var Result: Integer);
     procedure vstDemoHeaderClick(Sender: TVTHeader; Column: TColumnIndex;
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure EditTvValueNameChange(Sender: TObject);
+    procedure SpTBXButton1Click(Sender: TObject);
 
   Private
     FTreeViewData : ITreeViewDatas;
@@ -128,6 +134,9 @@ Var
   TestGitMainFrm : TTestGitMainFrm;
 
 Implementation
+
+Uses
+  XmlDoc, XmlIntf;
 
 {$R *.dfm}
 
@@ -162,6 +171,10 @@ Type
 
     Function Add() : ITreeViewData; OverLoad;
     Function Add(Const AItem : ITreeViewData) : Integer; OverLoad;
+
+    Function GetAsXml() : String;
+
+    Property Items[Index : Integer] : ITreeViewData Read Get Write Put; Default;
 
   End;
 
@@ -238,6 +251,35 @@ End;
 Function TTreeViewDatas.Add(Const AItem : ITreeViewData) : Integer;
 Begin
   Result := InHerited Add(AItem);
+End;
+
+Function TTreeViewDatas.GetAsXml() : String;
+  Procedure InternalTreeViewAsString(AStartPoint : ITreeViewDatas; AParent : IXMLNode);
+  Var X : Integer;
+  Begin
+    For X := 0 To AStartPoint.Count - 1 Do
+    Begin
+      With AParent.AddChild('Item') Do
+      Begin
+        AddChild('Name').NodeValue  := AStartPoint.Items[X].DataName;
+        AddChild('Value').NodeValue := AStartPoint.Items[X].DataValue;
+
+        If AStartPoint[X].Items.Count > 0 Then
+          InternalTreeViewAsString(AStartPoint[X].Items, AddChild('Items'));
+      End;
+    End;
+  End;
+
+Var lXml : IXMLDocument;
+Begin
+  lXml := NewXMLDocument('');
+  Try
+    InternalTreeViewAsString(Self, lXml.AddChild('Items'));
+    Result := FormatXmlData(lXml.Xml.Text);
+
+    Finally
+      lXml := Nil;
+  End;
 End;
 
 (******************************************************************************)
@@ -323,6 +365,11 @@ Begin
   lNodeData  := vstDemo.GetNodeData(ANode);
   lNodeData^ := Pointer(ANodeData);
 End;
+
+procedure TTestGitMainFrm.SpTBXButton1Click(Sender: TObject);
+begin
+  ShowMessage(FTreeViewData.AsXml);
+end;
 
 Function TTestGitMainFrm.GetNodeData(ANode : PVirtualNode; AId : TGUID; Var ANodeData) : Boolean;
 Var lNodeData : PPointer;

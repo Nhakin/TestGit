@@ -33,15 +33,11 @@ object TestGitMainFrm: TTestGitMainFrm
     Top = 3
     Width = 552
     Height = 350
-    ActivePage = tsTreeView
+    ActivePage = tsDemo
     Align = alClient
     TabOrder = 0
     object tsDemo: TTabSheet
       Caption = 'Demo'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label1: TLabel
         Left = 9
         Top = 161
@@ -181,6 +177,15 @@ object TestGitMainFrm: TTestGitMainFrm
           TabOrder = 1
           OnChange = EditTvValueNameChange
         end
+        object SpTBXButton1: TSpTBXButton
+          Left = 119
+          Top = 141
+          Width = 75
+          Height = 25
+          Caption = 'SpTBXButton1'
+          TabOrder = 2
+          OnClick = SpTBXButton1Click
+        end
       end
       object PanTv: TPanel
         Left = 0
@@ -235,10 +240,6 @@ object TestGitMainFrm: TTestGitMainFrm
     object tsSynEditDemo: TTabSheet
       Caption = 'Syn Edit Demo'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object MemoSrc: TSynMemo
         AlignWithMargins = True
         Left = 3
@@ -337,7 +338,7 @@ object TestGitMainFrm: TTestGitMainFrm
     Left = 44
     Top = 69
     Bitmap = {
-      494C010104007800300010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104007800340010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

@@ -67,6 +67,10 @@ Type
     ilTreeView: TImageList;
     PanTv: TPanel;
     vstDemo: TVirtualStringTree;
+    EditTvValueValue: TEdit;
+    EditTvValueName: TEdit;
+    Label2: TLabel;
+    Label3: TLabel;
 
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -100,10 +104,12 @@ Type
       Node2: PVirtualNode; Column: TColumnIndex; var Result: Integer);
     procedure vstDemoHeaderClick(Sender: TVTHeader; Column: TColumnIndex;
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure EditTvValueNameChange(Sender: TObject);
 
   Private
     FTreeViewData : ITreeViewDatas;
-
+    FPrevData     : ITreeViewData;
+    
     Procedure SetNodeData(ANode : PVirtualNode; ANodeData : IInterface);
     Function  GetNodeData(ANode : PVirtualNode; AId : TGUID; Var ANodeData) : Boolean; OverLoad;
     Function  GetNodeData(ANode : PVirtualNode; AId : TGUID) : Boolean; OverLoad;
@@ -249,6 +255,11 @@ begin
     ShowMessage(EditSaySomething.Text);
 end;
 
+procedure TTestGitMainFrm.EditTvValueNameChange(Sender: TObject);
+begin
+  FPrevData.DataName := TEdit(Sender).Text;
+end;
+
 procedure TTestGitMainFrm.FormCreate(Sender: TObject);
 Var X, Y, Z : Integer;
 begin
@@ -280,6 +291,7 @@ begin
   vstDemo.NodeDataSize := SizeOf(IInterface);
   vstDemo.RootNodeCount := FTreeViewData.Count;
   pcMain.ActivePage := tsDemo;
+  FPrevData := Nil;
 end;
 
 procedure TTestGitMainFrm.FormDestroy(Sender: TObject);
@@ -346,9 +358,24 @@ end;
 
 procedure TTestGitMainFrm.vstDemoFocusChanged(Sender: TBaseVirtualTree;
   Node: PVirtualNode; Column: TColumnIndex);
+Var lData : ITreeViewData;
 begin
   If Column = 1 Then
     vstDemo.EditNode(Node, Column);
+
+  If Assigned(FPrevData) Then
+  Begin
+    FPrevData.DataName  := EditTvValueName.Text;
+    FPrevData.DataValue := EditTvValueValue.Text;
+  End;
+
+  If GetNodeData(Node, ITreeViewData, lData) Then
+  Begin
+    FPrevData := lData;
+
+    EditTvValueName.Text  := FPrevData.DataName;
+    EditTvValueValue.Text := FPrevData.DataValue;
+  End;
 end;
 
 procedure TTestGitMainFrm.vstDemoGetImageIndex(Sender: TBaseVirtualTree;

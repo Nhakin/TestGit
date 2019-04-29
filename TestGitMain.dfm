@@ -24,11 +24,10 @@ object TestGitMainFrm: TTestGitMainFrm
         Text = 'Coded By Nhakin'
         Width = 50
       end>
-    ExplicitTop = 232
   end
   object RgOptions: TRadioGroup
-    Left = 111
-    Top = 12
+    Left = 8
+    Top = 8
     Width = 189
     Height = 109
     Caption = ' Options '
@@ -37,15 +36,15 @@ object TestGitMainFrm: TTestGitMainFrm
       'Option #2'
       'Option #3'
       'Option #4')
-    TabOrder = 8
+    TabOrder = 1
   end
   object CmdOk: TButton
-    Left = 220
-    Top = 91
+    Left = 117
+    Top = 87
     Width = 75
     Height = 25
     Caption = 'Ok'
-    TabOrder = 5
+    TabOrder = 3
     OnClick = CmdOkClick
   end
   object GbSaySomething: TGroupBox
@@ -54,7 +53,7 @@ object TestGitMainFrm: TTestGitMainFrm
     Width = 300
     Height = 47
     Caption = ' Say something'
-    TabOrder = 4
+    TabOrder = 2
     object EditSaySomething: TEdit
       Left = 9
       Top = 17
@@ -73,16 +72,16 @@ object TestGitMainFrm: TTestGitMainFrm
     end
   end
   object PBar: TProgressBar
-    Left = 64
-    Top = 128
+    Left = 8
+    Top = 127
     Width = 150
     Height = 17
     Smooth = True
-    TabOrder = 6
+    TabOrder = 5
   end
   object CmdPBarGo: TButton
-    Left = 220
-    Top = 122
+    Left = 164
+    Top = 123
     Width = 75
     Height = 25
     Caption = 'Go'
@@ -95,18 +94,18 @@ object TestGitMainFrm: TTestGitMainFrm
     Width = 97
     Height = 17
     Caption = 'Is Checked?'
-    TabOrder = 9
+    TabOrder = 4
     OnClick = chkIsCheckedClick
   end
   object TbPBarSpeed: TTrackBar
-    Left = 64
-    Top = 151
+    Left = 8
+    Top = 150
     Width = 150
     Height = 19
     Max = 1000
     Min = 250
     Position = 250
-    TabOrder = 10
+    TabOrder = 6
     OnChange = TbPBarSpeedChange
   end
   object MainMenu: TMainMenu

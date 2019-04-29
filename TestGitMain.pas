@@ -23,7 +23,6 @@ Type
     CmdPBarGo: TButton;
     Timer: TTimer;
     chkIsChecked: TCheckBox;
-    Label1: TLabel;
     TbPBarSpeed: TTrackBar;
     mnuVersion: TMenuItem;
     mnuLive: TMenuItem;

@@ -22,14 +22,14 @@ object TestGitMainFrm: TTestGitMainFrm
     Width = 550
     Height = 344
     Align = alClient
-    ActiveTabIndex = 1
+    ActiveTabIndex = 0
     HiddenItems = <>
     object SpTBXTabItem3: TSpTBXTabItem
       Caption = 'Demo'
+      Checked = True
     end
     object SpTBXTabItem2: TSpTBXTabItem
       Caption = 'TreeView Demo'
-      Checked = True
     end
     object SpTBXTabItem1: TSpTBXTabItem
       Caption = 'SynEdit Demo'
@@ -70,111 +70,6 @@ object TestGitMainFrm: TTestGitMainFrm
           'dex > -1 Then'#13#10'    ShowMessage(RgOptions.Items[RgOptions.ItemInd' +
           'ex])'#13#10'  Else'#13#10'    ShowMessage('#39'Please select an option.'#39');'#13#10'end;'
         FontSmoothing = fsmNone
-      end
-    end
-    object sptbxDemo: TSpTBXTabSheet
-      Left = 0
-      Top = 25
-      Width = 550
-      Height = 319
-      Caption = 'Demo'
-      ImageIndex = -1
-      TabItem = 'SpTBXTabItem3'
-      object RgOptions: TSpTBXRadioGroup
-        Left = 10
-        Top = 19
-        Width = 189
-        Height = 109
-        Caption = ' Options '
-        TabOrder = 0
-        Items.Strings = (
-          'Option #1'
-          'Option #2'
-          'Option #3'
-          'Option #4')
-      end
-      object CmdOk: TSpTBXButton
-        Left = 119
-        Top = 98
-        Width = 75
-        Height = 25
-        Caption = 'Ok'
-        TabOrder = 1
-        OnClick = CmdOkClick
-      end
-      object CmdPBarGo: TSpTBXButton
-        Left = 166
-        Top = 129
-        Width = 75
-        Height = 25
-        Caption = 'Go'
-        TabOrder = 3
-        OnClick = CmdPBarGoClick
-      end
-      object PBar: TSpTBXProgressBar
-        Left = 10
-        Top = 135
-        Width = 150
-        Height = 17
-        Caption = '0%'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-        Smooth = True
-      end
-      object chkIsChecked: TSpTBXCheckBox
-        Left = 14
-        Top = 236
-        Width = 82
-        Height = 21
-        Caption = 'Is Checked?'
-        TabOrder = 4
-        OnClick = chkIsCheckedClick
-      end
-      object TbPBarSpeed: TSpTBXTrackBar
-        Left = 45
-        Top = 158
-        Width = 150
-        Height = 26
-        Max = 1000
-        Min = 250
-        Position = 250
-        TabOrder = 5
-        OnChange = TbPBarSpeedChange
-      end
-      object Label1: TSpTBXLabel
-        Left = 9
-        Top = 161
-        Width = 36
-        Height = 19
-        Caption = 'Speed'
-      end
-      object GbSaySomething: TSpTBXGroupBox
-        Left = 5
-        Top = 183
-        Width = 300
-        Height = 47
-        Caption = ' Say something'
-        TabOrder = 2
-        object CmdSaySomething: TSpTBXButton
-          Left = 220
-          Top = 15
-          Width = 62
-          Height = 25
-          Caption = 'Ok'
-          TabOrder = 1
-          OnClick = CmdSaySomethingClick
-        end
-        object EditSaySomething: TSpTBXEdit
-          Left = 9
-          Top = 17
-          Width = 205
-          Height = 21
-          TabOrder = 0
-        end
       end
     end
     object sptbxTreeViewDemo: TSpTBXTabSheet
@@ -282,6 +177,111 @@ object TestGitMainFrm: TTestGitMainFrm
         end
       end
     end
+    object sptbxDemo: TSpTBXTabSheet
+      Left = 0
+      Top = 25
+      Width = 550
+      Height = 319
+      Caption = 'Demo'
+      ImageIndex = -1
+      TabItem = 'SpTBXTabItem3'
+      object RgOptions: TSpTBXRadioGroup
+        Left = 10
+        Top = 19
+        Width = 189
+        Height = 109
+        Caption = ' Options '
+        TabOrder = 0
+        Items.Strings = (
+          'Option #1'
+          'Option #2'
+          'Option #3'
+          'Option #4')
+      end
+      object CmdOk: TSpTBXButton
+        Left = 119
+        Top = 98
+        Width = 75
+        Height = 25
+        Caption = 'Ok'
+        TabOrder = 1
+        OnClick = CmdOkClick
+      end
+      object CmdPBarGo: TSpTBXButton
+        Left = 166
+        Top = 129
+        Width = 75
+        Height = 25
+        Caption = 'Go'
+        TabOrder = 3
+        OnClick = CmdPBarGoClick
+      end
+      object PBar: TSpTBXProgressBar
+        Left = 10
+        Top = 135
+        Width = 150
+        Height = 17
+        Caption = '0%'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Smooth = True
+      end
+      object chkIsChecked: TSpTBXCheckBox
+        Left = 14
+        Top = 236
+        Width = 82
+        Height = 21
+        Caption = 'Is Checked?'
+        TabOrder = 4
+        OnClick = chkIsCheckedClick
+      end
+      object TbPBarSpeed: TSpTBXTrackBar
+        Left = 45
+        Top = 158
+        Width = 150
+        Height = 26
+        Max = 1000
+        Min = 250
+        Position = 250
+        TabOrder = 5
+        OnChange = TbPBarSpeedChange
+      end
+      object Label1: TSpTBXLabel
+        Left = 9
+        Top = 161
+        Width = 36
+        Height = 19
+        Caption = 'Speed'
+      end
+      object GbSaySomething: TSpTBXGroupBox
+        Left = 5
+        Top = 183
+        Width = 300
+        Height = 47
+        Caption = ' Say something'
+        TabOrder = 2
+        object CmdSaySomething: TSpTBXButton
+          Left = 220
+          Top = 15
+          Width = 62
+          Height = 25
+          Caption = 'Ok'
+          TabOrder = 1
+          OnClick = CmdSaySomethingClick
+        end
+        object EditSaySomething: TSpTBXEdit
+          Left = 9
+          Top = 17
+          Width = 205
+          Height = 21
+          TabOrder = 0
+        end
+      end
+    end
   end
   object SpTBXDock1: TSpTBXDock
     Left = 0
@@ -346,7 +346,7 @@ object TestGitMainFrm: TTestGitMainFrm
     Left = 44
     Top = 69
     Bitmap = {
-      494C010104007800380010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101040078003C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

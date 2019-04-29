@@ -392,7 +392,7 @@ Var lNodeData : PPointer;
 Begin
   If Assigned(ANode) Then
   Begin
-    lNodeData := vstDemo.GetNodeData(ANode); 
+    lNodeData := vstDemo.GetNodeData(ANode);
     Result := Assigned(lNodeData) And Assigned(lNodeData^) And
               Supports(IInterface(lNodeData^), AId, ANodeData);
   End

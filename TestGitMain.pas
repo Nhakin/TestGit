@@ -62,10 +62,11 @@ Type
     Timer: TTimer;
     tsSynEditDemo: TTabSheet;
     MemoSrc: TSynMemo;
-    vstDemo: TVirtualStringTree;
     Splitter: TSplitter;
     PanTvDemo: TPanel;
     ilTreeView: TImageList;
+    PanTv: TPanel;
+    vstDemo: TVirtualStringTree;
 
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -95,6 +96,10 @@ Type
       Column: TColumnIndex);
     procedure vstDemoNewText(Sender: TBaseVirtualTree; Node: PVirtualNode;
       Column: TColumnIndex; NewText: WideString);
+    procedure vstDemoCompareNodes(Sender: TBaseVirtualTree; Node1,
+      Node2: PVirtualNode; Column: TColumnIndex; var Result: Integer);
+    procedure vstDemoHeaderClick(Sender: TVTHeader; Column: TColumnIndex;
+      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 
   Private
     FTreeViewData : ITreeViewDatas;
@@ -326,6 +331,19 @@ Begin
   Result := GetNodeData(ANode, AId, lDummy);
 End;
 
+procedure TTestGitMainFrm.vstDemoCompareNodes(Sender: TBaseVirtualTree; Node1,
+  Node2: PVirtualNode; Column: TColumnIndex; var Result: Integer);
+Var lData1 ,
+    lData2 : ITreeViewData;
+begin
+  If GetNodeData(Node1, ITreeViewData, lData1) And
+     GetNodeData(Node2, ITreeViewData, lData2) Then
+    Case Column Of
+      0 : Result := CompareText(lData1.DataName, lData2.DataName);
+      1 : Result := CompareText(lData1.DataValue, lData2.DataValue);
+    End;
+end;
+
 procedure TTestGitMainFrm.vstDemoFocusChanged(Sender: TBaseVirtualTree;
   Node: PVirtualNode; Column: TColumnIndex);
 begin
@@ -343,7 +361,6 @@ end;
 procedure TTestGitMainFrm.vstDemoGetText(Sender: TBaseVirtualTree;
   Node: PVirtualNode; Column: TColumnIndex; TextType: TVSTTextType;
   var CellText: WideString);
-
 Var lData : ITreeViewData;
 begin
   CellText := '';
@@ -353,6 +370,22 @@ begin
       0 : CellText := lData.DataName;
       1 : CellText := lData.DataValue;
     End;
+end;
+
+procedure TTestGitMainFrm.vstDemoHeaderClick(Sender: TVTHeader;
+  Column: TColumnIndex; Button: TMouseButton; Shift: TShiftState; X,
+  Y: Integer);
+begin
+  If vstDemo.Header.SortColumn = Column Then
+    If vstDemo.Header.SortDirection = sdAscending Then
+      vstDemo.Header.SortDirection := sdDescending
+    Else
+      vstDemo.Header.SortDirection := sdAscending
+  Else
+    vstDemo.Header.SortDirection := sdAscending;
+
+  vstDemo.Header.SortColumn := Column;
+  vstDemo.SortTree(Column, vstDemo.Header.SortDirection);
 end;
 
 procedure TTestGitMainFrm.vstDemoInitNode(Sender: TBaseVirtualTree; ParentNode,

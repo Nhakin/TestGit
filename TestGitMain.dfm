@@ -36,6 +36,8 @@ object TestGitMainFrm: TTestGitMainFrm
     ActivePage = tsTreeView
     Align = alClient
     TabOrder = 0
+    ExplicitLeft = 199
+    ExplicitTop = 0
     object tsDemo: TTabSheet
       Caption = 'Demo'
       object Label1: TLabel
@@ -133,59 +135,76 @@ object TestGitMainFrm: TTestGitMainFrm
       Caption = 'TreeView Demo'
       ImageIndex = 1
       object Splitter: TSplitter
-        Left = 195
+        Left = 185
         Top = 0
         Height = 322
-        ExplicitLeft = 220
-        ExplicitTop = 128
-        ExplicitHeight = 100
-      end
-      object vstDemo: TVirtualStringTree
-        AlignWithMargins = True
-        Left = 3
-        Top = 3
-        Width = 189
-        Height = 316
-        Align = alLeft
-        Header.AutoSizeIndex = 1
-        Header.DefaultHeight = 17
-        Header.Font.Charset = DEFAULT_CHARSET
-        Header.Font.Color = clWindowText
-        Header.Font.Height = -11
-        Header.Font.Name = 'Tahoma'
-        Header.Font.Style = []
-        Header.Options = [hoAutoResize, hoColumnResize, hoDrag, hoShowSortGlyphs, hoVisible]
-        Images = ilTreeView
-        TabOrder = 0
-        TreeOptions.MiscOptions = [toAcceptOLEDrop, toCheckSupport, toEditable, toFullRepaintOnResize, toGridExtensions, toInitOnSave, toToggleOnDblClick, toWheelPanning]
-        TreeOptions.PaintOptions = [toHotTrack, toPopupMode, toShowButtons, toShowDropmark, toShowRoot, toShowTreeLines, toThemeAware, toUseBlendedImages]
-        TreeOptions.SelectionOptions = [toExtendedFocus]
-        OnFocusChanged = vstDemoFocusChanged
-        OnGetText = vstDemoGetText
-        OnGetImageIndex = vstDemoGetImageIndex
-        OnInitChildren = vstDemoInitChildren
-        OnInitNode = vstDemoInitNode
-        OnNewText = vstDemoNewText
-        Columns = <
-          item
-            Position = 0
-            Width = 95
-            WideText = 'Name'
-          end
-          item
-            Position = 1
-            Width = 90
-            WideText = 'Value'
-          end>
+        ExplicitLeft = 202
+        ExplicitTop = 1
       end
       object PanTvDemo: TPanel
         AlignWithMargins = True
-        Left = 201
+        Left = 191
         Top = 3
-        Width = 340
+        Width = 350
         Height = 316
         Align = alClient
+        TabOrder = 0
+        ExplicitLeft = 201
+        ExplicitWidth = 340
+      end
+      object PanTv: TPanel
+        Left = 0
+        Top = 0
+        Width = 185
+        Height = 322
+        Align = alLeft
         TabOrder = 1
+        ExplicitLeft = 223
+        ExplicitTop = 139
+        ExplicitHeight = 41
+        object vstDemo: TVirtualStringTree
+          AlignWithMargins = True
+          Left = 4
+          Top = 4
+          Width = 177
+          Height = 314
+          Align = alClient
+          Header.AutoSizeIndex = 1
+          Header.DefaultHeight = 17
+          Header.Font.Charset = DEFAULT_CHARSET
+          Header.Font.Color = clWindowText
+          Header.Font.Height = -11
+          Header.Font.Name = 'Tahoma'
+          Header.Font.Style = []
+          Header.Options = [hoAutoResize, hoColumnResize, hoDrag, hoShowSortGlyphs, hoVisible]
+          Images = ilTreeView
+          TabOrder = 0
+          TreeOptions.AutoOptions = [toAutoDropExpand, toAutoScrollOnExpand, toAutoSort, toAutoTristateTracking, toAutoDeleteMovedNodes]
+          TreeOptions.MiscOptions = [toAcceptOLEDrop, toCheckSupport, toEditable, toFullRepaintOnResize, toGridExtensions, toInitOnSave, toToggleOnDblClick, toWheelPanning]
+          TreeOptions.PaintOptions = [toHotTrack, toPopupMode, toShowButtons, toShowDropmark, toShowRoot, toShowTreeLines, toThemeAware, toUseBlendedImages]
+          TreeOptions.SelectionOptions = [toExtendedFocus]
+          OnCompareNodes = vstDemoCompareNodes
+          OnFocusChanged = vstDemoFocusChanged
+          OnGetText = vstDemoGetText
+          OnGetImageIndex = vstDemoGetImageIndex
+          OnHeaderClick = vstDemoHeaderClick
+          OnInitChildren = vstDemoInitChildren
+          OnInitNode = vstDemoInitNode
+          OnNewText = vstDemoNewText
+          ExplicitWidth = 189
+          ExplicitHeight = 33
+          Columns = <
+            item
+              Position = 0
+              Width = 95
+              WideText = 'Name'
+            end
+            item
+              Position = 1
+              Width = 78
+              WideText = 'Value'
+            end>
+        end
       end
     end
     object tsSynEditDemo: TTabSheet
@@ -289,7 +308,7 @@ object TestGitMainFrm: TTestGitMainFrm
     Left = 44
     Top = 69
     Bitmap = {
-      494C010104007800240010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104007800280010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

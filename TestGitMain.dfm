@@ -132,10 +132,6 @@ object TestGitMainFrm: TTestGitMainFrm
     object tsTreeView: TTabSheet
       Caption = 'TreeView Demo'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Splitter: TSplitter
         Left = 195
         Top = 0
@@ -161,6 +157,7 @@ object TestGitMainFrm: TTestGitMainFrm
         Header.MainColumn = -1
         Images = ilTreeView
         TabOrder = 0
+        OnFocusChanged = vstDemoFocusChanged
         OnGetText = vstDemoGetText
         OnGetImageIndex = vstDemoGetImageIndex
         OnInitChildren = vstDemoInitChildren
@@ -175,15 +172,39 @@ object TestGitMainFrm: TTestGitMainFrm
         Height = 316
         Align = alClient
         TabOrder = 1
+        object Label2: TLabel
+          Left = 15
+          Top = 22
+          Width = 27
+          Height = 13
+          Caption = 'Name'
+        end
+        object Label3: TLabel
+          Left = 15
+          Top = 49
+          Width = 26
+          Height = 13
+          Caption = 'Value'
+        end
+        object EditTvValueName: TEdit
+          Left = 63
+          Top = 18
+          Width = 149
+          Height = 21
+          TabOrder = 0
+        end
+        object EditTvValueValue: TEdit
+          Left = 63
+          Top = 45
+          Width = 149
+          Height = 21
+          TabOrder = 1
+        end
       end
     end
     object tsSynEditDemo: TTabSheet
       Caption = 'Syn Edit Demo'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object MemoSrc: TSynMemo
         AlignWithMargins = True
         Left = 3
@@ -282,7 +303,7 @@ object TestGitMainFrm: TTestGitMainFrm
     Left = 44
     Top = 69
     Bitmap = {
-      494C010104007800200010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104007800240010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

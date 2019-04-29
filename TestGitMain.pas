@@ -66,6 +66,10 @@ Type
     Splitter: TSplitter;
     PanTvDemo: TPanel;
     ilTreeView: TImageList;
+    Label2: TLabel;
+    EditTvValueName: TEdit;
+    EditTvValueValue: TEdit;
+    Label3: TLabel;
 
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -91,10 +95,13 @@ Type
     procedure vstDemoGetImageIndex(Sender: TBaseVirtualTree; Node: PVirtualNode;
       Kind: TVTImageKind; Column: TColumnIndex; var Ghosted: Boolean;
       var ImageIndex: Integer);
+    procedure vstDemoFocusChanged(Sender: TBaseVirtualTree; Node: PVirtualNode;
+      Column: TColumnIndex);
 
   Private
     FTreeViewData : ITreeViewDatas;
-
+    FPrevData     : ITreeViewData;
+    
     Procedure SetNodeData(ANode : PVirtualNode; ANodeData : IInterface);
     Function  GetNodeData(ANode : PVirtualNode; AId : TGUID; Var ANodeData) : Boolean; OverLoad;
     Function  GetNodeData(ANode : PVirtualNode; AId : TGUID) : Boolean; OverLoad;
@@ -271,6 +278,7 @@ begin
   vstDemo.NodeDataSize := SizeOf(IInterface);
   vstDemo.RootNodeCount := FTreeViewData.Count;
   pcMain.ActivePage := tsDemo;
+  FPrevData := Nil;
 end;
 
 procedure TTestGitMainFrm.FormDestroy(Sender: TObject);
@@ -321,6 +329,25 @@ Var lDummy : IInterface;
 Begin
   Result := GetNodeData(ANode, AId, lDummy);
 End;
+
+procedure TTestGitMainFrm.vstDemoFocusChanged(Sender: TBaseVirtualTree;
+  Node: PVirtualNode; Column: TColumnIndex);
+Var lData : ITreeViewData;   
+begin
+  If Assigned(FPrevData) Then
+  Begin
+    FPrevData.DataName  := EditTvValueName.Text;
+    FPrevData.DataValue := EditTvValueValue.Text;
+  End;
+
+  If GetNodeData(Node, ITreeViewData, lData) Then
+  Begin
+    FPrevData := lData;
+
+    EditTvValueName.Text  := FPrevData.DataName;
+    EditTvValueValue.Text := FPrevData.DataValue;
+  End;
+end;
 
 procedure TTestGitMainFrm.vstDemoGetImageIndex(Sender: TBaseVirtualTree;
   Node: PVirtualNode; Kind: TVTImageKind; Column: TColumnIndex;

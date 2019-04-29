@@ -266,6 +266,21 @@ object TestGitMainFrm: TTestGitMainFrm
         OnClick = mnuExitClick
       end
     end
+    object mnuVersion: TMenuItem
+      Caption = 'Version'
+      object mnuLive: TMenuItem
+        Caption = 'Live'
+        OnClick = CmdLiveClick
+      end
+      object mnuBeta: TMenuItem
+        Caption = 'Beta'
+        OnClick = CmdBetaClick
+      end
+      object mnuDev: TMenuItem
+        Caption = 'Dev'
+        OnClick = CmdDevClick
+      end
+    end
   end
   object Timer: TTimer
     Enabled = False

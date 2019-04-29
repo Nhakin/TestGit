@@ -8,15 +8,16 @@ Uses
 
 Type
   TTestGitMainFrm = Class(TForm)
-    CmdLive : TButton;
-    CmdBeta : TButton;
-    CmdDev  : TButton;
     SBar: TStatusBar;
     MainMenu: TMainMenu;
     mnuFile: TMenuItem;
     mnuAbout: TMenuItem;
     N1: TMenuItem;
     mnuExit: TMenuItem;
+    mnuVersion: TMenuItem;
+    mnuLive: TMenuItem;
+    mnuBeta: TMenuItem;
+    mnuDev: TMenuItem;
 
     Procedure CmdLiveClick(Sender : TObject);
     Procedure CmdBetaClick(Sender : TObject);

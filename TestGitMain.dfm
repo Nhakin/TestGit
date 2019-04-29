@@ -14,33 +14,6 @@ object TestGitMainFrm: TTestGitMainFrm
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
-  object CmdLive: TButton
-    Left = 8
-    Top = 12
-    Width = 75
-    Height = 25
-    Caption = 'Live'
-    TabOrder = 0
-    OnClick = CmdLiveClick
-  end
-  object CmdBeta: TButton
-    Left = 8
-    Top = 43
-    Width = 75
-    Height = 25
-    Caption = 'Beta'
-    TabOrder = 1
-    OnClick = CmdBetaClick
-  end
-  object CmdDev: TButton
-    Left = 8
-    Top = 74
-    Width = 75
-    Height = 25
-    Caption = 'Dev'
-    TabOrder = 2
-    OnClick = CmdDevClick
-  end
   object SBar: TStatusBar
     Left = 0
     Top = 222
@@ -53,8 +26,8 @@ object TestGitMainFrm: TTestGitMainFrm
       end>
   end
   object MainMenu: TMainMenu
-    Left = 105
-    Top = 7
+    Left = 6
+    Top = 4
     object mnuFile: TMenuItem
       Caption = 'File'
       object mnuAbout: TMenuItem
@@ -67,6 +40,21 @@ object TestGitMainFrm: TTestGitMainFrm
       object mnuExit: TMenuItem
         Caption = 'Exit'
         OnClick = mnuExitClick
+      end
+    end
+    object mnuVersion: TMenuItem
+      Caption = 'Version'
+      object mnuLive: TMenuItem
+        Caption = 'Live'
+        OnClick = CmdLiveClick
+      end
+      object mnuBeta: TMenuItem
+        Caption = 'Beta'
+        OnClick = CmdBetaClick
+      end
+      object mnuDev: TMenuItem
+        Caption = 'Dev'
+        OnClick = CmdDevClick
       end
     end
   end

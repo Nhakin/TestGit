@@ -66,6 +66,8 @@ Type
     Splitter: TSplitter;
     PanTvDemo: TPanel;
 
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
     Procedure CmdLiveClick(Sender : TObject);
     Procedure CmdBetaClick(Sender : TObject);
     Procedure CmdDevClick(Sender : TObject);
@@ -77,8 +79,8 @@ Type
     procedure CmdPBarGoClick(Sender: TObject);
     procedure chkIsCheckedClick(Sender: TObject);
     procedure TbPBarSpeedChange(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
 
+    //VirtualTreeView Event Handler
     procedure vstDemoInitNode(Sender: TBaseVirtualTree; ParentNode,
       Node: PVirtualNode; var InitialStates: TVirtualNodeInitStates);
     procedure vstDemoGetText(Sender: TBaseVirtualTree; Node: PVirtualNode;
@@ -264,6 +266,11 @@ begin
 
   vstDemo.NodeDataSize := SizeOf(IInterface);
   vstDemo.RootNodeCount := FTreeViewData.Count;
+end;
+
+procedure TTestGitMainFrm.FormDestroy(Sender: TObject);
+begin
+  FTreeViewData := Nil;
 end;
 
 procedure TTestGitMainFrm.mnuExitClick(Sender: TObject);

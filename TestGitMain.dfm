@@ -13,6 +13,7 @@ object TestGitMainFrm: TTestGitMainFrm
   Menu = MainMenu
   OldCreateOrder = False
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
   object SBar: TStatusBar
@@ -37,8 +38,6 @@ object TestGitMainFrm: TTestGitMainFrm
     TabOrder = 0
     object tsDemo: TTabSheet
       Caption = 'Demo'
-      ExplicitLeft = 0
-      ExplicitTop = 25
       object Label1: TLabel
         Left = 9
         Top = 161
@@ -133,6 +132,10 @@ object TestGitMainFrm: TTestGitMainFrm
     object tsTreeView: TTabSheet
       Caption = 'TreeView Demo'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Splitter: TSplitter
         Left = 195
         Top = 0
@@ -175,6 +178,10 @@ object TestGitMainFrm: TTestGitMainFrm
     object tsSynEditDemo: TTabSheet
       Caption = 'Syn Edit Demo'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object MemoSrc: TSynMemo
         AlignWithMargins = True
         Left = 3

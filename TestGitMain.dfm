@@ -1,7 +1,7 @@
 object TestGitMainFrm: TTestGitMainFrm
   Left = 0
   Top = 0
-  Caption = 'Test Git 1.0.0.8'
+  Caption = 'Test Git 1.0.0.10'
   ClientHeight = 375
   ClientWidth = 558
   Color = clBtnFace
@@ -38,6 +38,10 @@ object TestGitMainFrm: TTestGitMainFrm
     TabOrder = 0
     object tsDemo: TTabSheet
       Caption = 'Demo'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label1: TLabel
         Left = 9
         Top = 161
@@ -231,6 +235,10 @@ object TestGitMainFrm: TTestGitMainFrm
     object tsSynEditDemo: TTabSheet
       Caption = 'Syn Edit Demo'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object MemoSrc: TSynMemo
         AlignWithMargins = True
         Left = 3
@@ -329,7 +337,7 @@ object TestGitMainFrm: TTestGitMainFrm
     Left = 44
     Top = 69
     Bitmap = {
-      494C010104007800280010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104007800300010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

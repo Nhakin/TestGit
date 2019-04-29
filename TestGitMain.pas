@@ -5,7 +5,7 @@ Interface
 Uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ComCtrls, Menus, ExtCtrls, SynEditHighlighter,
-  SynHighlighterPas, SynEdit, SynMemo, VirtualTrees;
+  SynHighlighterPas, SynEdit, SynMemo, VirtualTrees, ImgList;
 
 Type
   ITreeViewDatas = Interface;
@@ -65,6 +65,7 @@ Type
     vstDemo: TVirtualStringTree;
     Splitter: TSplitter;
     PanTvDemo: TPanel;
+    ilTreeView: TImageList;
 
     Procedure CmdLiveClick(Sender : TObject);
     Procedure CmdBetaClick(Sender : TObject);
@@ -85,6 +86,9 @@ Type
       Column: TColumnIndex; TextType: TVSTTextType; var CellText: WideString);
     procedure vstDemoInitChildren(Sender: TBaseVirtualTree; Node: PVirtualNode;
       var ChildCount: Cardinal);
+    procedure vstDemoGetImageIndex(Sender: TBaseVirtualTree; Node: PVirtualNode;
+      Kind: TVTImageKind; Column: TColumnIndex; var Ghosted: Boolean;
+      var ImageIndex: Integer);
 
   Private
     FTreeViewData : ITreeViewDatas;
@@ -264,6 +268,7 @@ begin
 
   vstDemo.NodeDataSize := SizeOf(IInterface);
   vstDemo.RootNodeCount := FTreeViewData.Count;
+  pcMain.ActivePage := tsDemo;
 end;
 
 procedure TTestGitMainFrm.mnuExitClick(Sender: TObject);
@@ -309,6 +314,13 @@ Var lDummy : IInterface;
 Begin
   Result := GetNodeData(ANode, AId, lDummy);
 End;
+
+procedure TTestGitMainFrm.vstDemoGetImageIndex(Sender: TBaseVirtualTree;
+  Node: PVirtualNode; Kind: TVTImageKind; Column: TColumnIndex;
+  var Ghosted: Boolean; var ImageIndex: Integer);
+begin
+  ImageIndex := Node.Index;
+end;
 
 procedure TTestGitMainFrm.vstDemoGetText(Sender: TBaseVirtualTree;
   Node: PVirtualNode; Column: TColumnIndex; TextType: TVSTTextType;

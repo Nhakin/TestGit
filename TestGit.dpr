@@ -2,7 +2,8 @@ program TestGit;
 
 uses
   Forms,
-  TestGitMain in 'TestGitMain.pas' {TestGitMainFrm};
+  TestGitMain in 'TestGitMain.pas' {TestGitMainFrm},
+  AboutFrm in 'AboutFrm.pas' {AboutDlg};
 
 {$R *.res}
 

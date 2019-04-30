@@ -2,10 +2,10 @@ object AboutDlg: TAboutDlg
   Left = 0
   Top = 0
   BorderIcons = [biSystemMenu]
-  BorderStyle = bsToolWindow
+  BorderStyle = bsNone
   Caption = 'About'
-  ClientHeight = 196
-  ClientWidth = 351
+  ClientHeight = 215
+  ClientWidth = 357
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,24 +13,24 @@ object AboutDlg: TAboutDlg
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poOwnerFormCenter
   PixelsPerInch = 96
   TextHeight = 13
-  object GroupBox1: TGroupBox
-    AlignWithMargins = True
-    Left = 3
-    Top = 3
-    Width = 345
-    Height = 190
-    Align = alClient
-    Caption = ' Git Test Demo '
-    TabOrder = 0
-    ExplicitLeft = 123
-    ExplicitTop = 192
-    ExplicitWidth = 185
-    ExplicitHeight = 105
+  object SpTBXTitleBar1: TSpTBXTitleBar
+    Left = 0
+    Top = 0
+    Width = 357
+    Height = 215
+    Caption = 'About'
+    Options.Minimize = False
+    Options.Maximize = False
+    ExplicitLeft = 258
+    ExplicitTop = 177
+    ExplicitWidth = 0
+    ExplicitHeight = 26
     object Image1: TImage
-      Left = 13
-      Top = 19
+      Left = 19
+      Top = 35
       Width = 319
       Height = 140
       AutoSize = True
@@ -303,12 +303,13 @@ object AboutDlg: TAboutDlg
         A28ECA58D9223B83BAE243EAC7F9D301C12694FCDB89EB9A461F28AE93CD6F5B
         9FFFD9}
     end
-    object Label1: TLabel
-      Left = 13
-      Top = 165
-      Width = 173
-      Height = 13
+    object Label1: TSpTBXLabel
+      Left = 16
+      Top = 181
+      Width = 179
+      Height = 19
       Caption = 'Coded By Nhakin '#169' HellSpawn 2019'
+      CaptionGlowColor = clNone
     end
   end
 end

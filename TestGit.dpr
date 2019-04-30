@@ -8,6 +8,10 @@ uses
 {$R *.res}
 
 begin
+  {$IfDef Debug}
+    ReportMemoryLeaksOnShutdown := True;
+  {$EndIf}
+
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.Title := 'Test Git';

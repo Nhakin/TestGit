@@ -20,10 +20,14 @@ Type
     Function  GetDataValue() : String;
     Procedure SetDataValue(Const ADataValue : String);
 
+    Function  GetExpanded() : Boolean;
+    Procedure SetExpanded(Const AExpanded : Boolean);
+
     Function GetItems() : ITreeViewDatas;
 
     Property DataName  : String         Read GetDataName  Write SetDataName;
     Property DataValue : String         Read GetDataValue Write SetDataValue;
+    Property Expanded  : Boolean        Read GetExpanded  Write SetExpanded;
     Property Items     : ITreeViewDatas Read GetItems;
 
   End;
@@ -33,18 +37,31 @@ Type
     Function  Get(Index : Integer) : ITreeViewData;
     Procedure Put(Index : Integer; Const Item : ITreeViewData);
 
-    Function GetAsXml() : String;
+    Function  GetAsXml() : String;
+    Procedure SetAsXml(AXmlString : String);
 
     Function Add() : ITreeViewData; OverLoad;
     Function Add(Const AItem : ITreeViewData) : Integer; OverLoad;
 
     Property Items[Index : Integer] : ITreeViewData Read Get Write Put; Default;
-    Property AsXml : String Read GetAsXml;
+    Property AsXml : String Read GetAsXml Write SetAsXml;
 
   End;
 
   TTestGitMainFrm = Class(TForm)
+    chkIsChecked: TSpTBXCheckBox;
+    CmdOk: TSpTBXButton;
+    CmdPBarGo: TSpTBXButton;
+    CmdSaySomething: TSpTBXButton;
+    EditSaySomething: TSpTBXEdit;
+    EditTvValueName: TSpTBXEdit;
+    EditTvValueValue: TSpTBXEdit;
+    GbSaySomething: TSpTBXGroupBox;
     ilTreeView: TImageList;
+    Label1: TSpTBXLabel;
+    Label2: TSpTBXLabel;
+    Label3: TSpTBXLabel;
+    MemoSrc: TSynMemo;
     mnuAbout: TSpTBXItem;
     mnuBeta: TSpTBXItem;
     mnuDev: TSpTBXItem;
@@ -53,43 +70,31 @@ Type
     mnuHelp: TSpTBXSubmenuItem;
     mnuLive: TSpTBXItem;
     mnuVersion: TSpTBXSubmenuItem;
-    SpTBXBItemContainer1: TSpTBXBItemContainer;
-    SpTBXSkinGroupItem1: TSpTBXSkinGroupItem;
-    SpTBXSubmenuItem1: TSpTBXSubmenuItem;
-    SpTBXTBGroupItem1: TSpTBXTBGroupItem;
-    SynPasSyn1: TSynPasSyn;
-    Timer: TTimer;
-    SpTBXTitleBar1: TSpTBXTitleBar;
-    SpTBXDock1: TSpTBXDock;
-    SpTBXToolbar1: TSpTBXToolbar;
-    tcMain: TSpTBXTabControl;
-    SpTBXTabItem3: TSpTBXTabItem;
-    SpTBXTabItem2: TSpTBXTabItem;
-    SpTBXTabItem1: TSpTBXTabItem;
-    sptbxTreeViewDemo: TSpTBXTabSheet;
-    Splitter: TSplitter;
     PanTv: TPanel;
-    vstDemo: TSpTBXVirtualStringTree;
     PanTvDemo: TPanel;
-    EditTvValueValue: TSpTBXEdit;
-    EditTvValueName: TSpTBXEdit;
-    Label2: TSpTBXLabel;
-    Label3: TSpTBXLabel;
-    sptbxSynEditDemo: TSpTBXTabSheet;
-    MemoSrc: TSynMemo;
-    sptbxDemo: TSpTBXTabSheet;
-    RgOptions: TSpTBXRadioGroup;
-    CmdOk: TSpTBXButton;
-    CmdPBarGo: TSpTBXButton;
     PBar: TSpTBXProgressBar;
-    chkIsChecked: TSpTBXCheckBox;
-    TbPBarSpeed: TSpTBXTrackBar;
-    Label1: TSpTBXLabel;
-    GbSaySomething: TSpTBXGroupBox;
-    CmdSaySomething: TSpTBXButton;
-    EditSaySomething: TSpTBXEdit;
-    SpTBXStatusBar1: TSpTBXStatusBar;
+    RgOptions: TSpTBXRadioGroup;
+    Splitter: TSplitter;
+    SpTBXBItemContainer1: TSpTBXBItemContainer;
+    sptbxDemo: TSpTBXTabSheet;
+    SpTBXDock1: TSpTBXDock;
     SpTBXLabelItem1: TSpTBXLabelItem;
+    SpTBXSkinGroupItem1: TSpTBXSkinGroupItem;
+    SpTBXStatusBar1: TSpTBXStatusBar;
+    SpTBXSubmenuItem1: TSpTBXSubmenuItem;
+    sptbxSynEditDemo: TSpTBXTabSheet;
+    SpTBXTabItem1: TSpTBXTabItem;
+    SpTBXTabItem2: TSpTBXTabItem;
+    SpTBXTabItem3: TSpTBXTabItem;
+    SpTBXTBGroupItem1: TSpTBXTBGroupItem;
+    SpTBXTitleBar1: TSpTBXTitleBar;
+    SpTBXToolbar1: TSpTBXToolbar;
+    sptbxTreeViewDemo: TSpTBXTabSheet;
+    SynPasSyn1: TSynPasSyn;
+    TbPBarSpeed: TSpTBXTrackBar;
+    tcMain: TSpTBXTabControl;
+    Timer: TTimer;
+    vstDemo: TSpTBXVirtualStringTree;
 
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -124,7 +129,6 @@ Type
       Node2: PVirtualNode; Column: TColumnIndex; var Result: Integer);
     procedure vstDemoHeaderClick(Sender: TVTHeader; Column: TColumnIndex;
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure SpTBXButton1Click(Sender: TObject);
 
   Private
     FTreeViewData : ITreeViewDatas;
@@ -134,7 +138,7 @@ Type
     Function  GetNodeData(ANode : PVirtualNode; AId : TGUID; Var ANodeData) : Boolean; OverLoad;
     Function  GetNodeData(ANode : PVirtualNode; AId : TGUID) : Boolean; OverLoad;
 
-  Public
+    Procedure DoUpdateTreeViewData(Sender : TBaseVirtualTree; Node : PVirtualNode; Data : Pointer; Var Abort : Boolean);
 
   End;
 
@@ -159,6 +163,7 @@ Type
   Private
     FDataName  : String;
     FDataValue : String;
+    FExpanded  : Boolean;
     FItems     : ITreeviewDatas;
 
   Protected
@@ -167,6 +172,9 @@ Type
 
     Function  GetDataValue() : String;
     Procedure SetDataValue(Const ADataValue : String);
+
+    Function  GetExpanded() : Boolean;
+    Procedure SetExpanded(Const AExpanded : Boolean);
 
     Function GetItems() : ITreeViewDatas;
 
@@ -183,10 +191,11 @@ Type
     Function  Get(Index : Integer) : ITreeViewData; OverLoad;
     Procedure Put(Index : Integer; Const Item : ITreeViewData); OverLoad;
 
+    Function  GetAsXml() : String;
+    Procedure SetAsXml(AXmlString : String);
+
     Function Add() : ITreeViewData; OverLoad;
     Function Add(Const AItem : ITreeViewData) : Integer; OverLoad;
-
-    Function GetAsXml() : String;
 
     Property Items[Index : Integer] : ITreeViewData Read Get Write Put; Default;
 
@@ -239,6 +248,16 @@ Begin
   FDataValue := ADataValue;
 End;
 
+Function TTreeViewDataImpl.GetExpanded() : Boolean;
+Begin
+  Result := FExpanded;
+End;
+
+Procedure TTreeViewDataImpl.SetExpanded(Const AExpanded : Boolean);
+Begin
+  FExpanded := AExpanded;
+End;
+
 Function TTreeViewDataImpl.GetItems() : ITreeViewDatas;
 Begin
   If Not Assigned(FItems) Then
@@ -268,18 +287,19 @@ Begin
 End;
 
 Function TTreeViewDatas.GetAsXml() : String;
-  Procedure InternalTreeViewAsString(AStartPoint : ITreeViewDatas; AParent : IXMLNode);
+  Procedure InternalGetAsXml(AStartPoint : ITreeViewDatas; AParent : IXMLNode);
   Var X : Integer;
   Begin
     For X := 0 To AStartPoint.Count - 1 Do
     Begin
       With AParent.AddChild('Item') Do
       Begin
-        AddChild('Name').NodeValue  := AStartPoint.Items[X].DataName;
-        AddChild('Value').NodeValue := AStartPoint.Items[X].DataValue;
+        AddChild('Name').NodeValue     := AStartPoint.Items[X].DataName;
+        AddChild('Value').NodeValue    := AStartPoint.Items[X].DataValue;
+        AddChild('Expanded').NodeValue := AStartPoint.Items[X].Expanded;
 
         If AStartPoint[X].Items.Count > 0 Then
-          InternalTreeViewAsString(AStartPoint[X].Items, AddChild('Items'));
+          InternalGetAsXml(AStartPoint[X].Items, AddChild('Items'));
       End;
     End;
   End;
@@ -288,8 +308,42 @@ Var lXml : IXMLDocument;
 Begin
   lXml := NewXMLDocument('');
   Try
-    InternalTreeViewAsString(Self, lXml.AddChild('Items'));
+    InternalGetAsXml(Self, lXml.AddChild('Items'));
     Result := FormatXmlData(lXml.Xml.Text);
+
+    Finally
+      lXml := Nil;
+  End;
+End;
+
+Procedure TTreeViewDatas.SetAsXml(AXmlString : String);
+  Procedure InternalSetAsXml(AStartPoint : IXMLNodeList; AParent : ITreeViewDatas);
+  Var X     : Integer;
+      lItem : ITreeViewData;
+  Begin
+    For X := 0 To AStartPoint.Count - 1 Do
+    Begin
+      lItem := AParent.Add();
+      With lItem Do
+      Begin
+        DataName  := AStartPoint[X].ChildNodes['Name'].NodeValue;
+        DataValue := AStartPoint[X].ChildNodes['Value'].NodeValue;
+        Expanded  := AStartPoint[X].ChildNodes['Expanded'].NodeValue;
+        
+        If Assigned(AStartPoint[X].ChildNodes.FindNode('Items')) And
+           (AStartPoint[X].ChildNodes['Items'].ChildNodes.Count > 0) Then
+          InternalSetAsXml(AStartPoint[X].ChildNodes['Items'].ChildNodes, lItem.Items);
+      End;
+    End;
+  End;
+
+Var lXml : IXMLDocument;
+Begin
+  Clear();
+
+  lXml := LoadXmlData(AXmlString);
+  Try
+    InternalSetAsXml(lXml.ChildNodes['Items'].ChildNodes, Self);
 
     Finally
       lXml := Nil;
@@ -322,6 +376,14 @@ begin
   FTreeViewData := TTreeViewData.CreateTreeViewData();
 
   If FileExists(ChangeFileExt(ParamStr(0), '.cfg')) Then
+    With TStringList.Create() Do
+    Try
+      LoadFromFile(ChangeFileExt(ParamStr(0), '.cfg'));
+      FTreeViewData.AsXml := Text;
+
+      Finally
+        Free();
+    End
   Else
   For X := 0 To 3 Do
     With FTreeViewData.Add() Do
@@ -354,6 +416,16 @@ end;
 
 procedure TTestGitMainFrm.FormDestroy(Sender: TObject);
 begin
+  vstDemo.IterateSubtree(Nil, DoUpdateTreeViewData, Nil);
+  With TStringList.Create() Do
+  Try
+    Text := FTreeViewData.AsXml;
+    SaveToFile(ChangeFileExt(ParamStr(0), '.cfg'));
+
+    Finally
+      Free();
+  End;
+
   FTreeViewData := Nil;
 end;
 
@@ -382,11 +454,6 @@ Begin
   lNodeData^ := Pointer(ANodeData);
 End;
 
-procedure TTestGitMainFrm.SpTBXButton1Click(Sender: TObject);
-begin
-  ShowMessage(FTreeViewData.AsXml);
-end;
-
 Function TTestGitMainFrm.GetNodeData(ANode : PVirtualNode; AId : TGUID; Var ANodeData) : Boolean;
 Var lNodeData : PPointer;
 Begin
@@ -404,6 +471,16 @@ Function TTestGitMainFrm.GetNodeData(ANode : PVirtualNode; AId : TGUID) : Boolea
 Var lDummy : IInterface;
 Begin
   Result := GetNodeData(ANode, AId, lDummy);
+End;
+
+Procedure TTestGitMainFrm.DoUpdateTreeViewData(Sender : TBaseVirtualTree; Node : PVirtualNode; Data : Pointer; Var Abort : Boolean);
+Var lData : ITreeViewData;
+Begin
+  If GetNodeData(Node, ITreeViewData, lData) Then
+    With lData Do
+    Begin
+      Expanded := Sender.Expanded[Node];
+    End;
 End;
 
 procedure TTestGitMainFrm.vstDemoCompareNodes(Sender: TBaseVirtualTree; Node1,
@@ -489,6 +566,7 @@ begin
       SetNodeData(Node, lData.Items[Node.Index]);
       If lData.Items[Node.Index].Items.Count > 0 Then
         Node.States := Node.States + [vsHasChildren];
+      Sender.Expanded[Node] := lData.Items[Node.Index].Expanded;
     End;
   End
   Else
@@ -496,6 +574,7 @@ begin
     SetNodeData(Node, FTreeViewData[Node.Index]);
     If FTreeViewData[Node.Index].Items.Count > 0 Then
       Node.States := Node.States + [vsHasChildren];
+    Sender.Expanded[Node] := FTreeViewData[Node.Index].Expanded;
   End;
 end;
 

@@ -24,13 +24,9 @@ object AboutDlg: TAboutDlg
     Caption = 'About'
     Options.Minimize = False
     Options.Maximize = False
-    ExplicitLeft = 258
-    ExplicitTop = 177
-    ExplicitWidth = 0
-    ExplicitHeight = 26
     object Image1: TImage
       Left = 19
-      Top = 35
+      Top = 39
       Width = 319
       Height = 140
       AutoSize = True
@@ -304,7 +300,7 @@ object AboutDlg: TAboutDlg
         9FFFD9}
     end
     object Label1: TSpTBXLabel
-      Left = 16
+      Left = 19
       Top = 181
       Width = 179
       Height = 19

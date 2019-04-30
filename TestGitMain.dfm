@@ -23,17 +23,12 @@ object TestGitMainFrm: TTestGitMainFrm
     Width = 572
     Height = 439
     Caption = 'Test Git 1.0.0.10'
-    ExplicitLeft = 350
-    ExplicitTop = 181
-    ExplicitWidth = 0
-    ExplicitHeight = 26
     object SpTBXDock1: TSpTBXDock
       Left = 8
       Top = 30
       Width = 556
       Height = 25
       AllowDrag = False
-      ExplicitWidth = 540
       object SpTBXToolbar1: TSpTBXToolbar
         Left = 0
         Top = 0
@@ -57,9 +52,6 @@ object TestGitMainFrm: TTestGitMainFrm
       Height = 345
       Align = alClient
       ActiveTabIndex = 0
-      ExplicitLeft = -2
-      ExplicitTop = 25
-      ExplicitHeight = 344
       HiddenItems = <>
       object SpTBXTabItem3: TSpTBXTabItem
         Caption = 'Demo'
@@ -78,8 +70,6 @@ object TestGitMainFrm: TTestGitMainFrm
         Height = 320
         Caption = 'TreeView Demo'
         ImageIndex = -1
-        ExplicitWidth = 534
-        ExplicitHeight = 281
         TabItem = 'SpTBXTabItem2'
         object Splitter: TSplitter
           Left = 187
@@ -96,7 +86,6 @@ object TestGitMainFrm: TTestGitMainFrm
           Height = 316
           Align = alLeft
           TabOrder = 0
-          ExplicitHeight = 277
           object vstDemo: TSpTBXVirtualStringTree
             AlignWithMargins = True
             Left = 4
@@ -126,7 +115,6 @@ object TestGitMainFrm: TTestGitMainFrm
             OnInitChildren = vstDemoInitChildren
             OnInitNode = vstDemoInitNode
             OnNewText = vstDemoNewText
-            ExplicitHeight = 269
             Columns = <
               item
                 Position = 0
@@ -148,8 +136,6 @@ object TestGitMainFrm: TTestGitMainFrm
           Height = 310
           Align = alClient
           TabOrder = 1
-          ExplicitWidth = 334
-          ExplicitHeight = 271
           object EditTvValueValue: TSpTBXEdit
             Left = 59
             Top = 39
@@ -189,8 +175,6 @@ object TestGitMainFrm: TTestGitMainFrm
         Height = 320
         Caption = 'SynEdit Demo'
         ImageIndex = -1
-        ExplicitWidth = 534
-        ExplicitHeight = 281
         TabItem = 'SpTBXTabItem1'
         object MemoSrc: TSynMemo
           AlignWithMargins = True
@@ -220,8 +204,6 @@ object TestGitMainFrm: TTestGitMainFrm
             'dex > -1 Then'#13#10'    ShowMessage(RgOptions.Items[RgOptions.ItemInd' +
             'ex])'#13#10'  Else'#13#10'    ShowMessage('#39'Please select an option.'#39');'#13#10'end;'
           FontSmoothing = fsmNone
-          ExplicitWidth = 522
-          ExplicitHeight = 271
         end
       end
       object sptbxDemo: TSpTBXTabSheet
@@ -231,7 +213,6 @@ object TestGitMainFrm: TTestGitMainFrm
         Height = 320
         Caption = 'Demo'
         ImageIndex = -1
-        ExplicitHeight = 319
         TabItem = 'SpTBXTabItem3'
         object RgOptions: TSpTBXRadioGroup
           Left = 10
@@ -336,8 +317,6 @@ object TestGitMainFrm: TTestGitMainFrm
       Top = 406
       Width = 556
       Height = 25
-      ExplicitTop = 367
-      ExplicitWidth = 540
       object SpTBXLabelItem1: TSpTBXLabelItem
         Caption = 'Coded By Nhakin'
       end
@@ -377,7 +356,7 @@ object TestGitMainFrm: TTestGitMainFrm
     Left = 516
     Top = 334
     Bitmap = {
-      494C010104007800480010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101040078004C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

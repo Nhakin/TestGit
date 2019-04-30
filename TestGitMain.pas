@@ -44,51 +44,52 @@ Type
   End;
 
   TTestGitMainFrm = Class(TForm)
-    chkIsChecked: TSpTBXCheckBox;
-    CmdOk: TSpTBXButton;
-    CmdPBarGo: TSpTBXButton;
-    CmdSaySomething: TSpTBXButton;
-    EditSaySomething: TSpTBXEdit;
-    EditTvValueName: TSpTBXEdit;
-    EditTvValueValue: TSpTBXEdit;
-    GbSaySomething: TSpTBXGroupBox;
     ilTreeView: TImageList;
-    Label1: TSpTBXLabel;
-    Label2: TSpTBXLabel;
-    Label3: TSpTBXLabel;
-    MemoSrc: TSynMemo;
     mnuAbout: TSpTBXItem;
     mnuBeta: TSpTBXItem;
     mnuDev: TSpTBXItem;
     mnuExit: TSpTBXItem;
-    mnuFile: TTBSubmenuItem;
+    mnuFile: TSpTBXSubmenuItem;
     mnuHelp: TSpTBXSubmenuItem;
     mnuLive: TSpTBXItem;
-    mnuVersion: TTBSubmenuItem;
-    PanTv: TPanel;
-    PanTvDemo: TPanel;
-    PBar: TSpTBXProgressBar;
-    RgOptions: TSpTBXRadioGroup;
-    Splitter: TSplitter;
+    mnuVersion: TSpTBXSubmenuItem;
     SpTBXBItemContainer1: TSpTBXBItemContainer;
-    sptbxDemo: TSpTBXTabSheet;
-    SpTBXDock1: TSpTBXDock;
-    SpTBXLabelItem1: TSpTBXLabelItem;
     SpTBXSkinGroupItem1: TSpTBXSkinGroupItem;
-    SpTBXStatusBar1: TSpTBXStatusBar;
     SpTBXSubmenuItem1: TSpTBXSubmenuItem;
-    sptbxSynEditDemo: TSpTBXTabSheet;
-    SpTBXTabItem1: TSpTBXTabItem;
-    SpTBXTabItem2: TSpTBXTabItem;
-    SpTBXTabItem3: TSpTBXTabItem;
     SpTBXTBGroupItem1: TSpTBXTBGroupItem;
-    SpTBXToolbar1: TSpTBXToolbar;
-    sptbxTreeViewDemo: TSpTBXTabSheet;
     SynPasSyn1: TSynPasSyn;
-    TbPBarSpeed: TSpTBXTrackBar;
-    tcMain: TSpTBXTabControl;
     Timer: TTimer;
+    SpTBXTitleBar1: TSpTBXTitleBar;
+    SpTBXDock1: TSpTBXDock;
+    SpTBXToolbar1: TSpTBXToolbar;
+    tcMain: TSpTBXTabControl;
+    SpTBXTabItem3: TSpTBXTabItem;
+    SpTBXTabItem2: TSpTBXTabItem;
+    SpTBXTabItem1: TSpTBXTabItem;
+    sptbxTreeViewDemo: TSpTBXTabSheet;
+    Splitter: TSplitter;
+    PanTv: TPanel;
     vstDemo: TSpTBXVirtualStringTree;
+    PanTvDemo: TPanel;
+    EditTvValueValue: TSpTBXEdit;
+    EditTvValueName: TSpTBXEdit;
+    Label2: TSpTBXLabel;
+    Label3: TSpTBXLabel;
+    sptbxSynEditDemo: TSpTBXTabSheet;
+    MemoSrc: TSynMemo;
+    sptbxDemo: TSpTBXTabSheet;
+    RgOptions: TSpTBXRadioGroup;
+    CmdOk: TSpTBXButton;
+    CmdPBarGo: TSpTBXButton;
+    PBar: TSpTBXProgressBar;
+    chkIsChecked: TSpTBXCheckBox;
+    TbPBarSpeed: TSpTBXTrackBar;
+    Label1: TSpTBXLabel;
+    GbSaySomething: TSpTBXGroupBox;
+    CmdSaySomething: TSpTBXButton;
+    EditSaySomething: TSpTBXEdit;
+    SpTBXStatusBar1: TSpTBXStatusBar;
+    SpTBXLabelItem1: TSpTBXLabelItem;
 
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -320,6 +321,8 @@ Var X, Y, Z : Integer;
 begin
   FTreeViewData := TTreeViewData.CreateTreeViewData();
 
+  If FileExists(ChangeFileExt(ParamStr(0), '.cfg')) Then
+  Else
   For X := 0 To 3 Do
     With FTreeViewData.Add() Do
     Begin

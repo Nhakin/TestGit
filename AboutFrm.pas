@@ -4,23 +4,22 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, jpeg, ExtCtrls;
+  Dialogs, StdCtrls, jpeg, ExtCtrls, SpTBXItem, SpTBXControls;
 
 type
   TAboutDlg = class(TForm)
-    GroupBox1: TGroupBox;
+    SpTBXTitleBar1: TSpTBXTitleBar;
     Image1: TImage;
-    Label1: TLabel;
-  private
-    { Private declarations }
-  public
-    { Public declarations }
+    Label1: TSpTBXLabel;
+
   end;
 
 var
   AboutDlg: TAboutDlg;
 
 implementation
+
+Uses SpTBXSkins, SpTbxAdditionalSkins;
 
 {$R *.dfm}
 

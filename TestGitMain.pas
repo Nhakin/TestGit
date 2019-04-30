@@ -39,38 +39,38 @@ Type
   End;
 
   TTestGitMainFrm = Class(TForm)
-    SBar: TStatusBar;
-    pcMain: TPageControl;
-    tsDemo: TTabSheet;
-    tsTreeView: TTabSheet;
-    Label1: TLabel;
-    RgOptions: TRadioGroup;
-    CmdOk: TButton;
-    GbSaySomething: TGroupBox;
-    EditSaySomething: TEdit;
-    CmdSaySomething: TButton;
-    PBar: TProgressBar;
-    CmdPBarGo: TButton;
     chkIsChecked: TCheckBox;
-    TbPBarSpeed: TTrackBar;
-    MainMenu: TMainMenu;
-    mnuFile: TMenuItem;
-    SynPasSyn1: TSynPasSyn;
-    mnuAbout: TMenuItem;
-    N1: TMenuItem;
-    mnuExit: TMenuItem;
-    Timer: TTimer;
-    tsSynEditDemo: TTabSheet;
-    MemoSrc: TSynMemo;
-    Splitter: TSplitter;
-    PanTvDemo: TPanel;
-    ilTreeView: TImageList;
-    PanTv: TPanel;
-    vstDemo: TVirtualStringTree;
-    EditTvValueValue: TEdit;
+    CmdOk: TButton;
+    CmdPBarGo: TButton;
+    CmdSaySomething: TButton;
+    EditSaySomething: TEdit;
     EditTvValueName: TEdit;
+    EditTvValueValue: TEdit;
+    GbSaySomething: TGroupBox;
+    ilTreeView: TImageList;
+    Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
+    MainMenu: TMainMenu;
+    MemoSrc: TSynMemo;
+    mnuAbout: TMenuItem;
+    mnuExit: TMenuItem;
+    mnuFile: TMenuItem;
+    mnuHelp: TMenuItem;
+    PanTv: TPanel;
+    PanTvDemo: TPanel;
+    PBar: TProgressBar;
+    pcMain: TPageControl;
+    RgOptions: TRadioGroup;
+    SBar: TStatusBar;
+    Splitter: TSplitter;
+    SynPasSyn1: TSynPasSyn;
+    TbPBarSpeed: TTrackBar;
+    Timer: TTimer;
+    tsDemo: TTabSheet;
+    tsSynEditDemo: TTabSheet;
+    tsTreeView: TTabSheet;
+    vstDemo: TVirtualStringTree;
 
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -128,6 +128,8 @@ Var
   TestGitMainFrm : TTestGitMainFrm;
 
 Implementation
+
+Uses AboutFrm;
 
 {$R *.dfm}
 
@@ -457,7 +459,13 @@ end;
 
 procedure TTestGitMainFrm.mnuAboutClick(Sender: TObject);
 begin
-  ShowMessage('TestGit');
+  With TAboutDlg.Create(Self) Do
+  Try
+    ShowModal();
+    
+    Finally
+      Release();
+  End;
 end;
 
 procedure TTestGitMainFrm.CmdOkClick(Sender: TObject);

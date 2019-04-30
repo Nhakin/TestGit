@@ -267,13 +267,6 @@ object TestGitMainFrm: TTestGitMainFrm
     Top = 37
     object mnuFile: TMenuItem
       Caption = 'File'
-      object mnuAbout: TMenuItem
-        Caption = 'About'
-        OnClick = mnuAboutClick
-      end
-      object N1: TMenuItem
-        Caption = '-'
-      end
       object mnuExit: TMenuItem
         Caption = 'Exit'
         OnClick = mnuExitClick
@@ -292,6 +285,13 @@ object TestGitMainFrm: TTestGitMainFrm
       object mnuDev: TMenuItem
         Caption = 'Dev'
         OnClick = CmdDevClick
+      end
+    end
+    object mnuHelp: TMenuItem
+      Caption = 'Help'
+      object mnuAbout: TMenuItem
+        Caption = 'About'
+        OnClick = mnuAboutClick
       end
     end
   end
@@ -329,7 +329,7 @@ object TestGitMainFrm: TTestGitMainFrm
     Left = 44
     Top = 69
     Bitmap = {
-      494C010104007800280010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101040078002C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

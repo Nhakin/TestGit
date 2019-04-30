@@ -44,50 +44,50 @@ Type
   End;
 
   TTestGitMainFrm = Class(TForm)
-    SynPasSyn1: TSynPasSyn;
-    Timer: TTimer;
-    ilTreeView: TImageList;
-    tcMain: TSpTBXTabControl;
-    SpTBXTabItem1: TSpTBXTabItem;
-    sptbxSynEditDemo: TSpTBXTabSheet;
-    SpTBXTabItem2: TSpTBXTabItem;
-    sptbxTreeViewDemo: TSpTBXTabSheet;
-    SpTBXTabItem3: TSpTBXTabItem;
-    sptbxDemo: TSpTBXTabSheet;
-    PanTv: TPanel;
-    PanTvDemo: TPanel;
-    Splitter: TSplitter;
-    MemoSrc: TSynMemo;
-    SpTBXBItemContainer1: TSpTBXBItemContainer;
-    mnuFile: TTBSubmenuItem;
-    N1: TTBSeparatorItem;
-    mnuVersion: TTBSubmenuItem;
-    SpTBXDock1: TSpTBXDock;
-    SpTBXToolbar1: TSpTBXToolbar;
-    SpTBXTBGroupItem1: TSpTBXTBGroupItem;
-    SpTBXSubmenuItem1: TSpTBXSubmenuItem;
-    SpTBXSkinGroupItem1: TSpTBXSkinGroupItem;
-    RgOptions: TSpTBXRadioGroup;
+    chkIsChecked: TSpTBXCheckBox;
     CmdOk: TSpTBXButton;
     CmdPBarGo: TSpTBXButton;
-    PBar: TSpTBXProgressBar;
-    chkIsChecked: TSpTBXCheckBox;
-    EditTvValueValue: TSpTBXEdit;
-    EditTvValueName: TSpTBXEdit;
-    TbPBarSpeed: TSpTBXTrackBar;
-    Label2: TSpTBXLabel;
-    Label3: TSpTBXLabel;
-    Label1: TSpTBXLabel;
-    mnuAbout: TSpTBXItem;
-    mnuExit: TSpTBXItem;
-    mnuLive: TSpTBXItem;
-    mnuBeta: TSpTBXItem;
-    mnuDev: TSpTBXItem;
-    GbSaySomething: TSpTBXGroupBox;
     CmdSaySomething: TSpTBXButton;
     EditSaySomething: TSpTBXEdit;
-    SpTBXStatusBar1: TSpTBXStatusBar;
+    EditTvValueName: TSpTBXEdit;
+    EditTvValueValue: TSpTBXEdit;
+    GbSaySomething: TSpTBXGroupBox;
+    ilTreeView: TImageList;
+    Label1: TSpTBXLabel;
+    Label2: TSpTBXLabel;
+    Label3: TSpTBXLabel;
+    MemoSrc: TSynMemo;
+    mnuAbout: TSpTBXItem;
+    mnuBeta: TSpTBXItem;
+    mnuDev: TSpTBXItem;
+    mnuExit: TSpTBXItem;
+    mnuFile: TTBSubmenuItem;
+    mnuHelp: TSpTBXSubmenuItem;
+    mnuLive: TSpTBXItem;
+    mnuVersion: TTBSubmenuItem;
+    PanTv: TPanel;
+    PanTvDemo: TPanel;
+    PBar: TSpTBXProgressBar;
+    RgOptions: TSpTBXRadioGroup;
+    Splitter: TSplitter;
+    SpTBXBItemContainer1: TSpTBXBItemContainer;
+    sptbxDemo: TSpTBXTabSheet;
+    SpTBXDock1: TSpTBXDock;
     SpTBXLabelItem1: TSpTBXLabelItem;
+    SpTBXSkinGroupItem1: TSpTBXSkinGroupItem;
+    SpTBXStatusBar1: TSpTBXStatusBar;
+    SpTBXSubmenuItem1: TSpTBXSubmenuItem;
+    sptbxSynEditDemo: TSpTBXTabSheet;
+    SpTBXTabItem1: TSpTBXTabItem;
+    SpTBXTabItem2: TSpTBXTabItem;
+    SpTBXTabItem3: TSpTBXTabItem;
+    SpTBXTBGroupItem1: TSpTBXTBGroupItem;
+    SpTBXToolbar1: TSpTBXToolbar;
+    sptbxTreeViewDemo: TSpTBXTabSheet;
+    SynPasSyn1: TSynPasSyn;
+    TbPBarSpeed: TSpTBXTrackBar;
+    tcMain: TSpTBXTabControl;
+    Timer: TTimer;
     vstDemo: TSpTBXVirtualStringTree;
 
     procedure FormCreate(Sender: TObject);
@@ -149,10 +149,7 @@ Var
 Implementation
 
 Uses
-  SpTBXSkins, SpTBXDefaultSkins, SpTBXAdditionalSkins;
-
-Uses
-  XmlDoc, XmlIntf;
+  SpTBXSkins, SpTBXDefaultSkins, SpTBXAdditionalSkins, XmlDoc, XmlIntf, AboutFrm;
 
 {$R *.dfm}
 
@@ -520,7 +517,13 @@ end;
 
 procedure TTestGitMainFrm.mnuAboutClick(Sender: TObject);
 begin
-  ShowMessage('TestGit');
+  With TAboutDlg.Create(Self) Do
+  Try
+    ShowModal();
+    
+    Finally
+      Release();
+  End;
 end;
 
 procedure TTestGitMainFrm.CmdOkClick(Sender: TObject);

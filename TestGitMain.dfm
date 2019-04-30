@@ -34,44 +34,6 @@ object TestGitMainFrm: TTestGitMainFrm
     object SpTBXTabItem1: TSpTBXTabItem
       Caption = 'SynEdit Demo'
     end
-    object sptbxSynEditDemo: TSpTBXTabSheet
-      Left = 0
-      Top = 25
-      Width = 550
-      Height = 319
-      Caption = 'SynEdit Demo'
-      ImageIndex = -1
-      TabItem = 'SpTBXTabItem1'
-      object MemoSrc: TSynMemo
-        AlignWithMargins = True
-        Left = 5
-        Top = 3
-        Width = 538
-        Height = 309
-        Align = alClient
-        Color = clBlack
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Courier New'
-        Font.Style = []
-        TabOrder = 0
-        Gutter.Font.Charset = DEFAULT_CHARSET
-        Gutter.Font.Color = clWindowText
-        Gutter.Font.Height = -11
-        Gutter.Font.Name = 'Courier New'
-        Gutter.Font.Style = []
-        Gutter.ShowLineNumbers = True
-        Gutter.ShowModification = True
-        Highlighter = SynPasSyn1
-        Lines.UnicodeStrings = 
-          '{This is a Comment}'#13#10#13#10'procedure TTestGitMainFrm.CmdOkClick(Send' +
-          'er: TObject);'#13#10'begin'#13#10'  lChar := #$29A;'#13#10#13#10'  If RgOptions.ItemIn' +
-          'dex > -1 Then'#13#10'    ShowMessage(RgOptions.Items[RgOptions.ItemInd' +
-          'ex])'#13#10'  Else'#13#10'    ShowMessage('#39'Please select an option.'#39');'#13#10'end;'
-        FontSmoothing = fsmNone
-      end
-    end
     object sptbxTreeViewDemo: TSpTBXTabSheet
       Left = 0
       Top = 25
@@ -175,6 +137,44 @@ object TestGitMainFrm: TTestGitMainFrm
           Height = 19
           Caption = 'Value'
         end
+      end
+    end
+    object sptbxSynEditDemo: TSpTBXTabSheet
+      Left = 0
+      Top = 25
+      Width = 550
+      Height = 319
+      Caption = 'SynEdit Demo'
+      ImageIndex = -1
+      TabItem = 'SpTBXTabItem1'
+      object MemoSrc: TSynMemo
+        AlignWithMargins = True
+        Left = 5
+        Top = 3
+        Width = 538
+        Height = 309
+        Align = alClient
+        Color = clBlack
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Courier New'
+        Font.Style = []
+        TabOrder = 0
+        Gutter.Font.Charset = DEFAULT_CHARSET
+        Gutter.Font.Color = clWindowText
+        Gutter.Font.Height = -11
+        Gutter.Font.Name = 'Courier New'
+        Gutter.Font.Style = []
+        Gutter.ShowLineNumbers = True
+        Gutter.ShowModification = True
+        Highlighter = SynPasSyn1
+        Lines.UnicodeStrings = 
+          '{This is a Comment}'#13#10#13#10'procedure TTestGitMainFrm.CmdOkClick(Send' +
+          'er: TObject);'#13#10'begin'#13#10'  lChar := #$29A;'#13#10#13#10'  If RgOptions.ItemIn' +
+          'dex > -1 Then'#13#10'    ShowMessage(RgOptions.Items[RgOptions.ItemInd' +
+          'ex])'#13#10'  Else'#13#10'    ShowMessage('#39'Please select an option.'#39');'#13#10'end;'
+        FontSmoothing = fsmNone
       end
     end
     object sptbxDemo: TSpTBXTabSheet
@@ -316,8 +316,8 @@ object TestGitMainFrm: TTestGitMainFrm
     Enabled = False
     Interval = 500
     OnTimer = TimerTimer
-    Left = 45
-    Top = 37
+    Left = 517
+    Top = 302
   end
   object SynPasSyn1: TSynPasSyn
     Options.AutoDetectEnabled = False
@@ -339,14 +339,14 @@ object TestGitMainFrm: TTestGitMainFrm
     CharAttri.Foreground = clRed
     SymbolAttri.Background = clBlack
     SymbolAttri.Foreground = clWhite
-    Left = 10
-    Top = 68
+    Left = 482
+    Top = 333
   end
   object ilTreeView: TImageList
-    Left = 44
-    Top = 69
+    Left = 516
+    Top = 334
     Bitmap = {
-      494C0101040078003C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104007800400010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -618,8 +618,8 @@ object TestGitMainFrm: TTestGitMainFrm
       000000000000}
   end
   object SpTBXBItemContainer1: TSpTBXBItemContainer
-    Left = 12
-    Top = 35
+    Left = 484
+    Top = 300
     object SpTBXTBGroupItem1: TSpTBXTBGroupItem
       object mnuFile: TTBSubmenuItem
         Caption = 'File'

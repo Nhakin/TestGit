@@ -13,7 +13,7 @@ object TestGitMainFrm: TTestGitMainFrm
   Font.Style = []
   OldCreateOrder = False
   Position = poOwnerFormCenter
-  OnCreate = FormCreate
+  OnActivate = FormActivate
   OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
@@ -51,14 +51,14 @@ object TestGitMainFrm: TTestGitMainFrm
       Width = 550
       Height = 345
       Align = alClient
-      ActiveTabIndex = 0
+      ActiveTabIndex = 1
       HiddenItems = <>
       object SpTBXTabItem3: TSpTBXTabItem
         Caption = 'Demo'
-        Checked = True
       end
       object SpTBXTabItem2: TSpTBXTabItem
         Caption = 'TreeView Demo'
+        Checked = True
       end
       object SpTBXTabItem1: TSpTBXTabItem
         Caption = 'SynEdit Demo'
@@ -101,111 +101,6 @@ object TestGitMainFrm: TTestGitMainFrm
           FontSmoothing = fsmNone
         end
       end
-      object sptbxTreeViewDemo: TSpTBXTabSheet
-        Left = 0
-        Top = 25
-        Width = 550
-        Height = 320
-        Caption = 'TreeView Demo'
-        ImageIndex = -1
-        TabItem = 'SpTBXTabItem2'
-        object Splitter: TSplitter
-          Left = 187
-          Top = 0
-          Height = 316
-          ExplicitLeft = 236
-          ExplicitTop = 15
-          ExplicitHeight = 321
-        end
-        object PanTv: TPanel
-          Left = 2
-          Top = 0
-          Width = 185
-          Height = 316
-          Align = alLeft
-          TabOrder = 0
-          object vstDemo: TSpTBXVirtualStringTree
-            AlignWithMargins = True
-            Left = 4
-            Top = 4
-            Width = 177
-            Height = 308
-            Align = alClient
-            Header.AutoSizeIndex = 1
-            Header.DefaultHeight = 17
-            Header.Font.Charset = DEFAULT_CHARSET
-            Header.Font.Color = clWindowText
-            Header.Font.Height = -11
-            Header.Font.Name = 'Tahoma'
-            Header.Font.Style = []
-            Header.Options = [hoAutoResize, hoColumnResize, hoDrag, hoOwnerDraw, hoShowSortGlyphs, hoVisible]
-            Images = ilTreeView
-            TabOrder = 0
-            TreeOptions.AutoOptions = [toAutoDropExpand, toAutoScrollOnExpand, toAutoSort, toAutoTristateTracking, toAutoDeleteMovedNodes]
-            TreeOptions.MiscOptions = [toAcceptOLEDrop, toCheckSupport, toEditable, toFullRepaintOnResize, toGridExtensions, toInitOnSave, toToggleOnDblClick, toWheelPanning]
-            TreeOptions.PaintOptions = [toHotTrack, toPopupMode, toShowButtons, toShowDropmark, toShowRoot, toShowTreeLines, toThemeAware, toUseBlendedImages]
-            TreeOptions.SelectionOptions = [toExtendedFocus]
-            OnCompareNodes = vstDemoCompareNodes
-            OnFocusChanged = vstDemoFocusChanged
-            OnGetText = vstDemoGetText
-            OnGetImageIndex = vstDemoGetImageIndex
-            OnHeaderClick = vstDemoHeaderClick
-            OnInitChildren = vstDemoInitChildren
-            OnInitNode = vstDemoInitNode
-            OnNewText = vstDemoNewText
-            Columns = <
-              item
-                Position = 0
-                Width = 95
-                WideText = 'Name'
-              end
-              item
-                Position = 1
-                Width = 78
-                WideText = 'Value'
-              end>
-          end
-        end
-        object PanTvDemo: TPanel
-          AlignWithMargins = True
-          Left = 193
-          Top = 3
-          Width = 350
-          Height = 310
-          Align = alClient
-          TabOrder = 1
-          object EditTvValueValue: TSpTBXEdit
-            Left = 59
-            Top = 39
-            Width = 149
-            Height = 21
-            TabOrder = 0
-            OnChange = EditTvValueNameChange
-          end
-          object EditTvValueName: TSpTBXEdit
-            Left = 59
-            Top = 12
-            Width = 149
-            Height = 21
-            TabOrder = 1
-            OnChange = EditTvValueNameChange
-          end
-          object Label2: TSpTBXLabel
-            Left = 11
-            Top = 16
-            Width = 33
-            Height = 19
-            Caption = 'Name'
-          end
-          object Label3: TSpTBXLabel
-            Left = 11
-            Top = 43
-            Width = 32
-            Height = 19
-            Caption = 'Value'
-          end
-        end
-      end
       object sptbxDemo: TSpTBXTabSheet
         Left = 0
         Top = 25
@@ -228,7 +123,7 @@ object TestGitMainFrm: TTestGitMainFrm
             'Option #4')
         end
         object CmdOk: TSpTBXButton
-          Left = 234
+          Left = 233
           Top = 98
           Width = 62
           Height = 25
@@ -237,7 +132,7 @@ object TestGitMainFrm: TTestGitMainFrm
           OnClick = CmdOkClick
         end
         object CmdPBarGo: TSpTBXButton
-          Left = 234
+          Left = 233
           Top = 129
           Width = 62
           Height = 25
@@ -293,14 +188,14 @@ object TestGitMainFrm: TTestGitMainFrm
           Caption = 'Speed'
         end
         object GbSaySomething: TSpTBXGroupBox
-          Left = 5
+          Left = 10
           Top = 183
-          Width = 300
+          Width = 290
           Height = 47
           Caption = ' Say something'
           TabOrder = 2
           object CmdSaySomething: TSpTBXButton
-            Left = 229
+            Left = 223
             Top = 15
             Width = 62
             Height = 25
@@ -315,6 +210,113 @@ object TestGitMainFrm: TTestGitMainFrm
             Height = 21
             TabOrder = 0
           end
+        end
+      end
+      object sptbxTreeViewDemo: TSpTBXTabSheet
+        Left = 0
+        Top = 25
+        Width = 550
+        Height = 320
+        Caption = 'TreeView Demo'
+        ImageIndex = -1
+        TabItem = 'SpTBXTabItem2'
+        object PanTv: TPanel
+          Left = 2
+          Top = 0
+          Width = 185
+          Height = 316
+          Align = alLeft
+          TabOrder = 0
+          object vstDemo: TSpTBXVirtualStringTree
+            AlignWithMargins = True
+            Left = 4
+            Top = 4
+            Width = 177
+            Height = 308
+            Align = alClient
+            Header.AutoSizeIndex = 1
+            Header.DefaultHeight = 17
+            Header.Font.Charset = DEFAULT_CHARSET
+            Header.Font.Color = clWindowText
+            Header.Font.Height = -11
+            Header.Font.Name = 'Tahoma'
+            Header.Font.Style = []
+            Header.Options = [hoAutoResize, hoColumnResize, hoDrag, hoOwnerDraw, hoShowSortGlyphs, hoVisible]
+            Images = ilTreeView
+            TabOrder = 0
+            TreeOptions.AutoOptions = [toAutoDropExpand, toAutoScrollOnExpand, toAutoSort, toAutoTristateTracking, toAutoDeleteMovedNodes]
+            TreeOptions.MiscOptions = [toAcceptOLEDrop, toCheckSupport, toEditable, toFullRepaintOnResize, toGridExtensions, toInitOnSave, toToggleOnDblClick, toWheelPanning]
+            TreeOptions.PaintOptions = [toHotTrack, toPopupMode, toShowButtons, toShowDropmark, toShowRoot, toShowTreeLines, toThemeAware, toUseBlendedImages]
+            TreeOptions.SelectionOptions = [toExtendedFocus]
+            OnCompareNodes = vstDemoCompareNodes
+            OnFocusChanged = vstDemoFocusChanged
+            OnGetText = vstDemoGetText
+            OnGetImageIndex = vstDemoGetImageIndex
+            OnHeaderClick = vstDemoHeaderClick
+            OnInitChildren = vstDemoInitChildren
+            OnInitNode = vstDemoInitNode
+            OnNewText = vstDemoNewText
+            Columns = <
+              item
+                Position = 0
+                Width = 95
+                WideText = 'Name'
+              end
+              item
+                Position = 1
+                Width = 78
+                WideText = 'Value'
+              end>
+          end
+        end
+        object PanTvDemo: TPanel
+          AlignWithMargins = True
+          Left = 195
+          Top = 3
+          Width = 348
+          Height = 310
+          Align = alClient
+          TabOrder = 1
+          ExplicitLeft = 193
+          ExplicitWidth = 350
+          object EditTvValueValue: TSpTBXEdit
+            Left = 59
+            Top = 39
+            Width = 149
+            Height = 21
+            TabOrder = 0
+            OnChange = EditTvValueNameChange
+          end
+          object EditTvValueName: TSpTBXEdit
+            Left = 59
+            Top = 12
+            Width = 149
+            Height = 21
+            TabOrder = 1
+            OnChange = EditTvValueNameChange
+          end
+          object Label2: TSpTBXLabel
+            Left = 11
+            Top = 16
+            Width = 33
+            Height = 19
+            Caption = 'Name'
+          end
+          object Label3: TSpTBXLabel
+            Left = 11
+            Top = 43
+            Width = 32
+            Height = 19
+            Caption = 'Value'
+          end
+        end
+        object Splitter: TSpTBXSplitter
+          Left = 187
+          Top = 0
+          Height = 316
+          Cursor = crSizeWE
+          ExplicitTop = 223
+          ExplicitHeight = 100
         end
       end
     end

@@ -3,11 +3,12 @@ Unit TestGitMain;
 Interface
 
 Uses
+  ClsAppConfig,
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ComCtrls, Menus, ExtCtrls, SynEditHighlighter,
   SynHighlighterPas, SynEdit, SynMemo, VirtualTrees, ImgList, TB2Item,
   SpTBXItem, SpTBXTabs, TB2Dock, TB2Toolbar, SpTBXControls, SpTBXEditors,
-  SpTBXExControls;
+  SpTBXExControls, SpTBXDkPanels;
 
 Type
   ITreeViewDatas = Interface;
@@ -23,11 +24,15 @@ Type
     Function  GetExpanded() : Boolean;
     Procedure SetExpanded(Const AExpanded : Boolean);
 
+    Function  GetIsSelected() : Boolean;
+    Procedure SetIsSelected(Const AIsSelected : Boolean);
+
     Function GetItems() : ITreeViewDatas;
 
-    Property DataName  : String         Read GetDataName  Write SetDataName;
-    Property DataValue : String         Read GetDataValue Write SetDataValue;
-    Property Expanded  : Boolean        Read GetExpanded  Write SetExpanded;
+    Property DataName   : String        Read GetDataName   Write SetDataName;
+    Property DataValue  : String        Read GetDataValue  Write SetDataValue;
+    Property Expanded   : Boolean       Read GetExpanded   Write SetExpanded;
+    Property IsSelected : Boolean       Read GetIsSelected Write SetIsSelected;
     Property Items     : ITreeViewDatas Read GetItems;
 
   End;
@@ -74,7 +79,6 @@ Type
     PanTvDemo: TPanel;
     PBar: TSpTBXProgressBar;
     RgOptions: TSpTBXRadioGroup;
-    Splitter: TSplitter;
     SpTBXBItemContainer1: TSpTBXBItemContainer;
     sptbxDemo: TSpTBXTabSheet;
     SpTBXDock1: TSpTBXDock;
@@ -95,21 +99,22 @@ Type
     tcMain: TSpTBXTabControl;
     Timer: TTimer;
     vstDemo: TSpTBXVirtualStringTree;
+    Splitter: TSpTBXSplitter;
 
-    procedure FormCreate(Sender: TObject);
-    procedure FormDestroy(Sender: TObject);
-    Procedure CmdLiveClick(Sender : TObject);
+    procedure chkIsCheckedClick(Sender: TObject);
     Procedure CmdBetaClick(Sender : TObject);
     Procedure CmdDevClick(Sender : TObject);
-    procedure mnuExitClick(Sender: TObject);
-    procedure mnuAboutClick(Sender: TObject);
+    Procedure CmdLiveClick(Sender : TObject);
     procedure CmdOkClick(Sender: TObject);
-    procedure CmdSaySomethingClick(Sender: TObject);
-    procedure TimerTimer(Sender: TObject);
     procedure CmdPBarGoClick(Sender: TObject);
-    procedure chkIsCheckedClick(Sender: TObject);
-    procedure TbPBarSpeedChange(Sender: TObject);
+    procedure CmdSaySomethingClick(Sender: TObject);
     procedure EditTvValueNameChange(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure mnuAboutClick(Sender: TObject);
+    procedure mnuExitClick(Sender: TObject);
+    procedure TbPBarSpeedChange(Sender: TObject);
+    procedure TimerTimer(Sender: TObject);
 
     //VirtualTreeView Event Handler
     procedure vstDemoInitNode(Sender: TBaseVirtualTree; ParentNode,
@@ -131,6 +136,7 @@ Type
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 
   Private
+    FAppConfig   : IXMLAppSettings;
     FTreeViewData : ITreeViewDatas;
     FPrevData     : ITreeViewData;
     
@@ -139,6 +145,9 @@ Type
     Function  GetNodeData(ANode : PVirtualNode; AId : TGUID) : Boolean; OverLoad;
 
     Procedure DoUpdateTreeViewData(Sender : TBaseVirtualTree; Node : PVirtualNode; Data : Pointer; Var Abort : Boolean);
+
+  Public
+    Procedure AfterConstruction(); OverRide;
 
   End;
 
@@ -154,17 +163,18 @@ Var
 Implementation
 
 Uses
-  SpTBXSkins, SpTBXDefaultSkins, SpTBXAdditionalSkins, XmlDoc, XmlIntf, AboutFrm;
+  TypInfo, SpTBXSkins, SpTBXDefaultSkins, SpTBXAdditionalSkins, XmlDoc, XmlIntf, AboutFrm;
 
 {$R *.dfm}
 
 Type
   TTreeViewDataImpl = Class(TInterfacedObject, ITreeViewData)
   Private
-    FDataName  : String;
-    FDataValue : String;
-    FExpanded  : Boolean;
-    FItems     : ITreeviewDatas;
+    FDataName   : String;
+    FDataValue  : String;
+    FExpanded   : Boolean;
+    FIsSelected : Boolean;
+    FItems      : ITreeviewDatas;
 
   Protected
     Function  GetDataName() : String;
@@ -175,6 +185,9 @@ Type
 
     Function  GetExpanded() : Boolean;
     Procedure SetExpanded(Const AExpanded : Boolean);
+
+    Function  GetIsSelected() : Boolean;
+    Procedure SetIsSelected(Const AIsSelected : Boolean);
 
     Function GetItems() : ITreeViewDatas;
 
@@ -258,6 +271,16 @@ Begin
   FExpanded := AExpanded;
 End;
 
+Function TTreeViewDataImpl.GetIsSelected() : Boolean;
+Begin
+  Result := FIsSelected;
+End;
+
+Procedure TTreeViewDataImpl.SetIsSelected(Const AIsSelected : Boolean);
+Begin
+  FIsSelected := AIsSelected;
+End;
+
 Function TTreeViewDataImpl.GetItems() : ITreeViewDatas;
 Begin
   If Not Assigned(FItems) Then
@@ -294,9 +317,10 @@ Function TTreeViewDatas.GetAsXml() : String;
     Begin
       With AParent.AddChild('Item') Do
       Begin
-        AddChild('Name').NodeValue     := AStartPoint.Items[X].DataName;
-        AddChild('Value').NodeValue    := AStartPoint.Items[X].DataValue;
-        AddChild('Expanded').NodeValue := AStartPoint.Items[X].Expanded;
+        AddChild('Name').NodeValue       := AStartPoint.Items[X].DataName;
+        AddChild('Value').NodeValue      := AStartPoint.Items[X].DataValue;
+        AddChild('Expanded').NodeValue   := AStartPoint.Items[X].Expanded;
+        AddChild('IsSelected').NodeValue := AStartPoint.Items[X].IsSelected;
 
         If AStartPoint[X].Items.Count > 0 Then
           InternalGetAsXml(AStartPoint[X].Items, AddChild('Items'));
@@ -308,7 +332,7 @@ Var lXml : IXMLDocument;
 Begin
   lXml := NewXMLDocument('');
   Try
-    InternalGetAsXml(Self, lXml.AddChild('Items'));
+    InternalGetAsXml(Self, lXml.AddChild('TvSettings'));
     Result := FormatXmlData(lXml.Xml.Text);
 
     Finally
@@ -326,10 +350,11 @@ Procedure TTreeViewDatas.SetAsXml(AXmlString : String);
       lItem := AParent.Add();
       With lItem Do
       Begin
-        DataName  := AStartPoint[X].ChildNodes['Name'].NodeValue;
-        DataValue := AStartPoint[X].ChildNodes['Value'].NodeValue;
-        Expanded  := AStartPoint[X].ChildNodes['Expanded'].NodeValue;
-        
+        DataName   := AStartPoint[X].ChildNodes['Name'].NodeValue;
+        DataValue  := AStartPoint[X].ChildNodes['Value'].NodeValue;
+        Expanded   := AStartPoint[X].ChildNodes['Expanded'].NodeValue;
+        IsSelected := AStartPoint[X].ChildNodes['IsSelected'].NodeValue;
+
         If Assigned(AStartPoint[X].ChildNodes.FindNode('Items')) And
            (AStartPoint[X].ChildNodes['Items'].ChildNodes.Count > 0) Then
           InternalSetAsXml(AStartPoint[X].ChildNodes['Items'].ChildNodes, lItem.Items);
@@ -343,7 +368,7 @@ Begin
 
   lXml := LoadXmlData(AXmlString);
   Try
-    InternalSetAsXml(lXml.ChildNodes['Items'].ChildNodes, Self);
+    InternalSetAsXml(lXml.ChildNodes['TvSettings'].ChildNodes, Self);
 
     Finally
       lXml := Nil;
@@ -370,20 +395,83 @@ begin
   FPrevData.DataName := TEdit(Sender).Text;
 end;
 
-procedure TTestGitMainFrm.FormCreate(Sender: TObject);
+Procedure TTestGitMainFrm.AfterConstruction();
+Begin
+  InHerited AfterConstruction();
+
+  Top    := FAppConfig.Form.Y;
+  Left   := FAppConfig.Form.X;
+  Height := FAppConfig.Form.H;
+  Width  := FAppConfig.Form.W;
+End;
+
+procedure TTestGitMainFrm.FormDestroy(Sender: TObject);
+Var lTvSettings : IXmlDocument;
+begin
+  If Not Assigned(FAppConfig) Then
+    FAppConfig := TXMLAppSettings.NewAppSettings();
+
+  FAppConfig.SkinName := SkinManager.CurrentSkinName;
+  FAppConfig.Form.WindowState := GetEnumName(TypeInfo(TWindowState), Ord(WindowState));
+
+  If WindowState <> wsMaximized Then
+  Begin
+    FAppConfig.Form.X := Top;
+    FAppConfig.Form.Y := Left;
+    FAppConfig.Form.H := Height;
+    FAppConfig.Form.W := Width;
+  End;
+
+  FAppConfig.Form.ChildNodes.Clear();
+  With FAppConfig.Form.Add() Do
+  Begin
+    SettingName  := 'SplitTv';
+    SettingValue := PanTv.Width;
+  End;
+
+  With FAppConfig.Form.Add() Do
+  Begin
+    SettingName  := 'TvCol0Width';
+    SettingValue := vstDemo.Header.Columns[0].Width;
+  End;
+
+  vstDemo.IterateSubtree(Nil, DoUpdateTreeViewData, Nil);
+  lTvSettings := LoadXmlData(FTreeViewData.AsXml);
+  FAppConfig.ChildNodes.Remove(FAppConfig.ChildNodes.FindNode('TvSettings'));
+  FAppConfig.ChildNodes.Add(lTvSettings.DocumentElement);
+
+  With TStringList.Create() Do
+  Try
+    Text := FormatXMLData(FAppConfig.Xml);
+    SaveToFile(ChangeFileExt(ParamStr(0), '.cfg'));
+    Finally
+      Free();
+  End;
+end;
+
+procedure TTestGitMainFrm.FormActivate(Sender: TObject);
 Var X, Y, Z : Integer;
 begin
   FTreeViewData := TTreeViewData.CreateTreeViewData();
 
   If FileExists(ChangeFileExt(ParamStr(0), '.cfg')) Then
-    With TStringList.Create() Do
-    Try
-      LoadFromFile(ChangeFileExt(ParamStr(0), '.cfg'));
-      FTreeViewData.AsXml := Text;
+  Begin
+    FAppConfig := TXMLAppSettings.LoadAppSettings(ChangeFileExt(ParamStr(0), '.cfg'));
+    FTreeViewData.AsXml := FAppConfig.TvSettings.Xml;
+    For X := 0 To FAppConfig.Form.Count - 1 Do
+      If SameText(FAppConfig.Form.Component[X].Attributes['SettingName'], 'SplitTv') Then
+        PanTv.Width := StrToIntDef(FAppConfig.Form.Component[X].Attributes['SettingValue'], 185)
+      Else If SameText(FAppConfig.Form.Component[X].Attributes['SettingName'], 'TvCol0Width') Then
+        vstDemo.Header.Columns[0].Width := StrToIntDef(FAppConfig.Form.Component[X].Attributes['SettingValue'], 95);
 
-      Finally
-        Free();
-    End
+    Top      := FAppConfig.Form.Y;
+    Left     := FAppConfig.Form.X;
+    Height   := FAppConfig.Form.H;
+    Width    := FAppConfig.Form.W;
+    Position := poDesigned;
+
+    SkinManager.SetSkin(FAppConfig.SkinName);
+  End
   Else
   For X := 0 To 3 Do
     With FTreeViewData.Add() Do
@@ -412,21 +500,6 @@ begin
   vstDemo.RootNodeCount := FTreeViewData.Count;
   tcMain.ActivePage := sptbxDemo;
   FPrevData := Nil;
-end;
-
-procedure TTestGitMainFrm.FormDestroy(Sender: TObject);
-begin
-  vstDemo.IterateSubtree(Nil, DoUpdateTreeViewData, Nil);
-  With TStringList.Create() Do
-  Try
-    Text := FTreeViewData.AsXml;
-    SaveToFile(ChangeFileExt(ParamStr(0), '.cfg'));
-
-    Finally
-      Free();
-  End;
-
-  FTreeViewData := Nil;
 end;
 
 procedure TTestGitMainFrm.mnuExitClick(Sender: TObject);
@@ -480,6 +553,7 @@ Begin
     With lData Do
     Begin
       Expanded := Sender.Expanded[Node];
+      IsSelected := Sender.Selected[Node];
     End;
 End;
 
@@ -567,6 +641,7 @@ begin
       If lData.Items[Node.Index].Items.Count > 0 Then
         Node.States := Node.States + [vsHasChildren];
       Sender.Expanded[Node] := lData.Items[Node.Index].Expanded;
+      Sender.Selected[Node] := lData.Items[Node.Index].IsSelected;
     End;
   End
   Else
@@ -575,6 +650,7 @@ begin
     If FTreeViewData[Node.Index].Items.Count > 0 Then
       Node.States := Node.States + [vsHasChildren];
     Sender.Expanded[Node] := FTreeViewData[Node.Index].Expanded;
+    Sender.Selected[Node] := FTreeViewData[Node.Index].IsSelected;
   End;
 end;
 

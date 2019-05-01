@@ -90,7 +90,7 @@ Type
     SpTBXTabItem1: TSpTBXTabItem;
     SpTBXTabItem2: TSpTBXTabItem;
     SpTBXTabItem3: TSpTBXTabItem;
-    SpTBXTBGroupItem1: TSpTBXTBGroupItem;
+    sptbxMainMenu: TSpTBXTBGroupItem;
     SpTBXTitleBar1: TSpTBXTitleBar;
     SpTBXToolbar1: TSpTBXToolbar;
     sptbxTreeViewDemo: TSpTBXTabSheet;
@@ -100,6 +100,10 @@ Type
     Timer: TTimer;
     vstDemo: TSpTBXVirtualStringTree;
     Splitter: TSpTBXSplitter;
+    popTv: TSpTBXPopupMenu;
+    spTbxPopTv: TSpTBXTBGroupItem;
+    popCollapseAll: TSpTBXItem;
+    popExpandAll: TSpTBXItem;
 
     procedure chkIsCheckedClick(Sender: TObject);
     Procedure CmdBetaClick(Sender : TObject);
@@ -134,6 +138,8 @@ Type
       Node2: PVirtualNode; Column: TColumnIndex; var Result: Integer);
     procedure vstDemoHeaderClick(Sender: TVTHeader; Column: TColumnIndex;
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure popExpandAllClick(Sender: TObject);
+    procedure popCollapseAllClick(Sender: TObject);
 
   Private
     FAppConfig   : IXMLAppSettings;
@@ -145,6 +151,7 @@ Type
     Function  GetNodeData(ANode : PVirtualNode; AId : TGUID) : Boolean; OverLoad;
 
     Procedure DoUpdateTreeViewData(Sender : TBaseVirtualTree; Node : PVirtualNode; Data : Pointer; Var Abort : Boolean);
+    Procedure DoSetNodeState(Sender : TBaseVirtualTree; Node : PVirtualNode; Data : Pointer; Var Abort : Boolean);
 
   Public
     Procedure AfterConstruction(); OverRide;
@@ -435,6 +442,12 @@ begin
     SettingValue := vstDemo.Header.Columns[0].Width;
   End;
 
+  With FAppConfig.Form.Add() Do
+  Begin
+    SettingName  := 'PageIndex';
+    SettingValue := tcMain.ActiveTabIndex;
+  End;
+
   vstDemo.IterateSubtree(Nil, DoUpdateTreeViewData, Nil);
   lTvSettings := LoadXmlData(FTreeViewData.AsXml);
   FAppConfig.ChildNodes.Remove(FAppConfig.ChildNodes.FindNode('TvSettings'));
@@ -452,6 +465,8 @@ end;
 procedure TTestGitMainFrm.FormActivate(Sender: TObject);
 Var X, Y, Z : Integer;
 begin
+  tcMain.ActivePage := sptbxDemo;
+
   FTreeViewData := TTreeViewData.CreateTreeViewData();
 
   If FileExists(ChangeFileExt(ParamStr(0), '.cfg')) Then
@@ -460,9 +475,11 @@ begin
     FTreeViewData.AsXml := FAppConfig.TvSettings.Xml;
     For X := 0 To FAppConfig.Form.Count - 1 Do
       If SameText(FAppConfig.Form.Component[X].Attributes['SettingName'], 'SplitTv') Then
-        PanTv.Width := StrToIntDef(FAppConfig.Form.Component[X].Attributes['SettingValue'], 185)
+        PanTv.Width := FAppConfig.Form.Component[X].SettingValue
       Else If SameText(FAppConfig.Form.Component[X].Attributes['SettingName'], 'TvCol0Width') Then
-        vstDemo.Header.Columns[0].Width := StrToIntDef(FAppConfig.Form.Component[X].Attributes['SettingValue'], 95);
+        vstDemo.Header.Columns[0].Width := FAppConfig.Form.Component[X].SettingValue
+      Else If SameText(FAppConfig.Form.Component[X].Attributes['SettingName'], 'PageIndex') Then
+        tcMain.ActiveTabIndex := FAppConfig.Form.Component[X].SettingValue;
 
     Top      := FAppConfig.Form.Y;
     Left     := FAppConfig.Form.X;
@@ -498,13 +515,31 @@ begin
 
   vstDemo.NodeDataSize := SizeOf(IInterface);
   vstDemo.RootNodeCount := FTreeViewData.Count;
-  tcMain.ActivePage := sptbxDemo;
   FPrevData := Nil;
 end;
 
 procedure TTestGitMainFrm.mnuExitClick(Sender: TObject);
 begin
   Close();
+end;
+
+Procedure TTestGitMainFrm.DoSetNodeState(Sender : TBaseVirtualTree; Node : PVirtualNode; Data : Pointer; Var Abort : Boolean);
+begin
+  Sender.Expanded[Node] := PBoolean(Data)^;
+end;
+
+procedure TTestGitMainFrm.popCollapseAllClick(Sender: TObject);
+Var lState : Boolean;
+begin
+  lState := False;
+  vstDemo.IterateSubtree(Nil, DoSetNodeState, PBoolean(@lState));
+end;
+
+procedure TTestGitMainFrm.popExpandAllClick(Sender: TObject);
+Var lState : Boolean;
+begin
+  lState := True;
+  vstDemo.IterateSubtree(Nil, DoSetNodeState, PBoolean(@lState));
 end;
 
 procedure TTestGitMainFrm.TbPBarSpeedChange(Sender: TObject);

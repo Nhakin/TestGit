@@ -35,7 +35,7 @@ object TestGitMainFrm: TTestGitMainFrm
         CloseButton = False
         DockPos = -3
         FullSize = True
-        LinkSubitems = SpTBXTBGroupItem1
+        LinkSubitems = sptbxMainMenu
         ProcessShortCuts = True
         ShrinkMode = tbsmWrap
         TabOrder = 0
@@ -243,6 +243,7 @@ object TestGitMainFrm: TTestGitMainFrm
             Header.Font.Style = []
             Header.Options = [hoAutoResize, hoColumnResize, hoDrag, hoOwnerDraw, hoShowSortGlyphs, hoVisible]
             Images = ilTreeView
+            PopupMenu = popTv
             TabOrder = 0
             TreeOptions.AutoOptions = [toAutoDropExpand, toAutoScrollOnExpand, toAutoSort, toAutoTristateTracking, toAutoDeleteMovedNodes]
             TreeOptions.MiscOptions = [toAcceptOLEDrop, toCheckSupport, toEditable, toFullRepaintOnResize, toGridExtensions, toInitOnSave, toToggleOnDblClick, toWheelPanning]
@@ -277,8 +278,6 @@ object TestGitMainFrm: TTestGitMainFrm
           Height = 310
           Align = alClient
           TabOrder = 1
-          ExplicitLeft = 193
-          ExplicitWidth = 350
           object EditTvValueValue: TSpTBXEdit
             Left = 59
             Top = 39
@@ -315,8 +314,6 @@ object TestGitMainFrm: TTestGitMainFrm
           Top = 0
           Height = 316
           Cursor = crSizeWE
-          ExplicitTop = 223
-          ExplicitHeight = 100
         end
       end
     end
@@ -364,7 +361,7 @@ object TestGitMainFrm: TTestGitMainFrm
     Left = 516
     Top = 334
     Bitmap = {
-      494C010104007800580010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101040078005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -638,7 +635,7 @@ object TestGitMainFrm: TTestGitMainFrm
   object SpTBXBItemContainer1: TSpTBXBItemContainer
     Left = 484
     Top = 300
-    object SpTBXTBGroupItem1: TSpTBXTBGroupItem
+    object sptbxMainMenu: TSpTBXTBGroupItem
       object mnuFile: TSpTBXSubmenuItem
         Caption = 'File'
         object mnuExit: TSpTBXItem
@@ -674,5 +671,20 @@ object TestGitMainFrm: TTestGitMainFrm
         end
       end
     end
+    object spTbxPopTv: TSpTBXTBGroupItem
+      object popExpandAll: TSpTBXItem
+        Caption = 'Expand All'
+        OnClick = popExpandAllClick
+      end
+      object popCollapseAll: TSpTBXItem
+        Caption = 'Colapse All'
+        OnClick = popCollapseAllClick
+      end
+    end
+  end
+  object popTv: TSpTBXPopupMenu
+    LinkSubitems = spTbxPopTv
+    Left = 57
+    Top = 143
   end
 end

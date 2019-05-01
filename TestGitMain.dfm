@@ -262,9 +262,15 @@ object TestGitMainFrm: TTestGitMainFrm
         object chkIsChecked: TSpTBXCheckBox
           Left = 14
           Top = 236
-          Width = 82
+          Width = 98
           Height = 21
-          Caption = 'Is Checked?'
+          Caption = 'Is Checked? No'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clRed
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
           TabOrder = 4
           OnClick = chkIsCheckedClick
         end
@@ -356,7 +362,7 @@ object TestGitMainFrm: TTestGitMainFrm
     Left = 516
     Top = 334
     Bitmap = {
-      494C010104007800540010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104007800580010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

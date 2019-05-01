@@ -627,11 +627,15 @@ begin
 end;
 
 procedure TTestGitMainFrm.chkIsCheckedClick(Sender: TObject);
+Const
+  cCaptionColor : Array[Boolean] Of TColor = (clRed, clGreen);
 begin
   If chkIsChecked.Checked Then
     chkIsChecked.Caption := 'Is Checked? Yes'
   Else
     chkIsChecked.Caption := 'Is Checked? No';
+
+  chkIsChecked.Font.Color := cCaptionColor[chkIsChecked.Checked];
 end;
 
 Procedure TTestGitMainFrm.CmdBetaClick(Sender : TObject);

@@ -3,9 +3,11 @@ object TestGitMainFrm: TTestGitMainFrm
   Top = 0
   BorderStyle = bsNone
   Caption = 'Test Git 1.0.0.11'
-  ClientHeight = 439
-  ClientWidth = 572
+  ClientHeight = 390
+  ClientWidth = 540
   Color = clBtnFace
+  Constraints.MinHeight = 390
+  Constraints.MinWidth = 540
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -20,15 +22,18 @@ object TestGitMainFrm: TTestGitMainFrm
   object SpTBXTitleBar1: TSpTBXTitleBar
     Left = 0
     Top = 0
-    Width = 572
-    Height = 439
+    Width = 540
+    Height = 390
     Caption = 'Test Git 1.0.0.11'
+    ExplicitWidth = 572
+    ExplicitHeight = 439
     object SpTBXDock1: TSpTBXDock
       Left = 8
       Top = 30
-      Width = 556
+      Width = 524
       Height = 25
       AllowDrag = False
+      ExplicitWidth = 556
       object SpTBXToolbar1: TSpTBXToolbar
         Left = 0
         Top = 0
@@ -48,35 +53,149 @@ object TestGitMainFrm: TTestGitMainFrm
       AlignWithMargins = True
       Left = 11
       Top = 58
-      Width = 550
-      Height = 345
+      Width = 518
+      Height = 296
       Align = alClient
-      ActiveTabIndex = 1
+      ActiveTabIndex = 0
+      ExplicitWidth = 550
+      ExplicitHeight = 345
       HiddenItems = <>
       object SpTBXTabItem3: TSpTBXTabItem
         Caption = 'Demo'
+        Checked = True
       end
       object SpTBXTabItem2: TSpTBXTabItem
         Caption = 'TreeView Demo'
-        Checked = True
       end
       object SpTBXTabItem1: TSpTBXTabItem
         Caption = 'SynEdit Demo'
       end
+      object sptbxTreeViewDemo: TSpTBXTabSheet
+        Left = 0
+        Top = 25
+        Width = 518
+        Height = 271
+        Caption = 'TreeView Demo'
+        ImageIndex = -1
+        ExplicitWidth = 550
+        ExplicitHeight = 320
+        TabItem = 'SpTBXTabItem2'
+        object PanTv: TPanel
+          Left = 2
+          Top = 0
+          Width = 185
+          Height = 267
+          Align = alLeft
+          TabOrder = 0
+          ExplicitHeight = 316
+          object vstDemo: TSpTBXVirtualStringTree
+            AlignWithMargins = True
+            Left = 4
+            Top = 4
+            Width = 177
+            Height = 259
+            Align = alClient
+            Header.AutoSizeIndex = 1
+            Header.DefaultHeight = 17
+            Header.Font.Charset = DEFAULT_CHARSET
+            Header.Font.Color = clWindowText
+            Header.Font.Height = -11
+            Header.Font.Name = 'Tahoma'
+            Header.Font.Style = []
+            Header.Options = [hoAutoResize, hoColumnResize, hoDrag, hoOwnerDraw, hoShowSortGlyphs, hoVisible]
+            Images = ilTreeView
+            TabOrder = 0
+            TreeOptions.AutoOptions = [toAutoDropExpand, toAutoScrollOnExpand, toAutoSort, toAutoTristateTracking, toAutoDeleteMovedNodes]
+            TreeOptions.MiscOptions = [toAcceptOLEDrop, toCheckSupport, toEditable, toFullRepaintOnResize, toGridExtensions, toInitOnSave, toToggleOnDblClick, toWheelPanning]
+            TreeOptions.PaintOptions = [toHotTrack, toPopupMode, toShowButtons, toShowDropmark, toShowRoot, toShowTreeLines, toThemeAware, toUseBlendedImages]
+            TreeOptions.SelectionOptions = [toExtendedFocus]
+            OnCompareNodes = vstDemoCompareNodes
+            OnFocusChanged = vstDemoFocusChanged
+            OnGetText = vstDemoGetText
+            OnGetImageIndex = vstDemoGetImageIndex
+            OnHeaderClick = vstDemoHeaderClick
+            OnInitChildren = vstDemoInitChildren
+            OnInitNode = vstDemoInitNode
+            OnNewText = vstDemoNewText
+            ExplicitHeight = 308
+            Columns = <
+              item
+                Position = 0
+                Width = 95
+                WideText = 'Name'
+              end
+              item
+                Position = 1
+                Width = 78
+                WideText = 'Value'
+              end>
+          end
+        end
+        object PanTvDemo: TPanel
+          AlignWithMargins = True
+          Left = 195
+          Top = 3
+          Width = 316
+          Height = 261
+          Align = alClient
+          TabOrder = 1
+          ExplicitWidth = 348
+          ExplicitHeight = 310
+          object EditTvValueValue: TSpTBXEdit
+            Left = 59
+            Top = 39
+            Width = 149
+            Height = 21
+            TabOrder = 0
+            OnChange = EditTvValueNameChange
+          end
+          object EditTvValueName: TSpTBXEdit
+            Left = 59
+            Top = 12
+            Width = 149
+            Height = 21
+            TabOrder = 1
+            OnChange = EditTvValueNameChange
+          end
+          object Label2: TSpTBXLabel
+            Left = 11
+            Top = 16
+            Width = 33
+            Height = 19
+            Caption = 'Name'
+          end
+          object Label3: TSpTBXLabel
+            Left = 11
+            Top = 43
+            Width = 32
+            Height = 19
+            Caption = 'Value'
+          end
+        end
+        object Splitter: TSpTBXSplitter
+          Left = 187
+          Top = 0
+          Height = 267
+          Cursor = crSizeWE
+          ExplicitHeight = 316
+        end
+      end
       object sptbxSynEditDemo: TSpTBXTabSheet
         Left = 0
         Top = 25
-        Width = 550
-        Height = 320
+        Width = 518
+        Height = 271
         Caption = 'SynEdit Demo'
         ImageIndex = -1
+        ExplicitWidth = 550
+        ExplicitHeight = 320
         TabItem = 'SpTBXTabItem1'
         object MemoSrc: TSynMemo
           AlignWithMargins = True
           Left = 5
           Top = 3
-          Width = 538
-          Height = 310
+          Width = 506
+          Height = 261
           Align = alClient
           Color = clBlack
           Font.Charset = DEFAULT_CHARSET
@@ -99,15 +218,19 @@ object TestGitMainFrm: TTestGitMainFrm
             'dex > -1 Then'#13#10'    ShowMessage(RgOptions.Items[RgOptions.ItemInd' +
             'ex])'#13#10'  Else'#13#10'    ShowMessage('#39'Please select an option.'#39');'#13#10'end;'
           FontSmoothing = fsmNone
+          ExplicitWidth = 538
+          ExplicitHeight = 310
         end
       end
       object sptbxDemo: TSpTBXTabSheet
         Left = 0
         Top = 25
-        Width = 550
-        Height = 320
+        Width = 518
+        Height = 271
         Caption = 'Demo'
         ImageIndex = -1
+        ExplicitWidth = 550
+        ExplicitHeight = 320
         TabItem = 'SpTBXTabItem3'
         object RgOptions: TSpTBXRadioGroup
           Left = 10
@@ -212,119 +335,14 @@ object TestGitMainFrm: TTestGitMainFrm
           end
         end
       end
-      object sptbxTreeViewDemo: TSpTBXTabSheet
-        Left = 0
-        Top = 25
-        Width = 550
-        Height = 320
-        Caption = 'TreeView Demo'
-        ImageIndex = -1
-        TabItem = 'SpTBXTabItem2'
-        object PanTv: TPanel
-          Left = 2
-          Top = 0
-          Width = 185
-          Height = 316
-          Align = alLeft
-          TabOrder = 0
-          object vstDemo: TSpTBXVirtualStringTree
-            AlignWithMargins = True
-            Left = 4
-            Top = 4
-            Width = 177
-            Height = 308
-            Align = alClient
-            Header.AutoSizeIndex = 1
-            Header.DefaultHeight = 17
-            Header.Font.Charset = DEFAULT_CHARSET
-            Header.Font.Color = clWindowText
-            Header.Font.Height = -11
-            Header.Font.Name = 'Tahoma'
-            Header.Font.Style = []
-            Header.Options = [hoAutoResize, hoColumnResize, hoDrag, hoOwnerDraw, hoShowSortGlyphs, hoVisible]
-            Images = ilTreeView
-            TabOrder = 0
-            TreeOptions.AutoOptions = [toAutoDropExpand, toAutoScrollOnExpand, toAutoSort, toAutoTristateTracking, toAutoDeleteMovedNodes]
-            TreeOptions.MiscOptions = [toAcceptOLEDrop, toCheckSupport, toEditable, toFullRepaintOnResize, toGridExtensions, toInitOnSave, toToggleOnDblClick, toWheelPanning]
-            TreeOptions.PaintOptions = [toHotTrack, toPopupMode, toShowButtons, toShowDropmark, toShowRoot, toShowTreeLines, toThemeAware, toUseBlendedImages]
-            TreeOptions.SelectionOptions = [toExtendedFocus]
-            OnCompareNodes = vstDemoCompareNodes
-            OnFocusChanged = vstDemoFocusChanged
-            OnGetText = vstDemoGetText
-            OnGetImageIndex = vstDemoGetImageIndex
-            OnHeaderClick = vstDemoHeaderClick
-            OnInitChildren = vstDemoInitChildren
-            OnInitNode = vstDemoInitNode
-            OnNewText = vstDemoNewText
-            Columns = <
-              item
-                Position = 0
-                Width = 95
-                WideText = 'Name'
-              end
-              item
-                Position = 1
-                Width = 78
-                WideText = 'Value'
-              end>
-          end
-        end
-        object PanTvDemo: TPanel
-          AlignWithMargins = True
-          Left = 195
-          Top = 3
-          Width = 348
-          Height = 310
-          Align = alClient
-          TabOrder = 1
-          ExplicitLeft = 193
-          ExplicitWidth = 350
-          object EditTvValueValue: TSpTBXEdit
-            Left = 59
-            Top = 39
-            Width = 149
-            Height = 21
-            TabOrder = 0
-            OnChange = EditTvValueNameChange
-          end
-          object EditTvValueName: TSpTBXEdit
-            Left = 59
-            Top = 12
-            Width = 149
-            Height = 21
-            TabOrder = 1
-            OnChange = EditTvValueNameChange
-          end
-          object Label2: TSpTBXLabel
-            Left = 11
-            Top = 16
-            Width = 33
-            Height = 19
-            Caption = 'Name'
-          end
-          object Label3: TSpTBXLabel
-            Left = 11
-            Top = 43
-            Width = 32
-            Height = 19
-            Caption = 'Value'
-          end
-        end
-        object Splitter: TSpTBXSplitter
-          Left = 187
-          Top = 0
-          Height = 316
-          Cursor = crSizeWE
-          ExplicitTop = 223
-          ExplicitHeight = 100
-        end
-      end
     end
     object SpTBXStatusBar1: TSpTBXStatusBar
       Left = 8
-      Top = 406
-      Width = 556
+      Top = 357
+      Width = 524
       Height = 25
+      ExplicitTop = 406
+      ExplicitWidth = 556
       object SpTBXLabelItem1: TSpTBXLabelItem
         Caption = 'Coded By Nhakin'
       end
@@ -334,8 +352,8 @@ object TestGitMainFrm: TTestGitMainFrm
     Enabled = False
     Interval = 500
     OnTimer = TimerTimer
-    Left = 517
-    Top = 302
+    Left = 495
+    Top = 288
   end
   object SynPasSyn1: TSynPasSyn
     Options.AutoDetectEnabled = False
@@ -357,14 +375,14 @@ object TestGitMainFrm: TTestGitMainFrm
     CharAttri.Foreground = clRed
     SymbolAttri.Background = clBlack
     SymbolAttri.Foreground = clWhite
-    Left = 482
-    Top = 333
+    Left = 460
+    Top = 319
   end
   object ilTreeView: TImageList
-    Left = 516
-    Top = 334
+    Left = 494
+    Top = 320
     Bitmap = {
-      494C010104007800580010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101040078005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -636,8 +654,8 @@ object TestGitMainFrm: TTestGitMainFrm
       000000000000}
   end
   object SpTBXBItemContainer1: TSpTBXBItemContainer
-    Left = 484
-    Top = 300
+    Left = 462
+    Top = 286
     object SpTBXTBGroupItem1: TSpTBXTBGroupItem
       object mnuFile: TSpTBXSubmenuItem
         Caption = 'File'

@@ -15,6 +15,9 @@ Type
   
   ITreeViewData = Interface(IInterface)
     ['{4B61686E-29A0-2112-ABA4-5433658EFC37}']
+    Function  GetNode() : PVirtualNode;
+    Procedure SetNode(Const ANode : PVirtualNode);
+    
     Function  GetDataName() : String;
     Procedure SetDataName(Const ADataName : String);
 
@@ -29,6 +32,7 @@ Type
 
     Function GetItems() : ITreeViewDatas;
 
+    Property Node       : PVirtualNode  Read GetNode       Write SetNode;
     Property DataName   : String        Read GetDataName   Write SetDataName;
     Property DataValue  : String        Read GetDataValue  Write SetDataValue;
     Property Expanded   : Boolean       Read GetExpanded   Write SetExpanded;
@@ -139,15 +143,12 @@ Type
     FAppConfig   : IXMLAppSettings;
     FTreeViewData : ITreeViewDatas;
     FPrevData     : ITreeViewData;
-    
+
     Procedure SetNodeData(ANode : PVirtualNode; ANodeData : IInterface);
     Function  GetNodeData(ANode : PVirtualNode; AId : TGUID; Var ANodeData) : Boolean; OverLoad;
     Function  GetNodeData(ANode : PVirtualNode; AId : TGUID) : Boolean; OverLoad;
 
     Procedure DoUpdateTreeViewData(Sender : TBaseVirtualTree; Node : PVirtualNode; Data : Pointer; Var Abort : Boolean);
-
-  Public
-    Procedure AfterConstruction(); OverRide;
 
   End;
 
@@ -170,13 +171,17 @@ Uses
 Type
   TTreeViewDataImpl = Class(TInterfacedObject, ITreeViewData)
   Private
+    FNode       : PVirtualNode;
     FDataName   : String;
     FDataValue  : String;
     FExpanded   : Boolean;
-    FIsSelected : Boolean;
+    FSelected   : Boolean;
     FItems      : ITreeviewDatas;
 
   Protected
+    Function  GetNode() : PVirtualNode;
+    Procedure SetNode(Const ANode : PVirtualNode);
+
     Function  GetDataName() : String;
     Procedure SetDataName(Const ADataName : String);
 
@@ -241,6 +246,25 @@ Begin
   FDataValue := '';
 End;
 
+Function TTreeViewDataImpl.GetNode() : PVirtualNode;
+Begin
+  Result := FNode;
+End;
+
+Procedure TTreeViewDataImpl.SetNode(Const ANode : PVirtualNode);
+Begin
+  FNode := ANode;
+
+  If Assigned(FNode) Then
+  Begin
+    If FExpanded Then
+      FNode.States := FNode.States + [vsExpanded];
+
+    If FSelected Then
+      FNode.States := FNode.States + [vsSelected];
+  End;
+End;
+
 Function TTreeViewDataImpl.GetDataName() : String;
 Begin
   Result := FDataName;
@@ -263,22 +287,32 @@ End;
 
 Function TTreeViewDataImpl.GetExpanded() : Boolean;
 Begin
-  Result := FExpanded;
+  If Assigned(FNode) Then
+    Result := FNode.States * [vsExpanded] <> []
+  Else
+    Result := FExpanded;
 End;
 
 Procedure TTreeViewDataImpl.SetExpanded(Const AExpanded : Boolean);
 Begin
   FExpanded := AExpanded;
+  If Assigned(FNode) Then
+    TreeFromNode(FNode).Expanded[FNode] := AExpanded;
 End;
 
 Function TTreeViewDataImpl.GetIsSelected() : Boolean;
 Begin
-  Result := FIsSelected;
+  If Assigned(FNode) Then
+    Result := FNode.States * [vsSelected] <> []
+  Else
+    Result := FSelected;
 End;
 
 Procedure TTreeViewDataImpl.SetIsSelected(Const AIsSelected : Boolean);
 Begin
-  FIsSelected := AIsSelected;
+  FSelected := AIsSelected;
+  If Assigned(FNode) Then
+    TreeFromNode(FNode).Selected[FNode] := AIsSelected;
 End;
 
 Function TTreeViewDataImpl.GetItems() : ITreeViewDatas;
@@ -395,18 +429,9 @@ begin
   FPrevData.DataName := TEdit(Sender).Text;
 end;
 
-Procedure TTestGitMainFrm.AfterConstruction();
-Begin
-  InHerited AfterConstruction();
-
-  Top    := FAppConfig.Form.Y;
-  Left   := FAppConfig.Form.X;
-  Height := FAppConfig.Form.H;
-  Width  := FAppConfig.Form.W;
-End;
-
 procedure TTestGitMainFrm.FormDestroy(Sender: TObject);
 Var lTvSettings : IXmlDocument;
+    lNode : IXmlNode;
 begin
   If Not Assigned(FAppConfig) Then
     FAppConfig := TXMLAppSettings.NewAppSettings();
@@ -437,7 +462,9 @@ begin
 
   vstDemo.IterateSubtree(Nil, DoUpdateTreeViewData, Nil);
   lTvSettings := LoadXmlData(FTreeViewData.AsXml);
-  FAppConfig.ChildNodes.Remove(FAppConfig.ChildNodes.FindNode('TvSettings'));
+  lNode := FAppConfig.ChildNodes.FindNode('TvSettings');
+  If Assigned(lNode) Then
+    FAppConfig.ChildNodes.Remove(lNode);
   FAppConfig.ChildNodes.Add(lTvSettings.DocumentElement);
 
   With TStringList.Create() Do
@@ -596,7 +623,9 @@ procedure TTestGitMainFrm.vstDemoGetImageIndex(Sender: TBaseVirtualTree;
   Node: PVirtualNode; Kind: TVTImageKind; Column: TColumnIndex;
   var Ghosted: Boolean; var ImageIndex: Integer);
 begin
-  ImageIndex := Node.Index;
+  ImageIndex := -1;
+  If Column = 0 Then
+    ImageIndex := Node.Index;
 end;
 
 procedure TTestGitMainFrm.vstDemoGetText(Sender: TBaseVirtualTree;
@@ -638,19 +667,19 @@ begin
     If GetNodeData(ParentNode, ITreeViewData, lData) Then
     Begin
       SetNodeData(Node, lData.Items[Node.Index]);
+      lData.Items[Node.Index].Node := Node;
+
       If lData.Items[Node.Index].Items.Count > 0 Then
         Node.States := Node.States + [vsHasChildren];
-      Sender.Expanded[Node] := lData.Items[Node.Index].Expanded;
-      Sender.Selected[Node] := lData.Items[Node.Index].IsSelected;
     End;
   End
   Else
   Begin
     SetNodeData(Node, FTreeViewData[Node.Index]);
+    FTreeViewData[Node.Index].Node := Node;
+
     If FTreeViewData[Node.Index].Items.Count > 0 Then
       Node.States := Node.States + [vsHasChildren];
-    Sender.Expanded[Node] := FTreeViewData[Node.Index].Expanded;
-    Sender.Selected[Node] := FTreeViewData[Node.Index].IsSelected;
   End;
 end;
 

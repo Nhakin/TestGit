@@ -3,7 +3,8 @@ program TestGit;
 uses
   Forms,
   TestGitMain in 'TestGitMain.pas' {TestGitMainFrm},
-  AboutFrm in 'AboutFrm.pas' {AboutDlg};
+  AboutFrm in 'AboutFrm.pas' {AboutDlg},
+  ClsAppConfig in 'ClsAppConfig.pas';
 
 {$R *.res}
 

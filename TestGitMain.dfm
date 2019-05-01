@@ -2,7 +2,7 @@ object TestGitMainFrm: TTestGitMainFrm
   Left = 0
   Top = 0
   BorderStyle = bsNone
-  Caption = 'Test Git 1.0.0.10'
+  Caption = 'Test Git 1.0.0.11'
   ClientHeight = 439
   ClientWidth = 572
   Color = clBtnFace
@@ -22,7 +22,7 @@ object TestGitMainFrm: TTestGitMainFrm
     Top = 0
     Width = 572
     Height = 439
-    Caption = 'Test Git 1.0.0.10'
+    Caption = 'Test Git 1.0.0.11'
     object SpTBXDock1: TSpTBXDock
       Left = 8
       Top = 30
@@ -62,6 +62,44 @@ object TestGitMainFrm: TTestGitMainFrm
       end
       object SpTBXTabItem1: TSpTBXTabItem
         Caption = 'SynEdit Demo'
+      end
+      object sptbxSynEditDemo: TSpTBXTabSheet
+        Left = 0
+        Top = 25
+        Width = 550
+        Height = 320
+        Caption = 'SynEdit Demo'
+        ImageIndex = -1
+        TabItem = 'SpTBXTabItem1'
+        object MemoSrc: TSynMemo
+          AlignWithMargins = True
+          Left = 5
+          Top = 3
+          Width = 538
+          Height = 310
+          Align = alClient
+          Color = clBlack
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Courier New'
+          Font.Style = []
+          TabOrder = 0
+          Gutter.Font.Charset = DEFAULT_CHARSET
+          Gutter.Font.Color = clWindowText
+          Gutter.Font.Height = -11
+          Gutter.Font.Name = 'Courier New'
+          Gutter.Font.Style = []
+          Gutter.ShowLineNumbers = True
+          Gutter.ShowModification = True
+          Highlighter = SynPasSyn1
+          Lines.UnicodeStrings = 
+            '{This is a Comment}'#13#10#13#10'procedure TTestGitMainFrm.CmdOkClick(Send' +
+            'er: TObject);'#13#10'begin'#13#10'  lChar := #$29A;'#13#10#13#10'  If RgOptions.ItemIn' +
+            'dex > -1 Then'#13#10'    ShowMessage(RgOptions.Items[RgOptions.ItemInd' +
+            'ex])'#13#10'  Else'#13#10'    ShowMessage('#39'Please select an option.'#39');'#13#10'end;'
+          FontSmoothing = fsmNone
+        end
       end
       object sptbxTreeViewDemo: TSpTBXTabSheet
         Left = 0
@@ -168,44 +206,6 @@ object TestGitMainFrm: TTestGitMainFrm
           end
         end
       end
-      object sptbxSynEditDemo: TSpTBXTabSheet
-        Left = 0
-        Top = 25
-        Width = 550
-        Height = 320
-        Caption = 'SynEdit Demo'
-        ImageIndex = -1
-        TabItem = 'SpTBXTabItem1'
-        object MemoSrc: TSynMemo
-          AlignWithMargins = True
-          Left = 5
-          Top = 3
-          Width = 538
-          Height = 310
-          Align = alClient
-          Color = clBlack
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Courier New'
-          Font.Style = []
-          TabOrder = 0
-          Gutter.Font.Charset = DEFAULT_CHARSET
-          Gutter.Font.Color = clWindowText
-          Gutter.Font.Height = -11
-          Gutter.Font.Name = 'Courier New'
-          Gutter.Font.Style = []
-          Gutter.ShowLineNumbers = True
-          Gutter.ShowModification = True
-          Highlighter = SynPasSyn1
-          Lines.UnicodeStrings = 
-            '{This is a Comment}'#13#10#13#10'procedure TTestGitMainFrm.CmdOkClick(Send' +
-            'er: TObject);'#13#10'begin'#13#10'  lChar := #$29A;'#13#10#13#10'  If RgOptions.ItemIn' +
-            'dex > -1 Then'#13#10'    ShowMessage(RgOptions.Items[RgOptions.ItemInd' +
-            'ex])'#13#10'  Else'#13#10'    ShowMessage('#39'Please select an option.'#39');'#13#10'end;'
-          FontSmoothing = fsmNone
-        end
-      end
       object sptbxDemo: TSpTBXTabSheet
         Left = 0
         Top = 25
@@ -217,7 +217,7 @@ object TestGitMainFrm: TTestGitMainFrm
         object RgOptions: TSpTBXRadioGroup
           Left = 10
           Top = 19
-          Width = 189
+          Width = 290
           Height = 109
           Caption = ' Options '
           TabOrder = 0
@@ -228,18 +228,18 @@ object TestGitMainFrm: TTestGitMainFrm
             'Option #4')
         end
         object CmdOk: TSpTBXButton
-          Left = 119
+          Left = 234
           Top = 98
-          Width = 75
+          Width = 62
           Height = 25
           Caption = 'Ok'
           TabOrder = 1
           OnClick = CmdOkClick
         end
         object CmdPBarGo: TSpTBXButton
-          Left = 166
+          Left = 234
           Top = 129
-          Width = 75
+          Width = 62
           Height = 25
           Caption = 'Go'
           TabOrder = 3
@@ -248,7 +248,7 @@ object TestGitMainFrm: TTestGitMainFrm
         object PBar: TSpTBXProgressBar
           Left = 10
           Top = 135
-          Width = 150
+          Width = 209
           Height = 17
           Caption = '0%'
           Font.Charset = DEFAULT_CHARSET
@@ -270,9 +270,9 @@ object TestGitMainFrm: TTestGitMainFrm
         end
         object TbPBarSpeed: TSpTBXTrackBar
           Left = 45
-          Top = 158
+          Top = 159
           Width = 150
-          Height = 26
+          Height = 23
           Max = 1000
           Min = 250
           Position = 250
@@ -294,7 +294,7 @@ object TestGitMainFrm: TTestGitMainFrm
           Caption = ' Say something'
           TabOrder = 2
           object CmdSaySomething: TSpTBXButton
-            Left = 220
+            Left = 229
             Top = 15
             Width = 62
             Height = 25
@@ -356,7 +356,7 @@ object TestGitMainFrm: TTestGitMainFrm
     Left = 516
     Top = 334
     Bitmap = {
-      494C0101040078004C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104007800540010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

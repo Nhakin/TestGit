@@ -104,6 +104,7 @@ Type
     spTbxPopTv: TSpTBXTBGroupItem;
     popCollapseAll: TSpTBXItem;
     popExpandAll: TSpTBXItem;
+    SpTBXButton1: TSpTBXButton;
 
     procedure chkIsCheckedClick(Sender: TObject);
     Procedure CmdBetaClick(Sender : TObject);
@@ -140,6 +141,7 @@ Type
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure popExpandAllClick(Sender: TObject);
     procedure popCollapseAllClick(Sender: TObject);
+    procedure SpTBXButton1Click(Sender: TObject);
 
   Private
     FAppConfig   : IXMLAppSettings;
@@ -170,7 +172,7 @@ Var
 Implementation
 
 Uses
-  TypInfo, SpTBXSkins, SpTBXDefaultSkins, SpTBXAdditionalSkins, XmlDoc, XmlIntf, AboutFrm;
+  TypInfo, ShellApi, SpTBXSkins, SpTBXDefaultSkins, SpTBXAdditionalSkins, XmlDoc, XmlIntf, AboutFrm;
 
 {$R *.dfm}
 
@@ -561,6 +563,16 @@ Begin
   lNodeData  := vstDemo.GetNodeData(ANode);
   lNodeData^ := Pointer(ANodeData);
 End;
+
+procedure TTestGitMainFrm.SpTBXButton1Click(Sender: TObject);
+Var CheminComplet : String;
+    iShellExecuteResult : Integer;
+begin
+  CheminComplet := 'Z:\Temp\TSTO\Bin\Res\THOH2018Menu-ipad-r436534-9H4YNMIF\unlock_abe_countgrandpa.png';
+  iShellExecuteResult := ShellExecute(Application.Handle, 'open', PChar('explorer.exe'), PChar('/select, "' + CheminComplet + '"'), nil, SW_SHOWNORMAL);
+  if iShellExecuteResult < 32 then
+     raise Exception.CreateFmt('An error occurred while locating the document.'#13#10#13#10'File: "%s".'#13#10'Code: %d.', [CheminComplet, iShellExecuteResult]);
+end;
 
 Function TTestGitMainFrm.GetNodeData(ANode : PVirtualNode; AId : TGUID; Var ANodeData) : Boolean;
 Var lNodeData : PPointer;
